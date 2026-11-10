@@ -1,0 +1,201 @@
+id,key,name,category,integration_type,auth_methods,has_official_mcp,secret_store_keys,health_check_type,popularity_rank
+1,openai,OpenAI,AI & Machine Learning,mcp,"API Key, OAuth",True,"api_key,org_id",api_ping,1
+2,anthropic,Anthropic Claude,AI & Machine Learning,mcp,API Key,True,api_key,api_ping,2
+3,huggingface,Hugging Face,AI & Machine Learning,mcp,Access Token (User/Write),True,hf_token,api_ping,3
+4,cohere,Cohere,AI & Machine Learning,api,API Key,True,api_key,api_ping,4
+5,mistral,Mistral AI,AI & Machine Learning,mcp,API Key,True,api_key,api_ping,5
+6,perplexity,Perplexity AI,AI & Machine Learning,mcp,API Key,True,api_key,api_ping,6
+7,replicate,Replicate,AI & Machine Learning,api,API Token,True,api_token,api_ping,7
+8,together_ai,Together AI,AI & Machine Learning,api,API Key,True,api_key,api_ping,8
+9,groq,Groq LPU,AI & Machine Learning,mcp,API Key,True,api_key,api_ping,9
+10,deepseek,DeepSeek,AI & Machine Learning,api,API Key,True,api_key,api_ping,10
+11,ollama,Ollama (Local/Self-hosted),AI & Machine Learning,mcp,"Endpoint URL, Basic Auth",True,"endpoint_url,api_key",http_get,11
+12,vllm,vLLM Engine,AI & Machine Learning,api,"Endpoint URL, Bearer Token",False,"endpoint_url,token",http_get,12
+13,langsmith,LangSmith (LangChain),AI & Machine Learning,api,API Key,False,"api_key,project",api_ping,13
+14,llamaindex,LlamaCloud,AI & Machine Learning,api,API Key,False,api_key,api_ping,14
+15,wandb,Weights & Biases,AI & Machine Learning,api,API Key,False,"api_key,entity",api_ping,15
+16,elevenlabs,ElevenLabs Voice AI,AI & Machine Learning,mcp,xi-api-key,True,api_key,api_ping,16
+17,runway,Runway Gen AI,AI & Machine Learning,api,Secret Token,False,secret_token,api_ping,17
+18,stability_ai,Stability AI,AI & Machine Learning,api,API Key,False,api_key,api_ping,18
+19,pinecone,Pinecone Vector DB,Vector Database,mcp,"API Key, Environment",True,"api_key,environment",api_ping,19
+20,qdrant,Qdrant Vector Search,Vector Database,mcp,"API Key, Cluster URL",True,"api_key,cluster_url",api_ping,20
+21,weaviate,Weaviate Cloud,Vector Database,mcp,"API Key, Cluster URL",True,"api_key,cluster_url",api_ping,21
+22,chroma,ChromaDB,Vector Database,mcp,"Endpoint URL, Auth Token",True,"endpoint_url,auth_token",api_ping,22
+23,milvus,Milvus / Zilliz,Vector Database,mcp,"API Key, Cluster URI",True,"api_key,cluster_uri",api_ping,23
+24,meilisearch,Meilisearch,Search & Discovery,mcp,"Master API Key, URL",True,"master_key,url",api_ping,24
+25,algolia,Algolia Search,Search & Discovery,api,"Application ID, Admin API Key",False,"app_id,api_key",api_ping,25
+26,typesense,Typesense Cloud,Search & Discovery,api,"API Key, Node URL",False,"api_key,node_url",api_ping,26
+27,vespa,Vespa AI,Search & Discovery,api,"Certificate, Key, Endpoint",False,"cert_pem,key_pem,endpoint",api_ping,27
+28,marqo,Marqo Vector Search,Vector Database,api,"API Key, Endpoint",False,"api_key,endpoint",api_ping,28
+29,postgresql,PostgreSQL,Relational Database,database,"User/Password, TLS, IAM Token",True,"host,port,user,password,database",sql_select_one,29
+30,mysql,MySQL,Relational Database,database,"User/Password, SSL CA",True,"host,port,user,password,database",sql_select_one,30
+31,sqlite,SQLite,Relational Database,mcp,"Database File Path, Encryption Key",True,"db_path,encryption_key",sqlite_read,31
+32,mariadb,MariaDB,Relational Database,database,"User/Password, TLS",True,"host,port,user,password,database",sql_select_one,32
+33,sqlserver,Microsoft SQL Server,Relational Database,database,"SQL Auth, Windows/Azure AD",True,"server,port,user,password,database",sql_select_one,33
+34,oracle_db,Oracle Database,Relational Database,database,"TNS, User/Password, Wallet",False,"tns_name,user,password,wallet_base64",sql_select_one,34
+35,cockroachdb,CockroachDB Dedicated,Relational Database,database,"User/Password, SSL Root Cert",True,"connection_string,ssl_root_cert",sql_select_one,35
+36,tidb,TiDB Serverless,Relational Database,database,"User/Password, TLS",False,"host,user,password,database",sql_select_one,36
+37,neon,Neon Serverless Postgres,Relational Database,mcp,"API Key, Connection String",True,"api_key,connection_uri",sql_select_one,37
+38,supabase,Supabase (DB & Auth),Relational Database,mcp,"Service Role Key, Database URL",True,"supabase_url,service_role_key,db_pass",api_ping,38
+39,planetscale,PlanetScale MySQL,Relational Database,database,"Service Token, Password",False,"service_token,host,username,password",sql_select_one,39
+40,timescaledb,TimescaleDB (Time Series),Relational Database,database,"User/Password, SSL",True,service_url,sql_select_one,40
+41,yugabytedb,YugabyteDB,Relational Database,database,"User/Password, TLS",False,"host,port,user,password,database",sql_select_one,41
+42,questdb,QuestDB Time-Series,Relational Database,database,HTTP Influx / PostgreSQL Wire,False,"host,pg_port,http_port",http_get,42
+43,clickhouse_local,ClickHouse Cloud / Local,Relational Database,mcp,"Native / HTTP, User, Password",True,"host,user,password,database",sql_select_one,43
+44,duckdb,DuckDB (Big Data Engine),Big Data & Analytics,mcp,"Embedded, Parquet, S3 Token",True,"db_path,s3_access_key,s3_secret",duckdb_query,44
+45,snowflake,Snowflake Warehouse,Big Data & Analytics,mcp,"OAuth, Key-Pair (RSA), Password",True,"account,username,private_key,password",sql_select_one,45
+46,bigquery,Google BigQuery,Big Data & Analytics,mcp,"Google OAuth 2.0, Service Account",True,"service_account_json,project_id",api_ping,46
+47,redshift,Amazon Redshift,Big Data & Analytics,database,"IAM Temp Token, Username/Password",False,"cluster_id,host,user,password,database",sql_select_one,47
+48,databricks,Databricks Lakehouse,Big Data & Analytics,mcp,"OAuth 2.0, Personal Access Token",True,"host,token,http_path",api_ping,48
+49,clickhouse_cloud,ClickHouse Analytical,Big Data & Analytics,mcp,"User, Password, TLS",True,"host,user,password,database",sql_select_one,49
+50,apache_spark,Apache Spark / Livy,Big Data & Analytics,api,"Master URL, Kerberos / Token",False,"livy_url,auth_token",api_ping,50
+51,trino,Trino / Presto Distributed,Big Data & Analytics,database,"User, Password / Kerberos, TLS",False,"coordinator_host,port,user,password",sql_select_one,51
+52,apache_druid,Apache Druid Real-Time,Big Data & Analytics,api,"Router URL, Basic Auth",False,"router_url,username,password",api_ping,52
+53,starrocks,StarRocks OLAP,Big Data & Analytics,database,"FE Host, User, Password",False,"fe_host,query_port,user,password",sql_select_one,53
+54,dbt_cloud,dbt Cloud,Big Data & Analytics,api,"Service Token, Account ID",False,"service_token,account_id",api_ping,54
+55,cubejs,Cube Semantic Layer,Big Data & Analytics,api,"API Secret, Cube URL",False,"cube_url,api_secret",api_ping,55
+56,motherduck,MotherDuck (Cloud DuckDB),Big Data & Analytics,mcp,Service Token,True,motherduck_token,api_ping,56
+57,firebolt,Firebolt Cloud Data Warehouse,Big Data & Analytics,database,"Service Account ID, Secret",False,"client_id,client_secret,account",api_ping,57
+58,singlestore,SingleStoreDB,Big Data & Analytics,database,"User/Password, SSL",False,"host,user,password,database",sql_select_one,58
+59,redis,Redis / Valkey Cache,NoSQL & Cache,mcp,"Password, ACL, TLS CA",True,"redis_url,password,tls_ca",redis_ping,59
+60,mongodb,MongoDB Atlas / Enterprise,NoSQL & Cache,database,"SCRAM-SHA-256, X.509, API Key",True,"connection_uri,public_key,private_key",mongo_ping,60
+61,cassandra,Apache Cassandra / Astra DB,NoSQL & Cache,database,"Secure Connect Bundle, Token",False,"scb_zip_base64,client_id,client_secret",api_ping,61
+62,couchbase,Couchbase Capella,NoSQL & Cache,database,"Cluster URL, User, Password",False,"connection_string,username,password",api_ping,62
+63,scylladb,ScyllaDB NoSQL,NoSQL & Cache,database,"Contact Points, User, Password",False,"contact_points,user,password",cql_ping,63
+64,dynamodb,Amazon DynamoDB,NoSQL & Cache,storage,"IAM Role, STS, Access Keys",True,"aws_access_key,aws_secret_key,region",aws_ping,64
+65,firestore,Google Cloud Firestore,NoSQL & Cache,database,"Google Service Account, OAuth",False,"service_account_json,project_id",api_ping,65
+66,firebase_rtdb,Firebase Realtime Database,NoSQL & Cache,database,Firebase Secret / Admin SDK,False,"service_account_json,database_url",api_ping,66
+67,upstash,Upstash Serverless Redis,NoSQL & Cache,mcp,"REST URL, REST Token",True,"rest_url,rest_token",api_ping,67
+68,dragonfly,DragonflyDB Cache,NoSQL & Cache,database,"Redis Wire Protocol, Password",False,"redis_url,password",redis_ping,68
+69,neo4j,Neo4j Graph Database,NoSQL & Cache,mcp,"Bolt Protocol, User, Password",True,"bolt_uri,username,password",bolt_ping,69
+70,memcached,Memcached,NoSQL & Cache,database,"Host, Port, SASL Credentials",False,"host,port,username,password",tcp_handshake,70
+71,aws_s3,AWS S3 Object Storage,Cloud Storage,storage,"IAM Role, STS, Access Keys",True,"aws_access_key,aws_secret_key,region",s3_head_bucket,71
+72,gcs,Google Cloud Storage,Cloud Storage,storage,"Workload Identity, Service Account",True,service_account_json,gcs_get_bucket,72
+73,azure_blob,Azure Blob Storage,Cloud Storage,storage,"Entra ID, SAS Token, Shared Key",False,"connection_string,sas_token",blob_list_containers,73
+74,minio,MinIO Object Storage,Cloud Storage,storage,"Access Key + Secret Key, Endpoint",True,"endpoint_url,access_key,secret_key",s3_head_bucket,74
+75,cloudflare_r2,Cloudflare R2 Storage,Cloud Storage,storage,"S3 Compatible Credentials, Account ID",True,"account_id,access_key_id,secret_access_key",s3_head_bucket,75
+76,wasabi,Wasabi Hot Cloud Storage,Cloud Storage,storage,"Access Key, Secret Key, Region",False,"access_key,secret_key,region",s3_head_bucket,76
+77,backblaze_b2,Backblaze B2,Cloud Storage,storage,"Application Key ID, Application Key",False,"key_id,application_key",api_ping,77
+78,google_drive,Google Drive,File Storage,mcp,"Google OAuth 2.0, Service Account",True,"service_account_json,refresh_token",api_ping,78
+79,onedrive,Microsoft OneDrive,File Storage,api,Microsoft Entra ID OAuth 2.0,False,"refresh_token,client_id,client_secret",api_ping,79
+80,sharepoint,Microsoft SharePoint Online,File Storage,api,Microsoft Entra ID OAuth 2.0,False,"tenant_id,client_id,client_secret",api_ping,80
+81,dropbox,Dropbox,File Storage,api,OAuth 2.0 PKCE,False,"refresh_token,app_key,app_secret",api_ping,81
+82,box,Box Enterprise Storage,File Storage,api,"OAuth 2.0, JWT Keypair",False,jwt_config_json,api_ping,82
+83,sftp,SFTP / SSH File Transfer,File Storage,file_transfer,"SSH Private Key, Passphrase",False,"host,port,username,private_key",tcp_handshake,83
+84,ipfs,IPFS / Pinata Storage,File Storage,api,"Pinata JWT, Gateway URL",False,"pinata_jwt,gateway_url",api_ping,84
+85,nextcloud,Nextcloud Storage,File Storage,api,"App Password, WebDAV URL",False,"webdav_url,username,app_password",api_ping,85
+86,aws_ec2_iam,AWS Cloud Management,Cloud Infrastructure,api,"IAM Role, AssumeRole STS",True,"access_key_id,secret_access_key,role_arn",aws_ping,86
+87,azure_rm,Microsoft Azure Resource Manager,Cloud Infrastructure,api,Entra ID Service Principal,False,"tenant_id,client_id,client_secret,subscription_id",api_ping,87
+88,gcp_compute,Google Cloud Platform (GCP),Cloud Infrastructure,api,"Service Account JSON, Workload Identity",False,"service_account_json,project_id",api_ping,88
+89,cloudflare,Cloudflare DNS & Edge,Cloud Infrastructure,mcp,API Token (Scoped),True,"api_token,account_id",api_ping,89
+90,digitalocean,DigitalOcean Cloud,Cloud Infrastructure,api,Personal Access Token,False,api_token,api_ping,90
+91,hetzner,Hetzner Cloud,Cloud Infrastructure,api,API Token,False,api_token,api_ping,91
+92,linode,Linode / Akamai Cloud,Cloud Infrastructure,api,Personal Access Token,False,api_token,api_ping,92
+93,vercel,Vercel Deployment Platform,Cloud Infrastructure,mcp,Personal / Team Access Token,True,"access_token,team_id",api_ping,93
+94,netlify,Netlify Edge,Cloud Infrastructure,api,Personal Access Token,False,access_token,api_ping,94
+95,render,Render Cloud Platform,Cloud Infrastructure,api,API Key,False,api_key,api_ping,95
+96,railway,Railway Infrastructure,Cloud Infrastructure,api,API Token,False,api_token,api_ping,96
+97,fly_io,Fly.io App Platform,Cloud Infrastructure,api,Auth Token,False,auth_token,api_ping,97
+98,ovhcloud,OVHcloud,Cloud Infrastructure,api,"Application Key, Secret, Consumer Key",False,"app_key,app_secret,consumer_key",api_ping,98
+99,scaleaway,Scaleway Elements,Cloud Infrastructure,api,"Secret Key, Organization ID",False,"secret_key,project_id",api_ping,99
+100,equinix_metal,Equinix Metal Bare Metal,Cloud Infrastructure,api,"User API Token, Project ID",False,"api_token,project_id",api_ping,100
+101,github,GitHub,DevOps & Code,mcp,"OAuth 2.0, GitHub App, Fine-grained PAT",True,"access_token,client_id,client_secret",api_ping,101
+102,gitlab,GitLab,DevOps & Code,mcp,"OAuth 2.0, Personal Access Token",True,"access_token,pat",api_ping,102
+103,bitbucket,Bitbucket Cloud,DevOps & Code,api,"OAuth 2.0, App Password",False,"username,app_password",api_ping,103
+104,azure_devops,Azure DevOps Repos & Pipelines,DevOps & Code,api,"Microsoft Entra ID, PAT",False,"pat,tenant_id,org_url",api_ping,104
+105,gitea,Gitea / Forgejo,DevOps & Code,mcp,"Access Token, Basic Auth",True,"access_token,instance_url",api_ping,105
+106,docker_hub,Docker Hub Registry,DevOps & Code,mcp,Personal Access Token,True,"username,access_token",api_ping,106
+107,kubernetes,Kubernetes Cluster,DevOps & Code,mcp,"Kubeconfig, ServiceAccount Bearer Token",True,"kubeconfig_yaml,server_url,token",k8s_version,107
+108,argocd,ArgoCD GitOps,DevOps & Code,api,"Auth Token, Server URL",False,"server_url,auth_token",api_ping,108
+109,terraform_cloud,Terraform Cloud / HCP,DevOps & Code,api,User / Team API Token,False,"api_token,org_name",api_ping,109
+110,pulumi,Pulumi Service,DevOps & Code,api,Pulumi Access Token,False,"access_token,org_name",api_ping,110
+111,jenkins,Jenkins Automation,DevOps & Code,api,"API Token, Username",False,"jenkins_url,username,api_token",api_ping,111
+112,circleci,CircleCI,DevOps & Code,api,Personal API Token,False,api_token,api_ping,112
+113,artifactory,JFrog Artifactory,DevOps & Code,api,"Access Token, Artifactory URL",False,"url,access_token",api_ping,113
+114,snyk,Snyk Security & Vulnerability,DevOps & Code,mcp,API Token,True,"snyk_token,org_id",api_ping,114
+115,sonarqube,SonarQube / SonarCloud,DevOps & Code,api,"User Token, Server URL",False,"sonar_token,server_url",api_ping,115
+116,datadog,Datadog Observability,Observability & Monitoring,mcp,"API Key, Application Key, Site",True,"api_key,app_key,site",api_ping,116
+117,newrelic,New Relic APM,Observability & Monitoring,api,"User API Key, Account ID",False,"api_key,account_id",api_ping,117
+118,grafana,Grafana Cloud / OSS,Observability & Monitoring,mcp,"Service Account Token, Host URL",True,"host_url,service_token",api_ping,118
+119,prometheus,Prometheus Metrics,Observability & Monitoring,api,"Server URL, Basic Auth, TLS",False,"server_url,username,password",api_ping,119
+120,sentry,Sentry Error Tracking,Observability & Monitoring,mcp,"User Auth Token, Organization",True,"auth_token,organization_slug",api_ping,120
+121,splunk,Splunk Enterprise / Cloud,Observability & Monitoring,api,"HEC Token, Management Port, TLS",False,"hec_token,host,port",api_ping,121
+122,dynatrace,Dynatrace Intelligence,Observability & Monitoring,api,"Environment Token, Tenant URL",False,"tenant_url,api_token",api_ping,122
+123,elasticsearch_apm,Elasticsearch / Kibana,Observability & Monitoring,mcp,"API Key, Elastic Cloud ID",True,"cloud_id,api_key,tls_ca",elastic_ping,123
+124,betterstack,Better Stack (Logtail/Uptime),Observability & Monitoring,api,API Token,False,api_token,api_ping,124
+125,posthog,PostHog Analytics,Observability & Monitoring,mcp,"Personal API Key, Project API Key",True,"api_key,host",api_ping,125
+126,mixpanel,Mixpanel Product Analytics,Observability & Monitoring,api,"Service Account Secret, Project ID",False,"username,secret,project_id",api_ping,126
+127,amplitude,Amplitude Analytics,Observability & Monitoring,api,"API Key, Secret Key",False,"api_key,secret_key",api_ping,127
+128,segment,Twilio Segment CDP,Observability & Monitoring,api,"Write Key, Public API Token",False,"write_key,access_token",api_ping,128
+129,slack,Slack Workspace,Communication,mcp,"OAuth 2.0, Bot Token, User Token",True,"bot_token,user_token,client_id",api_ping,129
+130,microsoft_teams,Microsoft Teams,Communication,api,Microsoft Entra ID OAuth 2.0,False,"tenant_id,client_id,client_secret",api_ping,130
+131,discord,Discord Community,Communication,api,"Bot Token, Client ID",True,"bot_token,client_id",api_ping,131
+132,telegram,Telegram Bot,Communication,mcp,Bot Father API Token,True,bot_token,api_ping,132
+133,whatsapp_business,WhatsApp Business (Meta),Communication,api,"System User Access Token, Phone ID",False,"access_token,phone_number_id",api_ping,133
+134,zoom,Zoom Video Communications,Communication,api,Server-to-Server OAuth,False,"account_id,client_id,client_secret",api_ping,134
+135,google_meet,Google Meet,Communication,api,"Google OAuth 2.0, Workspace Admin",False,"refresh_token,client_id,client_secret",api_ping,135
+136,cisco_webex,Cisco Webex,Communication,api,"OAuth 2.0, Bot Access Token",False,"access_token,refresh_token",api_ping,136
+137,mattermost,Mattermost Collaboration,Communication,api,"Personal Access Token, Bot Token",False,"server_url,access_token",api_ping,137
+138,matrix,Matrix / Element Synapse,Communication,api,"Access Token, Homeserver URL",False,"homeserver_url,access_token",api_ping,138
+139,twilio_sms,Twilio Voice & SMS,Communication,api,"Account SID, Auth Token",False,"account_sid,auth_token",api_ping,139
+140,sendgrid,Twilio SendGrid Email,Communication,api,API Key,False,api_key,api_ping,140
+141,resend,Resend Modern Email,Communication,mcp,API Key,True,api_key,api_ping,141
+142,postmark,Postmark Transactional Email,Communication,api,Server API Token,False,server_token,api_ping,142
+143,smtp_imap,Generic SMTP / IMAP Email,Communication,api,"Host, Port, User, TLS/SSL Password",False,"host,port,username,password",tcp_handshake,143
+144,jira,Jira Software & Product,Project Management,mcp,"OAuth 2.0 (3LO), API Token",True,"cloud_id,api_token,email",api_ping,144
+145,confluence,Confluence Wiki,Project Management,mcp,"OAuth 2.0 (3LO), API Token",True,"cloud_id,api_token,email",api_ping,145
+146,linear,Linear Issue Tracker,Project Management,mcp,"OAuth 2.0, Personal API Key",True,api_key,api_ping,146
+147,asana,Asana Work Management,Project Management,api,"OAuth 2.0, Personal Access Token",False,access_token,api_ping,147
+148,monday,Monday.com Work OS,Project Management,api,API v2 Token,False,api_token,api_ping,148
+149,trello,Trello Boards,Project Management,api,"API Key, OAuth Token",False,"api_key,api_token",api_ping,149
+150,notion,Notion Workspace,Project Management,mcp,"OAuth 2.0, Internal Integration Token",True,integration_token,api_ping,150
+151,clickup,ClickUp All-in-One,Project Management,api,"OAuth 2.0, Personal API Token",False,api_token,api_ping,151
+152,basecamp,Basecamp 4,Project Management,api,"OAuth 2.0, Account ID",False,"refresh_token,account_id",api_ping,152
+153,wrike,Wrike Collaborative Work,Project Management,api,Permanent Token,False,permanent_token,api_ping,153
+154,shortcut,Shortcut (Clubhouse),Project Management,api,API Token,False,api_token,api_ping,154
+155,coda,Coda Interactive Docs,Project Management,api,API Token,False,api_token,api_ping,155
+156,miro,Miro Visual Collaboration,Project Management,api,OAuth 2.0 Access Token,False,access_token,api_ping,156
+157,figma,Figma Design & Tokens,Project Management,mcp,"Personal Access Token, OAuth",True,access_token,api_ping,157
+158,obsidian,Obsidian Local Vault,Project Management,mcp,Local Vault REST API Token,True,"vault_path,api_key",api_ping,158
+159,salesforce,Salesforce CRM & Cloud,CRM & Sales,api,"OAuth 2.0 Connected App, JWT Flow",False,"refresh_token,client_id,client_secret,instance_url",api_ping,159
+160,hubspot,HubSpot Growth Platform,CRM & Sales,mcp,"OAuth 2.0, Private App Access Token",True,access_token,api_ping,160
+161,pipedrive,Pipedrive CRM,CRM & Sales,api,"OAuth 2.0, API Token",False,"api_token,company_domain",api_ping,161
+162,zoho_crm,Zoho CRM,CRM & Sales,api,OAuth 2.0 Server-Based,False,"refresh_token,client_id,client_secret",api_ping,162
+163,close_crm,Close CRM,CRM & Sales,api,API Key,False,api_key,api_ping,163
+164,mailchimp,Mailchimp Marketing,CRM & Sales,api,"API Key, Server Prefix",False,"api_key,server_prefix",api_ping,164
+165,klaviyo,Klaviyo Ecommerce Marketing,CRM & Sales,api,Private API Key (pk_...),False,private_api_key,api_ping,165
+166,activecampaign,ActiveCampaign,CRM & Sales,api,"API URL, API Key",False,"api_url,api_key",api_ping,166
+167,customer_io,Customer.io Journeys,CRM & Sales,api,"Site ID, API Key, App API Key",False,"site_id,api_key,app_key",api_ping,167
+168,intercom_crm,Intercom Engage & CRM,CRM & Sales,mcp,"OAuth 2.0, Extended Access Token",True,access_token,api_ping,168
+169,braze,Braze Customer Engagement,CRM & Sales,api,"Rest API Key, REST Endpoint",False,"api_key,rest_endpoint",api_ping,169
+170,apollo_io,Apollo.io B2B Lead Intel,CRM & Sales,api,Master API Key,False,api_key,api_ping,170
+171,zoominfo,ZoomInfo Enterprise,CRM & Sales,api,"Client ID, Private Key PKI",False,"client_id,private_key",api_ping,171
+172,lemlist,Lemlist Cold Outreach,CRM & Sales,api,API Key,False,api_key,api_ping,172
+173,zendesk_support,Zendesk Support,Customer Support,mcp,"OAuth 2.0, API Token + Email",True,"subdomain,email,api_token",api_ping,173
+174,freshdesk,Freshdesk Omnichannel,Customer Support,api,"API Key, Domain",False,"api_key,domain",api_ping,174
+175,helpscout,Help Scout Helpdesk,Customer Support,api,OAuth 2.0 App Credentials,False,"app_id,app_secret",api_ping,175
+176,front_app,Front Shared Inbox,Customer Support,api,API Token (JWT),False,api_token,api_ping,176
+177,gorgias,Gorgias Ecommerce Support,Customer Support,api,"Base API Key, Username",False,"domain,username,api_key",api_ping,177
+178,kustomer,Kustomer Platform,Customer Support,api,API Key with Roles,False,api_key,api_ping,178
+179,servicenow,ServiceNow Enterprise ITSM,Customer Support,api,"OAuth 2.0, Basic Auth",False,"instance_url,client_id,client_secret",api_ping,179
+180,pagerduty,PagerDuty Incident Response,Customer Support,mcp,"REST API Key, Events API v2 Key",True,"api_key,routing_key",api_ping,180
+181,opsgenie,Opsgenie Alerting,Customer Support,api,GenieKey (API Key),False,api_key,api_ping,181
+182,stripe,Stripe Payments & Billing,E-Commerce & Fintech,mcp,"Restricted API Key (rk_...), Webhook Secret",True,"restricted_api_key,webhook_secret",api_ping,182
+183,paypal,PayPal Developer,E-Commerce & Fintech,api,"Client ID, Secret Key, Environment",False,"client_id,client_secret,env",api_ping,183
+184,shopify,Shopify Plus / Store,E-Commerce & Fintech,mcp,"Admin API Access Token, Store Domain",True,"store_domain,access_token",api_ping,184
+185,woocommerce,WooCommerce WordPress,E-Commerce & Fintech,api,"Consumer Key, Consumer Secret",False,"site_url,consumer_key,consumer_secret",api_ping,185
+186,bigcommerce,BigCommerce,E-Commerce & Fintech,api,"Store Hash, Access Token",False,"store_hash,access_token",api_ping,186
+187,square,Square POS & Ecommerce,E-Commerce & Fintech,api,"OAuth 2.0, Personal Access Token",False,access_token,api_ping,187
+188,paddle,Paddle Billing,E-Commerce & Fintech,api,"API Key, Vendor ID",False,"vendor_id,api_key",api_ping,188
+189,adyen,Adyen Global Payments,E-Commerce & Fintech,api,"API Key, Merchant Account",False,"api_key,merchant_account",api_ping,189
+190,lemon_squeezy,Lemon Squeezy Merchant,E-Commerce & Fintech,api,"API Key, Store ID",False,"api_key,store_id",api_ping,190
+191,chargebee,Chargebee Subscription,E-Commerce & Fintech,api,"API Key, Site Name",False,"site_name,api_key",api_ping,191
+192,plaid,Plaid Financial Data,E-Commerce & Fintech,api,"Client ID, Secret, Environment",False,"client_id,secret,env",api_ping,192
+193,quickbooks,QuickBooks Online (Intuit),Finance & HR,api,"OAuth 2.0 Refresh Token, Realm ID",False,"refresh_token,client_id,client_secret,realm_id",api_ping,193
+194,xero,Xero Accounting,Finance & HR,api,"OAuth 2.0 PKCE, Tenant ID",False,"refresh_token,client_id,client_secret,tenant_id",api_ping,194
+195,google_sheets,Google Sheets,Spreadsheet & Docs,mcp,"Google OAuth 2.0, Service Account",True,"service_account_json,refresh_token",api_ping,195
+196,airtable,Airtable Connected Apps,Spreadsheet & Docs,mcp,"OAuth 2.0, Personal Access Token",True,personal_access_token,api_ping,196
+197,docusign,DocuSign eSignature,Finance & HR,api,"JWT Grant RSA Keypair, Integration Key",False,"integration_key,user_id,rsa_private_key",api_ping,197
+198,bamboohr,BambooHR Human Resources,Finance & HR,api,"API Key, Subdomain",False,"api_key,subdomain",api_ping,198
+199,gusto,Gusto Payroll & HR,Finance & HR,api,OAuth 2.0 Refresh Token,False,"client_id,client_secret,refresh_token",api_ping,199
+200,auth0_identity,Auth0 Identity & Security,Security & Identity,mcp,"OAuth 2.0 Device Flow, Client Credentials",True,"domain,client_id,client_secret,token",api_ping,200

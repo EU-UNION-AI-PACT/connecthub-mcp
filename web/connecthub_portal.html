@@ -50,7 +50,7 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
       <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)]">
         <span class="text-xs text-[var(--muted-foreground)]">Aktive Verbindungen</span>
-        <div class="text-lg font-bold text-[var(--foreground)] mt-0.5" id="activeConnCount">14 / 40</div>
+        <div class="text-lg font-bold text-[var(--foreground)] mt-0.5" id="activeConnCount">18 / 200</div>
         <span class="text-[10px] text-emerald-500">Alle Health-Checks OK</span>
       </div>
       <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)]">
@@ -78,7 +78,7 @@
     <!-- Main Tabs -->
     <div class="flex items-center gap-2 border-b border-[var(--card-border)] pb-2 text-xs">
       <button onclick="switchTab('catalog')" id="tabBtnCatalog" class="px-3 py-1.5 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]">
-        Connector-Katalog (40)
+        Connector-Katalog (200)
       </button>
       <button onclick="switchTab('upload')" id="tabBtnUpload" class="px-3 py-1.5 rounded-md font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">
         Resumable Upload Simulator
@@ -92,7 +92,7 @@
     <div id="viewCatalog" class="space-y-3">
       <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center gap-1.5" id="catBadges">
-          <button onclick="filterCat('all')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)]">Alle (40)</button>
+          <button onclick="filterCat('all')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)]">Alle (200)</button>
           <button onclick="filterCat('mcp')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]">MCP-Nativ</button>
           <button onclick="filterCat('Database')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]">Datenbanken</button>
           <button onclick="filterCat('Storage')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]">Cloud Storage</button>
@@ -255,27 +255,1807 @@
 
   <script>
     const connectors = [
-      { name: "GitHub", cat: "Development", auth: "OAuth 2.0 / App / PAT", mcp: true, installed: true },
-      { name: "GitLab", cat: "Development", auth: "OAuth 2.0 / PAT", mcp: true, installed: false },
-      { name: "PostgreSQL", cat: "Database", auth: "TLS / Password / IAM", mcp: true, installed: true },
-      { name: "DuckDB (Big Data)", cat: "Database", auth: "Storage Attached", mcp: true, installed: true },
-      { name: "AWS S3", cat: "Storage", auth: "IAM Role / STS", mcp: true, installed: true },
-      { name: "Google Cloud Storage", cat: "Storage", auth: "Workload Identity", mcp: true, installed: false },
-      { name: "Azure Blob Storage", cat: "Storage", auth: "Entra ID / SAS", mcp: false, installed: false },
-      { name: "MinIO", cat: "Storage", auth: "Access / Secret Key", mcp: true, installed: true },
-      { name: "Slack", cat: "Communication", auth: "OAuth 2.0 Bot Token", mcp: true, installed: true },
-      { name: "Notion", cat: "Documentation", auth: "OAuth 2.0 / Token", mcp: true, installed: false },
-      { name: "Google Drive", cat: "Storage", auth: "OAuth 2.0 / Service Acc", mcp: true, installed: true },
-      { name: "Jira", cat: "Project", auth: "OAuth 2.0 (3LO) / Token", mcp: false, installed: true },
-      { name: "Confluence", cat: "Documentation", auth: "OAuth 2.0 / API Token", mcp: false, installed: false },
-      { name: "Snowflake", cat: "Database", auth: "Key-Pair / OAuth", mcp: true, installed: false },
-      { name: "BigQuery", cat: "Database", auth: "Google OAuth / Service Acc", mcp: true, installed: true },
-      { name: "Salesforce", cat: "CRM", auth: "OAuth 2.0 Connected App", mcp: false, installed: false },
-      { name: "HubSpot", cat: "CRM", auth: "OAuth 2.0 Private App", mcp: false, installed: false },
-      { name: "Stripe", cat: "Payments", auth: "Restricted API Key", mcp: false, installed: true },
-      { name: "Redis", cat: "Database", auth: "TLS / Password", mcp: true, installed: true },
-      { name: "Elasticsearch", cat: "Search", auth: "API Key / TLS", mcp: true, installed: false }
-    ];
+  {
+    "id": 1,
+    "name": "OpenAI",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key, OAuth",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 2,
+    "name": "Anthropic Claude",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 3,
+    "name": "Hugging Face",
+    "cat": "AI & Machine Learning",
+    "auth": "Access Token (User/Write)",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 4,
+    "name": "Cohere",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": true,
+    "type": "api",
+    "installed": true
+  },
+  {
+    "id": 5,
+    "name": "Mistral AI",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 6,
+    "name": "Perplexity AI",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 7,
+    "name": "Replicate",
+    "cat": "AI & Machine Learning",
+    "auth": "API Token",
+    "mcp": true,
+    "type": "api",
+    "installed": true
+  },
+  {
+    "id": 8,
+    "name": "Together AI",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": true,
+    "type": "api",
+    "installed": true
+  },
+  {
+    "id": 9,
+    "name": "Groq LPU",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 10,
+    "name": "DeepSeek",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": true,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 11,
+    "name": "Ollama (Local/Self-hosted)",
+    "cat": "AI & Machine Learning",
+    "auth": "Endpoint URL, Basic Auth",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 12,
+    "name": "vLLM Engine",
+    "cat": "AI & Machine Learning",
+    "auth": "Endpoint URL, Bearer Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 13,
+    "name": "LangSmith (LangChain)",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 14,
+    "name": "LlamaCloud",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 15,
+    "name": "Weights & Biases",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 16,
+    "name": "ElevenLabs Voice AI",
+    "cat": "AI & Machine Learning",
+    "auth": "xi-api-key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 17,
+    "name": "Runway Gen AI",
+    "cat": "AI & Machine Learning",
+    "auth": "Secret Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 18,
+    "name": "Stability AI",
+    "cat": "AI & Machine Learning",
+    "auth": "API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 19,
+    "name": "Pinecone Vector DB",
+    "cat": "Vector Database",
+    "auth": "API Key, Environment",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 20,
+    "name": "Qdrant Vector Search",
+    "cat": "Vector Database",
+    "auth": "API Key, Cluster URL",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 21,
+    "name": "Weaviate Cloud",
+    "cat": "Vector Database",
+    "auth": "API Key, Cluster URL",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 22,
+    "name": "ChromaDB",
+    "cat": "Vector Database",
+    "auth": "Endpoint URL, Auth Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 23,
+    "name": "Milvus / Zilliz",
+    "cat": "Vector Database",
+    "auth": "API Key, Cluster URI",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 24,
+    "name": "Meilisearch",
+    "cat": "Search & Discovery",
+    "auth": "Master API Key, URL",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 25,
+    "name": "Algolia Search",
+    "cat": "Search & Discovery",
+    "auth": "Application ID, Admin API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 26,
+    "name": "Typesense Cloud",
+    "cat": "Search & Discovery",
+    "auth": "API Key, Node URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 27,
+    "name": "Vespa AI",
+    "cat": "Search & Discovery",
+    "auth": "Certificate, Key, Endpoint",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 28,
+    "name": "Marqo Vector Search",
+    "cat": "Vector Database",
+    "auth": "API Key, Endpoint",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 29,
+    "name": "PostgreSQL",
+    "cat": "Relational Database",
+    "auth": "User/Password, TLS, IAM Token",
+    "mcp": true,
+    "type": "database",
+    "installed": true
+  },
+  {
+    "id": 30,
+    "name": "MySQL",
+    "cat": "Relational Database",
+    "auth": "User/Password, SSL CA",
+    "mcp": true,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 31,
+    "name": "SQLite",
+    "cat": "Relational Database",
+    "auth": "Database File Path, Encryption Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 32,
+    "name": "MariaDB",
+    "cat": "Relational Database",
+    "auth": "User/Password, TLS",
+    "mcp": true,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 33,
+    "name": "Microsoft SQL Server",
+    "cat": "Relational Database",
+    "auth": "SQL Auth, Windows/Azure AD",
+    "mcp": true,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 34,
+    "name": "Oracle Database",
+    "cat": "Relational Database",
+    "auth": "TNS, User/Password, Wallet",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 35,
+    "name": "CockroachDB Dedicated",
+    "cat": "Relational Database",
+    "auth": "User/Password, SSL Root Cert",
+    "mcp": true,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 36,
+    "name": "TiDB Serverless",
+    "cat": "Relational Database",
+    "auth": "User/Password, TLS",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 37,
+    "name": "Neon Serverless Postgres",
+    "cat": "Relational Database",
+    "auth": "API Key, Connection String",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 38,
+    "name": "Supabase (DB & Auth)",
+    "cat": "Relational Database",
+    "auth": "Service Role Key, Database URL",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 39,
+    "name": "PlanetScale MySQL",
+    "cat": "Relational Database",
+    "auth": "Service Token, Password",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 40,
+    "name": "TimescaleDB (Time Series)",
+    "cat": "Relational Database",
+    "auth": "User/Password, SSL",
+    "mcp": true,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 41,
+    "name": "YugabyteDB",
+    "cat": "Relational Database",
+    "auth": "User/Password, TLS",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 42,
+    "name": "QuestDB Time-Series",
+    "cat": "Relational Database",
+    "auth": "HTTP Influx / PostgreSQL Wire",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 43,
+    "name": "ClickHouse Cloud / Local",
+    "cat": "Relational Database",
+    "auth": "Native / HTTP, User, Password",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 44,
+    "name": "DuckDB (Big Data Engine)",
+    "cat": "Big Data & Analytics",
+    "auth": "Embedded, Parquet, S3 Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 45,
+    "name": "Snowflake Warehouse",
+    "cat": "Big Data & Analytics",
+    "auth": "OAuth, Key-Pair (RSA), Password",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 46,
+    "name": "Google BigQuery",
+    "cat": "Big Data & Analytics",
+    "auth": "Google OAuth 2.0, Service Account",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 47,
+    "name": "Amazon Redshift",
+    "cat": "Big Data & Analytics",
+    "auth": "IAM Temp Token, Username/Password",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 48,
+    "name": "Databricks Lakehouse",
+    "cat": "Big Data & Analytics",
+    "auth": "OAuth 2.0, Personal Access Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 49,
+    "name": "ClickHouse Analytical",
+    "cat": "Big Data & Analytics",
+    "auth": "User, Password, TLS",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 50,
+    "name": "Apache Spark / Livy",
+    "cat": "Big Data & Analytics",
+    "auth": "Master URL, Kerberos / Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 51,
+    "name": "Trino / Presto Distributed",
+    "cat": "Big Data & Analytics",
+    "auth": "User, Password / Kerberos, TLS",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 52,
+    "name": "Apache Druid Real-Time",
+    "cat": "Big Data & Analytics",
+    "auth": "Router URL, Basic Auth",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 53,
+    "name": "StarRocks OLAP",
+    "cat": "Big Data & Analytics",
+    "auth": "FE Host, User, Password",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 54,
+    "name": "dbt Cloud",
+    "cat": "Big Data & Analytics",
+    "auth": "Service Token, Account ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 55,
+    "name": "Cube Semantic Layer",
+    "cat": "Big Data & Analytics",
+    "auth": "API Secret, Cube URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 56,
+    "name": "MotherDuck (Cloud DuckDB)",
+    "cat": "Big Data & Analytics",
+    "auth": "Service Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 57,
+    "name": "Firebolt Cloud Data Warehouse",
+    "cat": "Big Data & Analytics",
+    "auth": "Service Account ID, Secret",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 58,
+    "name": "SingleStoreDB",
+    "cat": "Big Data & Analytics",
+    "auth": "User/Password, SSL",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 59,
+    "name": "Redis / Valkey Cache",
+    "cat": "NoSQL & Cache",
+    "auth": "Password, ACL, TLS CA",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 60,
+    "name": "MongoDB Atlas / Enterprise",
+    "cat": "NoSQL & Cache",
+    "auth": "SCRAM-SHA-256, X.509, API Key",
+    "mcp": true,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 61,
+    "name": "Apache Cassandra / Astra DB",
+    "cat": "NoSQL & Cache",
+    "auth": "Secure Connect Bundle, Token",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 62,
+    "name": "Couchbase Capella",
+    "cat": "NoSQL & Cache",
+    "auth": "Cluster URL, User, Password",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 63,
+    "name": "ScyllaDB NoSQL",
+    "cat": "NoSQL & Cache",
+    "auth": "Contact Points, User, Password",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 64,
+    "name": "Amazon DynamoDB",
+    "cat": "NoSQL & Cache",
+    "auth": "IAM Role, STS, Access Keys",
+    "mcp": true,
+    "type": "storage",
+    "installed": false
+  },
+  {
+    "id": 65,
+    "name": "Google Cloud Firestore",
+    "cat": "NoSQL & Cache",
+    "auth": "Google Service Account, OAuth",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 66,
+    "name": "Firebase Realtime Database",
+    "cat": "NoSQL & Cache",
+    "auth": "Firebase Secret / Admin SDK",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 67,
+    "name": "Upstash Serverless Redis",
+    "cat": "NoSQL & Cache",
+    "auth": "REST URL, REST Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 68,
+    "name": "DragonflyDB Cache",
+    "cat": "NoSQL & Cache",
+    "auth": "Redis Wire Protocol, Password",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 69,
+    "name": "Neo4j Graph Database",
+    "cat": "NoSQL & Cache",
+    "auth": "Bolt Protocol, User, Password",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 70,
+    "name": "Memcached",
+    "cat": "NoSQL & Cache",
+    "auth": "Host, Port, SASL Credentials",
+    "mcp": false,
+    "type": "database",
+    "installed": false
+  },
+  {
+    "id": 71,
+    "name": "AWS S3 Object Storage",
+    "cat": "Cloud Storage",
+    "auth": "IAM Role, STS, Access Keys",
+    "mcp": true,
+    "type": "storage",
+    "installed": true
+  },
+  {
+    "id": 72,
+    "name": "Google Cloud Storage",
+    "cat": "Cloud Storage",
+    "auth": "Workload Identity, Service Account",
+    "mcp": true,
+    "type": "storage",
+    "installed": false
+  },
+  {
+    "id": 73,
+    "name": "Azure Blob Storage",
+    "cat": "Cloud Storage",
+    "auth": "Entra ID, SAS Token, Shared Key",
+    "mcp": false,
+    "type": "storage",
+    "installed": false
+  },
+  {
+    "id": 74,
+    "name": "MinIO Object Storage",
+    "cat": "Cloud Storage",
+    "auth": "Access Key + Secret Key, Endpoint",
+    "mcp": true,
+    "type": "storage",
+    "installed": false
+  },
+  {
+    "id": 75,
+    "name": "Cloudflare R2 Storage",
+    "cat": "Cloud Storage",
+    "auth": "S3 Compatible Credentials, Account ID",
+    "mcp": true,
+    "type": "storage",
+    "installed": false
+  },
+  {
+    "id": 76,
+    "name": "Wasabi Hot Cloud Storage",
+    "cat": "Cloud Storage",
+    "auth": "Access Key, Secret Key, Region",
+    "mcp": false,
+    "type": "storage",
+    "installed": false
+  },
+  {
+    "id": 77,
+    "name": "Backblaze B2",
+    "cat": "Cloud Storage",
+    "auth": "Application Key ID, Application Key",
+    "mcp": false,
+    "type": "storage",
+    "installed": false
+  },
+  {
+    "id": 78,
+    "name": "Google Drive",
+    "cat": "File Storage",
+    "auth": "Google OAuth 2.0, Service Account",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 79,
+    "name": "Microsoft OneDrive",
+    "cat": "File Storage",
+    "auth": "Microsoft Entra ID OAuth 2.0",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 80,
+    "name": "Microsoft SharePoint Online",
+    "cat": "File Storage",
+    "auth": "Microsoft Entra ID OAuth 2.0",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 81,
+    "name": "Dropbox",
+    "cat": "File Storage",
+    "auth": "OAuth 2.0 PKCE",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 82,
+    "name": "Box Enterprise Storage",
+    "cat": "File Storage",
+    "auth": "OAuth 2.0, JWT Keypair",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 83,
+    "name": "SFTP / SSH File Transfer",
+    "cat": "File Storage",
+    "auth": "SSH Private Key, Passphrase",
+    "mcp": false,
+    "type": "file_transfer",
+    "installed": false
+  },
+  {
+    "id": 84,
+    "name": "IPFS / Pinata Storage",
+    "cat": "File Storage",
+    "auth": "Pinata JWT, Gateway URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 85,
+    "name": "Nextcloud Storage",
+    "cat": "File Storage",
+    "auth": "App Password, WebDAV URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 86,
+    "name": "AWS Cloud Management",
+    "cat": "Cloud Infrastructure",
+    "auth": "IAM Role, AssumeRole STS",
+    "mcp": true,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 87,
+    "name": "Microsoft Azure Resource Manager",
+    "cat": "Cloud Infrastructure",
+    "auth": "Entra ID Service Principal",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 88,
+    "name": "Google Cloud Platform (GCP)",
+    "cat": "Cloud Infrastructure",
+    "auth": "Service Account JSON, Workload Identity",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 89,
+    "name": "Cloudflare DNS & Edge",
+    "cat": "Cloud Infrastructure",
+    "auth": "API Token (Scoped)",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 90,
+    "name": "DigitalOcean Cloud",
+    "cat": "Cloud Infrastructure",
+    "auth": "Personal Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 91,
+    "name": "Hetzner Cloud",
+    "cat": "Cloud Infrastructure",
+    "auth": "API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 92,
+    "name": "Linode / Akamai Cloud",
+    "cat": "Cloud Infrastructure",
+    "auth": "Personal Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 93,
+    "name": "Vercel Deployment Platform",
+    "cat": "Cloud Infrastructure",
+    "auth": "Personal / Team Access Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 94,
+    "name": "Netlify Edge",
+    "cat": "Cloud Infrastructure",
+    "auth": "Personal Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 95,
+    "name": "Render Cloud Platform",
+    "cat": "Cloud Infrastructure",
+    "auth": "API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 96,
+    "name": "Railway Infrastructure",
+    "cat": "Cloud Infrastructure",
+    "auth": "API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 97,
+    "name": "Fly.io App Platform",
+    "cat": "Cloud Infrastructure",
+    "auth": "Auth Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 98,
+    "name": "OVHcloud",
+    "cat": "Cloud Infrastructure",
+    "auth": "Application Key, Secret, Consumer Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 99,
+    "name": "Scaleway Elements",
+    "cat": "Cloud Infrastructure",
+    "auth": "Secret Key, Organization ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 100,
+    "name": "Equinix Metal Bare Metal",
+    "cat": "Cloud Infrastructure",
+    "auth": "User API Token, Project ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 101,
+    "name": "GitHub",
+    "cat": "DevOps & Code",
+    "auth": "OAuth 2.0, GitHub App, Fine-grained PAT",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 102,
+    "name": "GitLab",
+    "cat": "DevOps & Code",
+    "auth": "OAuth 2.0, Personal Access Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 103,
+    "name": "Bitbucket Cloud",
+    "cat": "DevOps & Code",
+    "auth": "OAuth 2.0, App Password",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 104,
+    "name": "Azure DevOps Repos & Pipelines",
+    "cat": "DevOps & Code",
+    "auth": "Microsoft Entra ID, PAT",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 105,
+    "name": "Gitea / Forgejo",
+    "cat": "DevOps & Code",
+    "auth": "Access Token, Basic Auth",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 106,
+    "name": "Docker Hub Registry",
+    "cat": "DevOps & Code",
+    "auth": "Personal Access Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 107,
+    "name": "Kubernetes Cluster",
+    "cat": "DevOps & Code",
+    "auth": "Kubeconfig, ServiceAccount Bearer Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 108,
+    "name": "ArgoCD GitOps",
+    "cat": "DevOps & Code",
+    "auth": "Auth Token, Server URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 109,
+    "name": "Terraform Cloud / HCP",
+    "cat": "DevOps & Code",
+    "auth": "User / Team API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 110,
+    "name": "Pulumi Service",
+    "cat": "DevOps & Code",
+    "auth": "Pulumi Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 111,
+    "name": "Jenkins Automation",
+    "cat": "DevOps & Code",
+    "auth": "API Token, Username",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 112,
+    "name": "CircleCI",
+    "cat": "DevOps & Code",
+    "auth": "Personal API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 113,
+    "name": "JFrog Artifactory",
+    "cat": "DevOps & Code",
+    "auth": "Access Token, Artifactory URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 114,
+    "name": "Snyk Security & Vulnerability",
+    "cat": "DevOps & Code",
+    "auth": "API Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 115,
+    "name": "SonarQube / SonarCloud",
+    "cat": "DevOps & Code",
+    "auth": "User Token, Server URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 116,
+    "name": "Datadog Observability",
+    "cat": "Observability & Monitoring",
+    "auth": "API Key, Application Key, Site",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 117,
+    "name": "New Relic APM",
+    "cat": "Observability & Monitoring",
+    "auth": "User API Key, Account ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 118,
+    "name": "Grafana Cloud / OSS",
+    "cat": "Observability & Monitoring",
+    "auth": "Service Account Token, Host URL",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 119,
+    "name": "Prometheus Metrics",
+    "cat": "Observability & Monitoring",
+    "auth": "Server URL, Basic Auth, TLS",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 120,
+    "name": "Sentry Error Tracking",
+    "cat": "Observability & Monitoring",
+    "auth": "User Auth Token, Organization",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 121,
+    "name": "Splunk Enterprise / Cloud",
+    "cat": "Observability & Monitoring",
+    "auth": "HEC Token, Management Port, TLS",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 122,
+    "name": "Dynatrace Intelligence",
+    "cat": "Observability & Monitoring",
+    "auth": "Environment Token, Tenant URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 123,
+    "name": "Elasticsearch / Kibana",
+    "cat": "Observability & Monitoring",
+    "auth": "API Key, Elastic Cloud ID",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 124,
+    "name": "Better Stack (Logtail/Uptime)",
+    "cat": "Observability & Monitoring",
+    "auth": "API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 125,
+    "name": "PostHog Analytics",
+    "cat": "Observability & Monitoring",
+    "auth": "Personal API Key, Project API Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 126,
+    "name": "Mixpanel Product Analytics",
+    "cat": "Observability & Monitoring",
+    "auth": "Service Account Secret, Project ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 127,
+    "name": "Amplitude Analytics",
+    "cat": "Observability & Monitoring",
+    "auth": "API Key, Secret Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 128,
+    "name": "Twilio Segment CDP",
+    "cat": "Observability & Monitoring",
+    "auth": "Write Key, Public API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 129,
+    "name": "Slack Workspace",
+    "cat": "Communication",
+    "auth": "OAuth 2.0, Bot Token, User Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 130,
+    "name": "Microsoft Teams",
+    "cat": "Communication",
+    "auth": "Microsoft Entra ID OAuth 2.0",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 131,
+    "name": "Discord Community",
+    "cat": "Communication",
+    "auth": "Bot Token, Client ID",
+    "mcp": true,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 132,
+    "name": "Telegram Bot",
+    "cat": "Communication",
+    "auth": "Bot Father API Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 133,
+    "name": "WhatsApp Business (Meta)",
+    "cat": "Communication",
+    "auth": "System User Access Token, Phone ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 134,
+    "name": "Zoom Video Communications",
+    "cat": "Communication",
+    "auth": "Server-to-Server OAuth",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 135,
+    "name": "Google Meet",
+    "cat": "Communication",
+    "auth": "Google OAuth 2.0, Workspace Admin",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 136,
+    "name": "Cisco Webex",
+    "cat": "Communication",
+    "auth": "OAuth 2.0, Bot Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 137,
+    "name": "Mattermost Collaboration",
+    "cat": "Communication",
+    "auth": "Personal Access Token, Bot Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 138,
+    "name": "Matrix / Element Synapse",
+    "cat": "Communication",
+    "auth": "Access Token, Homeserver URL",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 139,
+    "name": "Twilio Voice & SMS",
+    "cat": "Communication",
+    "auth": "Account SID, Auth Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 140,
+    "name": "Twilio SendGrid Email",
+    "cat": "Communication",
+    "auth": "API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 141,
+    "name": "Resend Modern Email",
+    "cat": "Communication",
+    "auth": "API Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 142,
+    "name": "Postmark Transactional Email",
+    "cat": "Communication",
+    "auth": "Server API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 143,
+    "name": "Generic SMTP / IMAP Email",
+    "cat": "Communication",
+    "auth": "Host, Port, User, TLS/SSL Password",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 144,
+    "name": "Jira Software & Product",
+    "cat": "Project Management",
+    "auth": "OAuth 2.0 (3LO), API Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 145,
+    "name": "Confluence Wiki",
+    "cat": "Project Management",
+    "auth": "OAuth 2.0 (3LO), API Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 146,
+    "name": "Linear Issue Tracker",
+    "cat": "Project Management",
+    "auth": "OAuth 2.0, Personal API Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 147,
+    "name": "Asana Work Management",
+    "cat": "Project Management",
+    "auth": "OAuth 2.0, Personal Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 148,
+    "name": "Monday.com Work OS",
+    "cat": "Project Management",
+    "auth": "API v2 Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 149,
+    "name": "Trello Boards",
+    "cat": "Project Management",
+    "auth": "API Key, OAuth Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 150,
+    "name": "Notion Workspace",
+    "cat": "Project Management",
+    "auth": "OAuth 2.0, Internal Integration Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 151,
+    "name": "ClickUp All-in-One",
+    "cat": "Project Management",
+    "auth": "OAuth 2.0, Personal API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 152,
+    "name": "Basecamp 4",
+    "cat": "Project Management",
+    "auth": "OAuth 2.0, Account ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 153,
+    "name": "Wrike Collaborative Work",
+    "cat": "Project Management",
+    "auth": "Permanent Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 154,
+    "name": "Shortcut (Clubhouse)",
+    "cat": "Project Management",
+    "auth": "API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 155,
+    "name": "Coda Interactive Docs",
+    "cat": "Project Management",
+    "auth": "API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 156,
+    "name": "Miro Visual Collaboration",
+    "cat": "Project Management",
+    "auth": "OAuth 2.0 Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 157,
+    "name": "Figma Design & Tokens",
+    "cat": "Project Management",
+    "auth": "Personal Access Token, OAuth",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 158,
+    "name": "Obsidian Local Vault",
+    "cat": "Project Management",
+    "auth": "Local Vault REST API Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 159,
+    "name": "Salesforce CRM & Cloud",
+    "cat": "CRM & Sales",
+    "auth": "OAuth 2.0 Connected App, JWT Flow",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 160,
+    "name": "HubSpot Growth Platform",
+    "cat": "CRM & Sales",
+    "auth": "OAuth 2.0, Private App Access Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 161,
+    "name": "Pipedrive CRM",
+    "cat": "CRM & Sales",
+    "auth": "OAuth 2.0, API Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 162,
+    "name": "Zoho CRM",
+    "cat": "CRM & Sales",
+    "auth": "OAuth 2.0 Server-Based",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 163,
+    "name": "Close CRM",
+    "cat": "CRM & Sales",
+    "auth": "API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 164,
+    "name": "Mailchimp Marketing",
+    "cat": "CRM & Sales",
+    "auth": "API Key, Server Prefix",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 165,
+    "name": "Klaviyo Ecommerce Marketing",
+    "cat": "CRM & Sales",
+    "auth": "Private API Key (pk_...)",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 166,
+    "name": "ActiveCampaign",
+    "cat": "CRM & Sales",
+    "auth": "API URL, API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 167,
+    "name": "Customer.io Journeys",
+    "cat": "CRM & Sales",
+    "auth": "Site ID, API Key, App API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 168,
+    "name": "Intercom Engage & CRM",
+    "cat": "CRM & Sales",
+    "auth": "OAuth 2.0, Extended Access Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 169,
+    "name": "Braze Customer Engagement",
+    "cat": "CRM & Sales",
+    "auth": "Rest API Key, REST Endpoint",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 170,
+    "name": "Apollo.io B2B Lead Intel",
+    "cat": "CRM & Sales",
+    "auth": "Master API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 171,
+    "name": "ZoomInfo Enterprise",
+    "cat": "CRM & Sales",
+    "auth": "Client ID, Private Key PKI",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 172,
+    "name": "Lemlist Cold Outreach",
+    "cat": "CRM & Sales",
+    "auth": "API Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 173,
+    "name": "Zendesk Support",
+    "cat": "Customer Support",
+    "auth": "OAuth 2.0, API Token + Email",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 174,
+    "name": "Freshdesk Omnichannel",
+    "cat": "Customer Support",
+    "auth": "API Key, Domain",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 175,
+    "name": "Help Scout Helpdesk",
+    "cat": "Customer Support",
+    "auth": "OAuth 2.0 App Credentials",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 176,
+    "name": "Front Shared Inbox",
+    "cat": "Customer Support",
+    "auth": "API Token (JWT)",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 177,
+    "name": "Gorgias Ecommerce Support",
+    "cat": "Customer Support",
+    "auth": "Base API Key, Username",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 178,
+    "name": "Kustomer Platform",
+    "cat": "Customer Support",
+    "auth": "API Key with Roles",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 179,
+    "name": "ServiceNow Enterprise ITSM",
+    "cat": "Customer Support",
+    "auth": "OAuth 2.0, Basic Auth",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 180,
+    "name": "PagerDuty Incident Response",
+    "cat": "Customer Support",
+    "auth": "REST API Key, Events API v2 Key",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 181,
+    "name": "Opsgenie Alerting",
+    "cat": "Customer Support",
+    "auth": "GenieKey (API Key)",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 182,
+    "name": "Stripe Payments & Billing",
+    "cat": "E-Commerce & Fintech",
+    "auth": "Restricted API Key (rk_...), Webhook Secret",
+    "mcp": true,
+    "type": "mcp",
+    "installed": true
+  },
+  {
+    "id": 183,
+    "name": "PayPal Developer",
+    "cat": "E-Commerce & Fintech",
+    "auth": "Client ID, Secret Key, Environment",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 184,
+    "name": "Shopify Plus / Store",
+    "cat": "E-Commerce & Fintech",
+    "auth": "Admin API Access Token, Store Domain",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 185,
+    "name": "WooCommerce WordPress",
+    "cat": "E-Commerce & Fintech",
+    "auth": "Consumer Key, Consumer Secret",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 186,
+    "name": "BigCommerce",
+    "cat": "E-Commerce & Fintech",
+    "auth": "Store Hash, Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 187,
+    "name": "Square POS & Ecommerce",
+    "cat": "E-Commerce & Fintech",
+    "auth": "OAuth 2.0, Personal Access Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 188,
+    "name": "Paddle Billing",
+    "cat": "E-Commerce & Fintech",
+    "auth": "API Key, Vendor ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 189,
+    "name": "Adyen Global Payments",
+    "cat": "E-Commerce & Fintech",
+    "auth": "API Key, Merchant Account",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 190,
+    "name": "Lemon Squeezy Merchant",
+    "cat": "E-Commerce & Fintech",
+    "auth": "API Key, Store ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 191,
+    "name": "Chargebee Subscription",
+    "cat": "E-Commerce & Fintech",
+    "auth": "API Key, Site Name",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 192,
+    "name": "Plaid Financial Data",
+    "cat": "E-Commerce & Fintech",
+    "auth": "Client ID, Secret, Environment",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 193,
+    "name": "QuickBooks Online (Intuit)",
+    "cat": "Finance & HR",
+    "auth": "OAuth 2.0 Refresh Token, Realm ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 194,
+    "name": "Xero Accounting",
+    "cat": "Finance & HR",
+    "auth": "OAuth 2.0 PKCE, Tenant ID",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 195,
+    "name": "Google Sheets",
+    "cat": "Spreadsheet & Docs",
+    "auth": "Google OAuth 2.0, Service Account",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 196,
+    "name": "Airtable Connected Apps",
+    "cat": "Spreadsheet & Docs",
+    "auth": "OAuth 2.0, Personal Access Token",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  },
+  {
+    "id": 197,
+    "name": "DocuSign eSignature",
+    "cat": "Finance & HR",
+    "auth": "JWT Grant RSA Keypair, Integration Key",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 198,
+    "name": "BambooHR Human Resources",
+    "cat": "Finance & HR",
+    "auth": "API Key, Subdomain",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 199,
+    "name": "Gusto Payroll & HR",
+    "cat": "Finance & HR",
+    "auth": "OAuth 2.0 Refresh Token",
+    "mcp": false,
+    "type": "api",
+    "installed": false
+  },
+  {
+    "id": 200,
+    "name": "Auth0 Identity & Security",
+    "cat": "Security & Identity",
+    "auth": "OAuth 2.0 Device Flow, Client Credentials",
+    "mcp": true,
+    "type": "mcp",
+    "installed": false
+  }
+];
 
     let currentCat = 'all';
 

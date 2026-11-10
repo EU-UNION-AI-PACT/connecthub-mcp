@@ -209,3 +209,51 @@ CREATE POLICY rls_stored_objects ON stored_objects
 
 CREATE POLICY rls_audit_events ON audit_events
   FOR ALL USING (tenant_id = current_tenant_id()) WITH CHECK (tenant_id = current_tenant_id());
+
+
+-- ==========================================
+-- DATA VERSIONING & CONFIG AUDIT
+-- ==========================================
+
+CREATE TABLE data_versions (
+    id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    tenant_id           UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+    installation_id     UUID NOT NULL,
+    version_tag         TEXT NOT NULL,
+    commit_hash         TEXT NOT NULL,
+    records_count       BIGINT NOT NULL DEFAULT 0,
+    size_bytes          BIGINT NOT NULL DEFAULT 0,
+    storage_location    TEXT NOT NULL,
+    parent_version_id   UUID REFERENCES data_versions(id),
+    metadata            JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT now(),
+    FOREIGN KEY (tenant_id, installation_id)
+        REFERENCES connector_installations (tenant_id, id)
+        ON DELETE CASCADE
+);
+
+CREATE INDEX data_versions_tenant_installation_idx
+    ON data_versions (tenant_id, installation_id, created_at DESC);
+
+CREATE TABLE connector_config_versions (
+    id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    tenant_id           UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+    installation_id     UUID NOT NULL,
+    version_number      INTEGER NOT NULL,
+    configuration_hash  TEXT NOT NULL,
+    configuration       JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_by          UUID REFERENCES users(id) ON DELETE SET NULL,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT now(),
+    FOREIGN KEY (tenant_id, installation_id)
+        REFERENCES connector_installations (tenant_id, id)
+        ON DELETE CASCADE
+);
+
+ALTER TABLE data_versions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE connector_config_versions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY rls_data_versions ON data_versions
+  FOR ALL USING (tenant_id = current_tenant_id()) WITH CHECK (tenant_id = current_tenant_id());
+
+CREATE POLICY rls_connector_config_versions ON connector_config_versions
+  FOR ALL USING (tenant_id = current_tenant_id()) WITH CHECK (tenant_id = current_tenant_id());

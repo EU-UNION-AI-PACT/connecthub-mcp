@@ -50,8 +50,8 @@
     <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
       <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)]">
         <span class="text-xs text-[var(--muted-foreground)]">Aktive Verbindungen</span>
-        <div class="text-lg font-bold text-[var(--foreground)] mt-0.5" id="activeConnCount">18 / 200</div>
-        <span class="text-[10px] text-emerald-500">Alle Health-Checks OK</span>
+        <div class="text-lg font-bold text-[var(--foreground)] mt-0.5" id="activeConnCount">200 / 200</div>
+        <span class="text-[10px] text-emerald-500">200 Connectors Aktiv & Versioniert</span>
       </div>
       <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)]">
         <span class="text-xs text-[var(--muted-foreground)]">Storage Belegung</span>
@@ -83,6 +83,7 @@
       <button onclick="switchTab('upload')" id="tabBtnUpload" class="px-3 py-1.5 rounded-md font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">
         Resumable Upload Simulator
       </button>
+      <button onclick="switchTab('versions')" id="tabBtnVersions" class="px-3 py-1.5 rounded-md font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">Daten-Versionierung (200 Snapshots)</button>
       <button onclick="switchTab('jobs')" id="tabBtnJobs" class="px-3 py-1.5 rounded-md font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">
         Sync Jobs &amp; Audit Logs
       </button>
@@ -208,6 +209,38 @@
       </div>
     </div>
 
+    
+    <!-- TAB 4: Data Versioning -->
+    <div id="viewVersions" class="space-y-3 hidden">
+      <div class="flex items-center justify-between pb-1">
+        <div>
+          <h3 class="text-sm font-semibold text-[var(--foreground)]">Kryptografische Daten-Versionierung (Git-like Snapshots)</h3>
+          <p class="text-xs text-[var(--muted-foreground)]">Jede Synchronisierung und jeder Import wird mit SHA-256 Commit-Hashes mandantenisoliert versioniert.</p>
+        </div>
+        <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-mono font-bold">
+          200 Version-Hashes Gesichert
+        </span>
+      </div>
+
+      <div class="border border-[var(--card-border)] rounded-lg overflow-hidden max-h-72 overflow-y-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead class="bg-[var(--card)] border-b border-[var(--card-border)] sticky top-0">
+            <tr>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Connector</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Version</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Commit Hash (SHA-256)</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Datensätze</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Snapshot-Größe</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)] text-right">Status</th>
+            </tr>
+          </thead>
+          <tbody id="versionsTbody" class="divide-y divide-[var(--card-border)] font-mono">
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- TAB 3: Jobs & Audit -->
     <div id="viewJobs" class="space-y-3 hidden">
       <div class="border border-[var(--card-border)] rounded-lg overflow-hidden">
@@ -256,1804 +289,2804 @@
   <script>
     const connectors = [
   {
-    "id": 1,
+    "id": "i0000000-0000-0000-0000-000000000001",
     "name": "OpenAI",
+    "key": "openai",
     "cat": "AI & Machine Learning",
-    "auth": "API Key, OAuth",
-    "mcp": true,
     "type": "mcp",
-    "installed": true
-  },
-  {
-    "id": 2,
-    "name": "Anthropic Claude",
-    "cat": "AI & Machine Learning",
     "auth": "API Key",
     "mcp": true,
-    "type": "mcp",
+    "version": "v1.1.7",
+    "hash": "6e7d8e8caf",
+    "records": 2770,
+    "size": "1.35 MB",
     "installed": true
   },
   {
-    "id": 3,
-    "name": "Hugging Face",
+    "id": "i0000000-0000-0000-0000-000000000002",
+    "name": "Anthropic Claude",
+    "key": "anthropic",
     "cat": "AI & Machine Learning",
+    "type": "mcp",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.2.14",
+    "hash": "cf4021a589",
+    "records": 4190,
+    "size": "2.05 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000003",
+    "name": "Hugging Face",
+    "key": "huggingface",
+    "cat": "AI & Machine Learning",
+    "type": "mcp",
     "auth": "Access Token (User/Write)",
     "mcp": true,
-    "type": "mcp",
+    "version": "v1.3.1",
+    "hash": "4f1b566b79",
+    "records": 5610,
+    "size": "2.74 MB",
     "installed": true
   },
   {
-    "id": 4,
+    "id": "i0000000-0000-0000-0000-000000000004",
     "name": "Cohere",
+    "key": "cohere",
     "cat": "AI & Machine Learning",
-    "auth": "API Key",
-    "mcp": true,
     "type": "api",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.4.8",
+    "hash": "150aed0300",
+    "records": 7030,
+    "size": "3.43 MB",
     "installed": true
   },
   {
-    "id": 5,
+    "id": "i0000000-0000-0000-0000-000000000005",
     "name": "Mistral AI",
+    "key": "mistral",
     "cat": "AI & Machine Learning",
+    "type": "mcp",
     "auth": "API Key",
     "mcp": true,
-    "type": "mcp",
+    "version": "v1.0.15",
+    "hash": "d36efd8883",
+    "records": 8450,
+    "size": "4.13 MB",
     "installed": true
   },
   {
-    "id": 6,
+    "id": "i0000000-0000-0000-0000-000000000006",
     "name": "Perplexity AI",
+    "key": "perplexity",
     "cat": "AI & Machine Learning",
+    "type": "mcp",
     "auth": "API Key",
     "mcp": true,
-    "type": "mcp",
+    "version": "v1.1.2",
+    "hash": "15e0108bde",
+    "records": 9870,
+    "size": "4.82 MB",
     "installed": true
   },
   {
-    "id": 7,
+    "id": "i0000000-0000-0000-0000-000000000007",
     "name": "Replicate",
+    "key": "replicate",
     "cat": "AI & Machine Learning",
+    "type": "api",
     "auth": "API Token",
     "mcp": true,
-    "type": "api",
+    "version": "v1.2.9",
+    "hash": "ec492c5805",
+    "records": 11290,
+    "size": "5.51 MB",
     "installed": true
   },
   {
-    "id": 8,
+    "id": "i0000000-0000-0000-0000-000000000008",
     "name": "Together AI",
+    "key": "together_ai",
     "cat": "AI & Machine Learning",
+    "type": "api",
     "auth": "API Key",
     "mcp": true,
-    "type": "api",
+    "version": "v1.3.16",
+    "hash": "25a0276fd0",
+    "records": 12710,
+    "size": "6.21 MB",
     "installed": true
   },
   {
-    "id": 9,
+    "id": "i0000000-0000-0000-0000-000000000009",
     "name": "Groq LPU",
+    "key": "groq",
     "cat": "AI & Machine Learning",
+    "type": "mcp",
     "auth": "API Key",
     "mcp": true,
-    "type": "mcp",
-    "installed": false
+    "version": "v1.4.3",
+    "hash": "b28424e445",
+    "records": 14130,
+    "size": "6.9 MB",
+    "installed": true
   },
   {
-    "id": 10,
+    "id": "i0000000-0000-0000-0000-000000000010",
     "name": "DeepSeek",
+    "key": "deepseek",
     "cat": "AI & Machine Learning",
+    "type": "api",
     "auth": "API Key",
     "mcp": true,
-    "type": "api",
-    "installed": false
+    "version": "v1.0.10",
+    "hash": "99157c0cec",
+    "records": 15550,
+    "size": "7.59 MB",
+    "installed": true
   },
   {
-    "id": 11,
+    "id": "i0000000-0000-0000-0000-000000000011",
     "name": "Ollama (Local/Self-hosted)",
+    "key": "ollama",
     "cat": "AI & Machine Learning",
-    "auth": "Endpoint URL, Basic Auth",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "Endpoint URL",
+    "mcp": true,
+    "version": "v1.1.17",
+    "hash": "a7efb9ceae",
+    "records": 16970,
+    "size": "8.29 MB",
+    "installed": true
   },
   {
-    "id": 12,
+    "id": "i0000000-0000-0000-0000-000000000012",
     "name": "vLLM Engine",
+    "key": "vllm",
     "cat": "AI & Machine Learning",
-    "auth": "Endpoint URL, Bearer Token",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Endpoint URL",
+    "mcp": false,
+    "version": "v1.2.4",
+    "hash": "cdcff88dfb",
+    "records": 18390,
+    "size": "8.98 MB",
+    "installed": true
   },
   {
-    "id": 13,
+    "id": "i0000000-0000-0000-0000-000000000013",
     "name": "LangSmith (LangChain)",
+    "key": "langsmith",
     "cat": "AI & Machine Learning",
+    "type": "api",
     "auth": "API Key",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.3.11",
+    "hash": "097a2ea372",
+    "records": 19810,
+    "size": "9.67 MB",
+    "installed": true
   },
   {
-    "id": 14,
+    "id": "i0000000-0000-0000-0000-000000000014",
     "name": "LlamaCloud",
+    "key": "llamaindex",
     "cat": "AI & Machine Learning",
+    "type": "api",
     "auth": "API Key",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.4.18",
+    "hash": "c07d9f9ff8",
+    "records": 21230,
+    "size": "10.37 MB",
+    "installed": true
   },
   {
-    "id": 15,
+    "id": "i0000000-0000-0000-0000-000000000015",
     "name": "Weights & Biases",
+    "key": "wandb",
     "cat": "AI & Machine Learning",
+    "type": "api",
     "auth": "API Key",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.0.5",
+    "hash": "4d4ace5cda",
+    "records": 22650,
+    "size": "11.06 MB",
+    "installed": true
   },
   {
-    "id": 16,
+    "id": "i0000000-0000-0000-0000-000000000016",
     "name": "ElevenLabs Voice AI",
+    "key": "elevenlabs",
     "cat": "AI & Machine Learning",
+    "type": "mcp",
     "auth": "xi-api-key",
     "mcp": true,
-    "type": "mcp",
-    "installed": false
+    "version": "v1.1.12",
+    "hash": "733a509def",
+    "records": 24070,
+    "size": "11.75 MB",
+    "installed": true
   },
   {
-    "id": 17,
+    "id": "i0000000-0000-0000-0000-000000000017",
     "name": "Runway Gen AI",
+    "key": "runway",
     "cat": "AI & Machine Learning",
+    "type": "api",
     "auth": "Secret Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 18,
-    "name": "Stability AI",
-    "cat": "AI & Machine Learning",
-    "auth": "API Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 19,
-    "name": "Pinecone Vector DB",
-    "cat": "Vector Database",
-    "auth": "API Key, Environment",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 20,
-    "name": "Qdrant Vector Search",
-    "cat": "Vector Database",
-    "auth": "API Key, Cluster URL",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 21,
-    "name": "Weaviate Cloud",
-    "cat": "Vector Database",
-    "auth": "API Key, Cluster URL",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 22,
-    "name": "ChromaDB",
-    "cat": "Vector Database",
-    "auth": "Endpoint URL, Auth Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 23,
-    "name": "Milvus / Zilliz",
-    "cat": "Vector Database",
-    "auth": "API Key, Cluster URI",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 24,
-    "name": "Meilisearch",
-    "cat": "Search & Discovery",
-    "auth": "Master API Key, URL",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 25,
-    "name": "Algolia Search",
-    "cat": "Search & Discovery",
-    "auth": "Application ID, Admin API Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 26,
-    "name": "Typesense Cloud",
-    "cat": "Search & Discovery",
-    "auth": "API Key, Node URL",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 27,
-    "name": "Vespa AI",
-    "cat": "Search & Discovery",
-    "auth": "Certificate, Key, Endpoint",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 28,
-    "name": "Marqo Vector Search",
-    "cat": "Vector Database",
-    "auth": "API Key, Endpoint",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 29,
-    "name": "PostgreSQL",
-    "cat": "Relational Database",
-    "auth": "User/Password, TLS, IAM Token",
-    "mcp": true,
-    "type": "database",
+    "version": "v1.2.19",
+    "hash": "b15d7406ad",
+    "records": 25490,
+    "size": "12.45 MB",
     "installed": true
   },
   {
-    "id": 30,
+    "id": "i0000000-0000-0000-0000-000000000018",
+    "name": "Stability AI",
+    "key": "stability_ai",
+    "cat": "AI & Machine Learning",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.3.6",
+    "hash": "558387f3bc",
+    "records": 26910,
+    "size": "13.14 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000019",
+    "name": "Pinecone Vector DB",
+    "key": "pinecone",
+    "cat": "Vector Database",
+    "type": "mcp",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.4.13",
+    "hash": "09bb86dc30",
+    "records": 28330,
+    "size": "13.83 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000020",
+    "name": "Qdrant Vector Search",
+    "key": "qdrant",
+    "cat": "Vector Database",
+    "type": "mcp",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.0.0",
+    "hash": "cac1f091d7",
+    "records": 29750,
+    "size": "14.53 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000021",
+    "name": "Weaviate Cloud",
+    "key": "weaviate",
+    "cat": "Vector Database",
+    "type": "mcp",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.1.7",
+    "hash": "3d9a042ef0",
+    "records": 31170,
+    "size": "15.22 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000022",
+    "name": "ChromaDB",
+    "key": "chroma",
+    "cat": "Vector Database",
+    "type": "mcp",
+    "auth": "Endpoint URL",
+    "mcp": true,
+    "version": "v1.2.14",
+    "hash": "bd19ddeeb6",
+    "records": 32590,
+    "size": "15.91 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000023",
+    "name": "Milvus / Zilliz",
+    "key": "milvus",
+    "cat": "Vector Database",
+    "type": "mcp",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.3.1",
+    "hash": "c7f2c0e198",
+    "records": 34010,
+    "size": "16.61 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000024",
+    "name": "Meilisearch",
+    "key": "meilisearch",
+    "cat": "Search & Discovery",
+    "type": "mcp",
+    "auth": "Master API Key",
+    "mcp": true,
+    "version": "v1.4.8",
+    "hash": "cd40e2df4a",
+    "records": 35430,
+    "size": "17.3 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000025",
+    "name": "Algolia Search",
+    "key": "algolia",
+    "cat": "Search & Discovery",
+    "type": "api",
+    "auth": "Application ID",
+    "mcp": false,
+    "version": "v1.0.15",
+    "hash": "e70ab30736",
+    "records": 36850,
+    "size": "17.99 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000026",
+    "name": "Typesense Cloud",
+    "key": "typesense",
+    "cat": "Search & Discovery",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.1.2",
+    "hash": "87a97cd1f9",
+    "records": 38270,
+    "size": "18.69 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000027",
+    "name": "Vespa AI",
+    "key": "vespa",
+    "cat": "Search & Discovery",
+    "type": "api",
+    "auth": "Certificate",
+    "mcp": false,
+    "version": "v1.2.9",
+    "hash": "858ca64a16",
+    "records": 39690,
+    "size": "19.38 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000028",
+    "name": "Marqo Vector Search",
+    "key": "marqo",
+    "cat": "Vector Database",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.3.16",
+    "hash": "d69252c76c",
+    "records": 41110,
+    "size": "20.07 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000029",
+    "name": "PostgreSQL",
+    "key": "postgresql",
+    "cat": "Relational Database",
+    "type": "database",
+    "auth": "User/Password",
+    "mcp": true,
+    "version": "v1.4.3",
+    "hash": "506790d88a",
+    "records": 42530,
+    "size": "20.77 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000030",
     "name": "MySQL",
+    "key": "mysql",
     "cat": "Relational Database",
-    "auth": "User/Password, SSL CA",
-    "mcp": true,
     "type": "database",
-    "installed": false
+    "auth": "User/Password",
+    "mcp": true,
+    "version": "v1.0.10",
+    "hash": "1baec6db55",
+    "records": 43950,
+    "size": "21.46 MB",
+    "installed": true
   },
   {
-    "id": 31,
+    "id": "i0000000-0000-0000-0000-000000000031",
     "name": "SQLite",
+    "key": "sqlite",
     "cat": "Relational Database",
-    "auth": "Database File Path, Encryption Key",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "Database File Path",
+    "mcp": true,
+    "version": "v1.1.17",
+    "hash": "d02acd244c",
+    "records": 45370,
+    "size": "22.15 MB",
+    "installed": true
   },
   {
-    "id": 32,
+    "id": "i0000000-0000-0000-0000-000000000032",
     "name": "MariaDB",
+    "key": "mariadb",
     "cat": "Relational Database",
-    "auth": "User/Password, TLS",
-    "mcp": true,
     "type": "database",
-    "installed": false
+    "auth": "User/Password",
+    "mcp": true,
+    "version": "v1.2.4",
+    "hash": "be7b86fcad",
+    "records": 46790,
+    "size": "22.85 MB",
+    "installed": true
   },
   {
-    "id": 33,
+    "id": "i0000000-0000-0000-0000-000000000033",
     "name": "Microsoft SQL Server",
+    "key": "sqlserver",
     "cat": "Relational Database",
-    "auth": "SQL Auth, Windows/Azure AD",
-    "mcp": true,
     "type": "database",
-    "installed": false
+    "auth": "SQL Auth",
+    "mcp": true,
+    "version": "v1.3.11",
+    "hash": "fb114e1f9d",
+    "records": 48210,
+    "size": "23.54 MB",
+    "installed": true
   },
   {
-    "id": 34,
+    "id": "i0000000-0000-0000-0000-000000000034",
     "name": "Oracle Database",
+    "key": "oracle_db",
     "cat": "Relational Database",
-    "auth": "TNS, User/Password, Wallet",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "TNS",
+    "mcp": false,
+    "version": "v1.4.18",
+    "hash": "704477b3f3",
+    "records": 49630,
+    "size": "24.23 MB",
+    "installed": true
   },
   {
-    "id": 35,
+    "id": "i0000000-0000-0000-0000-000000000035",
     "name": "CockroachDB Dedicated",
+    "key": "cockroachdb",
     "cat": "Relational Database",
-    "auth": "User/Password, SSL Root Cert",
-    "mcp": true,
     "type": "database",
-    "installed": false
+    "auth": "User/Password",
+    "mcp": true,
+    "version": "v1.0.5",
+    "hash": "ac687135a8",
+    "records": 51050,
+    "size": "24.93 MB",
+    "installed": true
   },
   {
-    "id": 36,
+    "id": "i0000000-0000-0000-0000-000000000036",
     "name": "TiDB Serverless",
+    "key": "tidb",
     "cat": "Relational Database",
-    "auth": "User/Password, TLS",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "User/Password",
+    "mcp": false,
+    "version": "v1.1.12",
+    "hash": "b04e42541d",
+    "records": 52470,
+    "size": "25.62 MB",
+    "installed": true
   },
   {
-    "id": 37,
+    "id": "i0000000-0000-0000-0000-000000000037",
     "name": "Neon Serverless Postgres",
+    "key": "neon",
     "cat": "Relational Database",
-    "auth": "API Key, Connection String",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.2.19",
+    "hash": "47c3174e18",
+    "records": 53890,
+    "size": "26.31 MB",
+    "installed": true
   },
   {
-    "id": 38,
+    "id": "i0000000-0000-0000-0000-000000000038",
     "name": "Supabase (DB & Auth)",
+    "key": "supabase",
     "cat": "Relational Database",
-    "auth": "Service Role Key, Database URL",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 39,
-    "name": "PlanetScale MySQL",
-    "cat": "Relational Database",
-    "auth": "Service Token, Password",
-    "mcp": false,
-    "type": "database",
-    "installed": false
-  },
-  {
-    "id": 40,
-    "name": "TimescaleDB (Time Series)",
-    "cat": "Relational Database",
-    "auth": "User/Password, SSL",
+    "auth": "Service Role Key",
     "mcp": true,
-    "type": "database",
-    "installed": false
+    "version": "v1.3.6",
+    "hash": "c8bc3f49e3",
+    "records": 55310,
+    "size": "27.01 MB",
+    "installed": true
   },
   {
-    "id": 41,
-    "name": "YugabyteDB",
+    "id": "i0000000-0000-0000-0000-000000000039",
+    "name": "PlanetScale MySQL",
+    "key": "planetscale",
     "cat": "Relational Database",
-    "auth": "User/Password, TLS",
+    "type": "database",
+    "auth": "Service Token",
     "mcp": false,
-    "type": "database",
-    "installed": false
+    "version": "v1.4.13",
+    "hash": "02d82b1cc5",
+    "records": 56730,
+    "size": "27.7 MB",
+    "installed": true
   },
   {
-    "id": 42,
-    "name": "QuestDB Time-Series",
+    "id": "i0000000-0000-0000-0000-000000000040",
+    "name": "TimescaleDB (Time Series)",
+    "key": "timescaledb",
     "cat": "Relational Database",
+    "type": "database",
+    "auth": "User/Password",
+    "mcp": true,
+    "version": "v1.0.0",
+    "hash": "ae68662875",
+    "records": 58150,
+    "size": "28.39 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000041",
+    "name": "YugabyteDB",
+    "key": "yugabytedb",
+    "cat": "Relational Database",
+    "type": "database",
+    "auth": "User/Password",
+    "mcp": false,
+    "version": "v1.1.7",
+    "hash": "136ca1a27c",
+    "records": 59570,
+    "size": "29.09 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000042",
+    "name": "QuestDB Time-Series",
+    "key": "questdb",
+    "cat": "Relational Database",
+    "type": "database",
     "auth": "HTTP Influx / PostgreSQL Wire",
     "mcp": false,
-    "type": "database",
-    "installed": false
-  },
-  {
-    "id": 43,
-    "name": "ClickHouse Cloud / Local",
-    "cat": "Relational Database",
-    "auth": "Native / HTTP, User, Password",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 44,
-    "name": "DuckDB (Big Data Engine)",
-    "cat": "Big Data & Analytics",
-    "auth": "Embedded, Parquet, S3 Token",
-    "mcp": true,
-    "type": "mcp",
+    "version": "v1.2.14",
+    "hash": "bb2b76bdeb",
+    "records": 60990,
+    "size": "29.78 MB",
     "installed": true
   },
   {
-    "id": 45,
+    "id": "i0000000-0000-0000-0000-000000000043",
+    "name": "ClickHouse Cloud / Local",
+    "key": "clickhouse_local",
+    "cat": "Relational Database",
+    "type": "mcp",
+    "auth": "Native / HTTP",
+    "mcp": true,
+    "version": "v1.3.1",
+    "hash": "970f95cec1",
+    "records": 62410,
+    "size": "30.47 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000044",
+    "name": "DuckDB (Big Data Engine)",
+    "key": "duckdb",
+    "cat": "Big Data & Analytics",
+    "type": "mcp",
+    "auth": "Embedded",
+    "mcp": true,
+    "version": "v1.4.8",
+    "hash": "c837036544",
+    "records": 63830,
+    "size": "31.17 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000045",
     "name": "Snowflake Warehouse",
+    "key": "snowflake",
     "cat": "Big Data & Analytics",
-    "auth": "OAuth, Key-Pair (RSA), Password",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "OAuth",
+    "mcp": true,
+    "version": "v1.0.15",
+    "hash": "82a118092e",
+    "records": 65250,
+    "size": "31.86 MB",
+    "installed": true
   },
   {
-    "id": 46,
+    "id": "i0000000-0000-0000-0000-000000000046",
     "name": "Google BigQuery",
+    "key": "bigquery",
     "cat": "Big Data & Analytics",
-    "auth": "Google OAuth 2.0, Service Account",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "Google OAuth 2.0",
+    "mcp": true,
+    "version": "v1.1.2",
+    "hash": "abd7f0b910",
+    "records": 66670,
+    "size": "32.55 MB",
+    "installed": true
   },
   {
-    "id": 47,
+    "id": "i0000000-0000-0000-0000-000000000047",
     "name": "Amazon Redshift",
+    "key": "redshift",
     "cat": "Big Data & Analytics",
-    "auth": "IAM Temp Token, Username/Password",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "IAM Temp Token",
+    "mcp": false,
+    "version": "v1.2.9",
+    "hash": "c5d5b48a0c",
+    "records": 68090,
+    "size": "33.25 MB",
+    "installed": true
   },
   {
-    "id": 48,
+    "id": "i0000000-0000-0000-0000-000000000048",
     "name": "Databricks Lakehouse",
+    "key": "databricks",
     "cat": "Big Data & Analytics",
-    "auth": "OAuth 2.0, Personal Access Token",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.3.16",
+    "hash": "31ae867361",
+    "records": 69510,
+    "size": "33.94 MB",
+    "installed": true
   },
   {
-    "id": 49,
+    "id": "i0000000-0000-0000-0000-000000000049",
     "name": "ClickHouse Analytical",
+    "key": "clickhouse_cloud",
     "cat": "Big Data & Analytics",
-    "auth": "User, Password, TLS",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "User",
+    "mcp": true,
+    "version": "v1.4.3",
+    "hash": "1bcf2365be",
+    "records": 70930,
+    "size": "34.63 MB",
+    "installed": true
   },
   {
-    "id": 50,
+    "id": "i0000000-0000-0000-0000-000000000050",
     "name": "Apache Spark / Livy",
+    "key": "apache_spark",
     "cat": "Big Data & Analytics",
-    "auth": "Master URL, Kerberos / Token",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Master URL",
+    "mcp": false,
+    "version": "v1.0.10",
+    "hash": "cd598e8dcb",
+    "records": 72350,
+    "size": "35.33 MB",
+    "installed": true
   },
   {
-    "id": 51,
+    "id": "i0000000-0000-0000-0000-000000000051",
     "name": "Trino / Presto Distributed",
+    "key": "trino",
     "cat": "Big Data & Analytics",
-    "auth": "User, Password / Kerberos, TLS",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "User",
+    "mcp": false,
+    "version": "v1.1.17",
+    "hash": "3142e45cb4",
+    "records": 73770,
+    "size": "36.02 MB",
+    "installed": true
   },
   {
-    "id": 52,
+    "id": "i0000000-0000-0000-0000-000000000052",
     "name": "Apache Druid Real-Time",
+    "key": "apache_druid",
     "cat": "Big Data & Analytics",
-    "auth": "Router URL, Basic Auth",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Router URL",
+    "mcp": false,
+    "version": "v1.2.4",
+    "hash": "24bdbedf77",
+    "records": 75190,
+    "size": "36.71 MB",
+    "installed": true
   },
   {
-    "id": 53,
+    "id": "i0000000-0000-0000-0000-000000000053",
     "name": "StarRocks OLAP",
+    "key": "starrocks",
     "cat": "Big Data & Analytics",
-    "auth": "FE Host, User, Password",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "FE Host",
+    "mcp": false,
+    "version": "v1.3.11",
+    "hash": "65e3de750c",
+    "records": 76610,
+    "size": "37.41 MB",
+    "installed": true
   },
   {
-    "id": 54,
+    "id": "i0000000-0000-0000-0000-000000000054",
     "name": "dbt Cloud",
+    "key": "dbt_cloud",
     "cat": "Big Data & Analytics",
-    "auth": "Service Token, Account ID",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Service Token",
+    "mcp": false,
+    "version": "v1.4.18",
+    "hash": "2d6920bdbe",
+    "records": 78030,
+    "size": "38.1 MB",
+    "installed": true
   },
   {
-    "id": 55,
+    "id": "i0000000-0000-0000-0000-000000000055",
     "name": "Cube Semantic Layer",
+    "key": "cubejs",
     "cat": "Big Data & Analytics",
-    "auth": "API Secret, Cube URL",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "API Secret",
+    "mcp": false,
+    "version": "v1.0.5",
+    "hash": "aa288fa036",
+    "records": 79450,
+    "size": "38.79 MB",
+    "installed": true
   },
   {
-    "id": 56,
+    "id": "i0000000-0000-0000-0000-000000000056",
     "name": "MotherDuck (Cloud DuckDB)",
+    "key": "motherduck",
     "cat": "Big Data & Analytics",
+    "type": "mcp",
     "auth": "Service Token",
     "mcp": true,
-    "type": "mcp",
-    "installed": false
+    "version": "v1.1.12",
+    "hash": "c1aa8839e6",
+    "records": 80870,
+    "size": "39.49 MB",
+    "installed": true
   },
   {
-    "id": 57,
+    "id": "i0000000-0000-0000-0000-000000000057",
     "name": "Firebolt Cloud Data Warehouse",
+    "key": "firebolt",
     "cat": "Big Data & Analytics",
-    "auth": "Service Account ID, Secret",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "Service Account ID",
+    "mcp": false,
+    "version": "v1.2.19",
+    "hash": "ca963e4163",
+    "records": 82290,
+    "size": "40.18 MB",
+    "installed": true
   },
   {
-    "id": 58,
+    "id": "i0000000-0000-0000-0000-000000000058",
     "name": "SingleStoreDB",
+    "key": "singlestore",
     "cat": "Big Data & Analytics",
-    "auth": "User/Password, SSL",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "User/Password",
+    "mcp": false,
+    "version": "v1.3.6",
+    "hash": "eb6d3b0502",
+    "records": 83710,
+    "size": "40.87 MB",
+    "installed": true
   },
   {
-    "id": 59,
+    "id": "i0000000-0000-0000-0000-000000000059",
     "name": "Redis / Valkey Cache",
+    "key": "redis",
     "cat": "NoSQL & Cache",
-    "auth": "Password, ACL, TLS CA",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "Password",
+    "mcp": true,
+    "version": "v1.4.13",
+    "hash": "202cf77080",
+    "records": 85130,
+    "size": "41.57 MB",
+    "installed": true
   },
   {
-    "id": 60,
+    "id": "i0000000-0000-0000-0000-000000000060",
     "name": "MongoDB Atlas / Enterprise",
+    "key": "mongodb",
     "cat": "NoSQL & Cache",
-    "auth": "SCRAM-SHA-256, X.509, API Key",
-    "mcp": true,
     "type": "database",
-    "installed": false
+    "auth": "SCRAM-SHA-256",
+    "mcp": true,
+    "version": "v1.0.0",
+    "hash": "aa646d97bc",
+    "records": 86550,
+    "size": "42.26 MB",
+    "installed": true
   },
   {
-    "id": 61,
+    "id": "i0000000-0000-0000-0000-000000000061",
     "name": "Apache Cassandra / Astra DB",
+    "key": "cassandra",
     "cat": "NoSQL & Cache",
-    "auth": "Secure Connect Bundle, Token",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "Secure Connect Bundle",
+    "mcp": false,
+    "version": "v1.1.7",
+    "hash": "0ab26c3e44",
+    "records": 87970,
+    "size": "42.95 MB",
+    "installed": true
   },
   {
-    "id": 62,
+    "id": "i0000000-0000-0000-0000-000000000062",
     "name": "Couchbase Capella",
+    "key": "couchbase",
     "cat": "NoSQL & Cache",
-    "auth": "Cluster URL, User, Password",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "Cluster URL",
+    "mcp": false,
+    "version": "v1.2.14",
+    "hash": "d235664116",
+    "records": 89390,
+    "size": "43.65 MB",
+    "installed": true
   },
   {
-    "id": 63,
+    "id": "i0000000-0000-0000-0000-000000000063",
     "name": "ScyllaDB NoSQL",
+    "key": "scylladb",
     "cat": "NoSQL & Cache",
-    "auth": "Contact Points, User, Password",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "Contact Points",
+    "mcp": false,
+    "version": "v1.3.1",
+    "hash": "7f5a756b82",
+    "records": 90810,
+    "size": "44.34 MB",
+    "installed": true
   },
   {
-    "id": 64,
+    "id": "i0000000-0000-0000-0000-000000000064",
     "name": "Amazon DynamoDB",
+    "key": "dynamodb",
     "cat": "NoSQL & Cache",
-    "auth": "IAM Role, STS, Access Keys",
-    "mcp": true,
     "type": "storage",
-    "installed": false
+    "auth": "IAM Role",
+    "mcp": true,
+    "version": "v1.4.8",
+    "hash": "8a9b82c8a0",
+    "records": 92230,
+    "size": "45.03 MB",
+    "installed": true
   },
   {
-    "id": 65,
+    "id": "i0000000-0000-0000-0000-000000000065",
     "name": "Google Cloud Firestore",
+    "key": "firestore",
     "cat": "NoSQL & Cache",
-    "auth": "Google Service Account, OAuth",
-    "mcp": false,
     "type": "database",
-    "installed": false
+    "auth": "Google Service Account",
+    "mcp": false,
+    "version": "v1.0.15",
+    "hash": "97f93a9ce7",
+    "records": 93650,
+    "size": "45.73 MB",
+    "installed": true
   },
   {
-    "id": 66,
+    "id": "i0000000-0000-0000-0000-000000000066",
     "name": "Firebase Realtime Database",
+    "key": "firebase_rtdb",
     "cat": "NoSQL & Cache",
+    "type": "database",
     "auth": "Firebase Secret / Admin SDK",
     "mcp": false,
-    "type": "database",
-    "installed": false
-  },
-  {
-    "id": 67,
-    "name": "Upstash Serverless Redis",
-    "cat": "NoSQL & Cache",
-    "auth": "REST URL, REST Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 68,
-    "name": "DragonflyDB Cache",
-    "cat": "NoSQL & Cache",
-    "auth": "Redis Wire Protocol, Password",
-    "mcp": false,
-    "type": "database",
-    "installed": false
-  },
-  {
-    "id": 69,
-    "name": "Neo4j Graph Database",
-    "cat": "NoSQL & Cache",
-    "auth": "Bolt Protocol, User, Password",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 70,
-    "name": "Memcached",
-    "cat": "NoSQL & Cache",
-    "auth": "Host, Port, SASL Credentials",
-    "mcp": false,
-    "type": "database",
-    "installed": false
-  },
-  {
-    "id": 71,
-    "name": "AWS S3 Object Storage",
-    "cat": "Cloud Storage",
-    "auth": "IAM Role, STS, Access Keys",
-    "mcp": true,
-    "type": "storage",
+    "version": "v1.1.2",
+    "hash": "418a26b1eb",
+    "records": 95070,
+    "size": "46.42 MB",
     "installed": true
   },
   {
-    "id": 72,
-    "name": "Google Cloud Storage",
-    "cat": "Cloud Storage",
-    "auth": "Workload Identity, Service Account",
-    "mcp": true,
-    "type": "storage",
-    "installed": false
-  },
-  {
-    "id": 73,
-    "name": "Azure Blob Storage",
-    "cat": "Cloud Storage",
-    "auth": "Entra ID, SAS Token, Shared Key",
-    "mcp": false,
-    "type": "storage",
-    "installed": false
-  },
-  {
-    "id": 74,
-    "name": "MinIO Object Storage",
-    "cat": "Cloud Storage",
-    "auth": "Access Key + Secret Key, Endpoint",
-    "mcp": true,
-    "type": "storage",
-    "installed": false
-  },
-  {
-    "id": 75,
-    "name": "Cloudflare R2 Storage",
-    "cat": "Cloud Storage",
-    "auth": "S3 Compatible Credentials, Account ID",
-    "mcp": true,
-    "type": "storage",
-    "installed": false
-  },
-  {
-    "id": 76,
-    "name": "Wasabi Hot Cloud Storage",
-    "cat": "Cloud Storage",
-    "auth": "Access Key, Secret Key, Region",
-    "mcp": false,
-    "type": "storage",
-    "installed": false
-  },
-  {
-    "id": 77,
-    "name": "Backblaze B2",
-    "cat": "Cloud Storage",
-    "auth": "Application Key ID, Application Key",
-    "mcp": false,
-    "type": "storage",
-    "installed": false
-  },
-  {
-    "id": 78,
-    "name": "Google Drive",
-    "cat": "File Storage",
-    "auth": "Google OAuth 2.0, Service Account",
-    "mcp": true,
+    "id": "i0000000-0000-0000-0000-000000000067",
+    "name": "Upstash Serverless Redis",
+    "key": "upstash",
+    "cat": "NoSQL & Cache",
     "type": "mcp",
-    "installed": false
+    "auth": "REST URL",
+    "mcp": true,
+    "version": "v1.2.9",
+    "hash": "35e6178015",
+    "records": 96490,
+    "size": "47.11 MB",
+    "installed": true
   },
   {
-    "id": 79,
+    "id": "i0000000-0000-0000-0000-000000000068",
+    "name": "DragonflyDB Cache",
+    "key": "dragonfly",
+    "cat": "NoSQL & Cache",
+    "type": "database",
+    "auth": "Redis Wire Protocol",
+    "mcp": false,
+    "version": "v1.3.16",
+    "hash": "8ae3d191d4",
+    "records": 97910,
+    "size": "47.81 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000069",
+    "name": "Neo4j Graph Database",
+    "key": "neo4j",
+    "cat": "NoSQL & Cache",
+    "type": "mcp",
+    "auth": "Bolt Protocol",
+    "mcp": true,
+    "version": "v1.4.3",
+    "hash": "9392a27ba9",
+    "records": 99330,
+    "size": "48.5 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000070",
+    "name": "Memcached",
+    "key": "memcached",
+    "cat": "NoSQL & Cache",
+    "type": "database",
+    "auth": "Host",
+    "mcp": false,
+    "version": "v1.0.10",
+    "hash": "af798798a8",
+    "records": 100750,
+    "size": "49.19 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000071",
+    "name": "AWS S3 Object Storage",
+    "key": "aws_s3",
+    "cat": "Cloud Storage",
+    "type": "storage",
+    "auth": "IAM Role",
+    "mcp": true,
+    "version": "v1.1.17",
+    "hash": "51efecf423",
+    "records": 102170,
+    "size": "49.89 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000072",
+    "name": "Google Cloud Storage",
+    "key": "gcs",
+    "cat": "Cloud Storage",
+    "type": "storage",
+    "auth": "Workload Identity",
+    "mcp": true,
+    "version": "v1.2.4",
+    "hash": "7f4864795d",
+    "records": 103590,
+    "size": "50.58 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000073",
+    "name": "Azure Blob Storage",
+    "key": "azure_blob",
+    "cat": "Cloud Storage",
+    "type": "storage",
+    "auth": "Entra ID",
+    "mcp": false,
+    "version": "v1.3.11",
+    "hash": "986efb22f7",
+    "records": 105010,
+    "size": "51.27 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000074",
+    "name": "MinIO Object Storage",
+    "key": "minio",
+    "cat": "Cloud Storage",
+    "type": "storage",
+    "auth": "Access Key + Secret Key",
+    "mcp": true,
+    "version": "v1.4.18",
+    "hash": "d1593a9cd2",
+    "records": 106430,
+    "size": "51.97 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000075",
+    "name": "Cloudflare R2 Storage",
+    "key": "cloudflare_r2",
+    "cat": "Cloud Storage",
+    "type": "storage",
+    "auth": "S3 Compatible Credentials",
+    "mcp": true,
+    "version": "v1.0.5",
+    "hash": "668da0af14",
+    "records": 107850,
+    "size": "52.66 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000076",
+    "name": "Wasabi Hot Cloud Storage",
+    "key": "wasabi",
+    "cat": "Cloud Storage",
+    "type": "storage",
+    "auth": "Access Key",
+    "mcp": false,
+    "version": "v1.1.12",
+    "hash": "f7a04509ef",
+    "records": 109270,
+    "size": "53.35 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000077",
+    "name": "Backblaze B2",
+    "key": "backblaze_b2",
+    "cat": "Cloud Storage",
+    "type": "storage",
+    "auth": "Application Key ID",
+    "mcp": false,
+    "version": "v1.2.19",
+    "hash": "4bade3c410",
+    "records": 110690,
+    "size": "54.05 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000078",
+    "name": "Google Drive",
+    "key": "google_drive",
+    "cat": "File Storage",
+    "type": "mcp",
+    "auth": "Google OAuth 2.0",
+    "mcp": true,
+    "version": "v1.3.6",
+    "hash": "f692716cec",
+    "records": 112110,
+    "size": "54.74 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000079",
     "name": "Microsoft OneDrive",
+    "key": "onedrive",
     "cat": "File Storage",
+    "type": "api",
     "auth": "Microsoft Entra ID OAuth 2.0",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.4.13",
+    "hash": "abd9c01136",
+    "records": 113530,
+    "size": "55.43 MB",
+    "installed": true
   },
   {
-    "id": 80,
+    "id": "i0000000-0000-0000-0000-000000000080",
     "name": "Microsoft SharePoint Online",
+    "key": "sharepoint",
     "cat": "File Storage",
+    "type": "api",
     "auth": "Microsoft Entra ID OAuth 2.0",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.0.0",
+    "hash": "1a67490ef8",
+    "records": 114950,
+    "size": "56.13 MB",
+    "installed": true
   },
   {
-    "id": 81,
+    "id": "i0000000-0000-0000-0000-000000000081",
     "name": "Dropbox",
+    "key": "dropbox",
     "cat": "File Storage",
+    "type": "api",
     "auth": "OAuth 2.0 PKCE",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.1.7",
+    "hash": "95e1020d59",
+    "records": 116370,
+    "size": "56.82 MB",
+    "installed": true
   },
   {
-    "id": 82,
+    "id": "i0000000-0000-0000-0000-000000000082",
     "name": "Box Enterprise Storage",
+    "key": "box",
     "cat": "File Storage",
-    "auth": "OAuth 2.0, JWT Keypair",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.2.14",
+    "hash": "cf11bc83c7",
+    "records": 117790,
+    "size": "57.51 MB",
+    "installed": true
   },
   {
-    "id": 83,
+    "id": "i0000000-0000-0000-0000-000000000083",
     "name": "SFTP / SSH File Transfer",
+    "key": "sftp",
     "cat": "File Storage",
-    "auth": "SSH Private Key, Passphrase",
-    "mcp": false,
     "type": "file_transfer",
-    "installed": false
+    "auth": "SSH Private Key",
+    "mcp": false,
+    "version": "v1.3.1",
+    "hash": "4723c6b9d1",
+    "records": 119210,
+    "size": "58.21 MB",
+    "installed": true
   },
   {
-    "id": 84,
+    "id": "i0000000-0000-0000-0000-000000000084",
     "name": "IPFS / Pinata Storage",
+    "key": "ipfs",
     "cat": "File Storage",
-    "auth": "Pinata JWT, Gateway URL",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Pinata JWT",
+    "mcp": false,
+    "version": "v1.4.8",
+    "hash": "eb8c0e43f5",
+    "records": 120630,
+    "size": "58.9 MB",
+    "installed": true
   },
   {
-    "id": 85,
+    "id": "i0000000-0000-0000-0000-000000000085",
     "name": "Nextcloud Storage",
+    "key": "nextcloud",
     "cat": "File Storage",
-    "auth": "App Password, WebDAV URL",
+    "type": "api",
+    "auth": "App Password",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.0.15",
+    "hash": "588a7520f5",
+    "records": 122050,
+    "size": "59.59 MB",
+    "installed": true
   },
   {
-    "id": 86,
+    "id": "i0000000-0000-0000-0000-000000000086",
     "name": "AWS Cloud Management",
+    "key": "aws_ec2_iam",
     "cat": "Cloud Infrastructure",
-    "auth": "IAM Role, AssumeRole STS",
-    "mcp": true,
     "type": "api",
-    "installed": false
+    "auth": "IAM Role",
+    "mcp": true,
+    "version": "v1.1.2",
+    "hash": "530e602417",
+    "records": 123470,
+    "size": "60.29 MB",
+    "installed": true
   },
   {
-    "id": 87,
+    "id": "i0000000-0000-0000-0000-000000000087",
     "name": "Microsoft Azure Resource Manager",
+    "key": "azure_rm",
     "cat": "Cloud Infrastructure",
+    "type": "api",
     "auth": "Entra ID Service Principal",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.2.9",
+    "hash": "ed34faffba",
+    "records": 124890,
+    "size": "60.98 MB",
+    "installed": true
   },
   {
-    "id": 88,
+    "id": "i0000000-0000-0000-0000-000000000088",
     "name": "Google Cloud Platform (GCP)",
+    "key": "gcp_compute",
     "cat": "Cloud Infrastructure",
-    "auth": "Service Account JSON, Workload Identity",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Service Account JSON",
+    "mcp": false,
+    "version": "v1.3.16",
+    "hash": "ea30f0a46c",
+    "records": 126310,
+    "size": "61.67 MB",
+    "installed": true
   },
   {
-    "id": 89,
+    "id": "i0000000-0000-0000-0000-000000000089",
     "name": "Cloudflare DNS & Edge",
+    "key": "cloudflare",
     "cat": "Cloud Infrastructure",
+    "type": "mcp",
     "auth": "API Token (Scoped)",
     "mcp": true,
-    "type": "mcp",
-    "installed": false
+    "version": "v1.4.3",
+    "hash": "07d3382107",
+    "records": 127730,
+    "size": "62.37 MB",
+    "installed": true
   },
   {
-    "id": 90,
+    "id": "i0000000-0000-0000-0000-000000000090",
     "name": "DigitalOcean Cloud",
+    "key": "digitalocean",
     "cat": "Cloud Infrastructure",
+    "type": "api",
     "auth": "Personal Access Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.0.10",
+    "hash": "2aa82a6442",
+    "records": 129150,
+    "size": "63.06 MB",
+    "installed": true
   },
   {
-    "id": 91,
+    "id": "i0000000-0000-0000-0000-000000000091",
     "name": "Hetzner Cloud",
+    "key": "hetzner",
     "cat": "Cloud Infrastructure",
+    "type": "api",
     "auth": "API Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.1.17",
+    "hash": "c3d9f38b05",
+    "records": 130570,
+    "size": "63.75 MB",
+    "installed": true
   },
   {
-    "id": 92,
+    "id": "i0000000-0000-0000-0000-000000000092",
     "name": "Linode / Akamai Cloud",
+    "key": "linode",
     "cat": "Cloud Infrastructure",
+    "type": "api",
     "auth": "Personal Access Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.2.4",
+    "hash": "850ed77205",
+    "records": 131990,
+    "size": "64.45 MB",
+    "installed": true
   },
   {
-    "id": 93,
+    "id": "i0000000-0000-0000-0000-000000000093",
     "name": "Vercel Deployment Platform",
+    "key": "vercel",
     "cat": "Cloud Infrastructure",
+    "type": "mcp",
     "auth": "Personal / Team Access Token",
     "mcp": true,
-    "type": "mcp",
-    "installed": false
+    "version": "v1.3.11",
+    "hash": "eb63ff9229",
+    "records": 133410,
+    "size": "65.14 MB",
+    "installed": true
   },
   {
-    "id": 94,
+    "id": "i0000000-0000-0000-0000-000000000094",
     "name": "Netlify Edge",
+    "key": "netlify",
     "cat": "Cloud Infrastructure",
+    "type": "api",
     "auth": "Personal Access Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.4.18",
+    "hash": "f2b9d8cc00",
+    "records": 134830,
+    "size": "65.83 MB",
+    "installed": true
   },
   {
-    "id": 95,
+    "id": "i0000000-0000-0000-0000-000000000095",
     "name": "Render Cloud Platform",
+    "key": "render",
     "cat": "Cloud Infrastructure",
+    "type": "api",
     "auth": "API Key",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.0.5",
+    "hash": "7799b3f697",
+    "records": 136250,
+    "size": "66.53 MB",
+    "installed": true
   },
   {
-    "id": 96,
+    "id": "i0000000-0000-0000-0000-000000000096",
     "name": "Railway Infrastructure",
+    "key": "railway",
     "cat": "Cloud Infrastructure",
+    "type": "api",
     "auth": "API Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.1.12",
+    "hash": "c026e0dfb4",
+    "records": 137670,
+    "size": "67.22 MB",
+    "installed": true
   },
   {
-    "id": 97,
+    "id": "i0000000-0000-0000-0000-000000000097",
     "name": "Fly.io App Platform",
+    "key": "fly_io",
     "cat": "Cloud Infrastructure",
+    "type": "api",
     "auth": "Auth Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 98,
-    "name": "OVHcloud",
-    "cat": "Cloud Infrastructure",
-    "auth": "Application Key, Secret, Consumer Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 99,
-    "name": "Scaleway Elements",
-    "cat": "Cloud Infrastructure",
-    "auth": "Secret Key, Organization ID",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 100,
-    "name": "Equinix Metal Bare Metal",
-    "cat": "Cloud Infrastructure",
-    "auth": "User API Token, Project ID",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 101,
-    "name": "GitHub",
-    "cat": "DevOps & Code",
-    "auth": "OAuth 2.0, GitHub App, Fine-grained PAT",
-    "mcp": true,
-    "type": "mcp",
+    "version": "v1.2.19",
+    "hash": "68eebe5683",
+    "records": 139090,
+    "size": "67.92 MB",
     "installed": true
   },
   {
-    "id": 102,
+    "id": "i0000000-0000-0000-0000-000000000098",
+    "name": "OVHcloud",
+    "key": "ovhcloud",
+    "cat": "Cloud Infrastructure",
+    "type": "api",
+    "auth": "Application Key",
+    "mcp": false,
+    "version": "v1.3.6",
+    "hash": "f17b7e918f",
+    "records": 140510,
+    "size": "68.61 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000099",
+    "name": "Scaleway Elements",
+    "key": "scaleaway",
+    "cat": "Cloud Infrastructure",
+    "type": "api",
+    "auth": "Secret Key",
+    "mcp": false,
+    "version": "v1.4.13",
+    "hash": "9e12689800",
+    "records": 141930,
+    "size": "69.3 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000100",
+    "name": "Equinix Metal Bare Metal",
+    "key": "equinix_metal",
+    "cat": "Cloud Infrastructure",
+    "type": "api",
+    "auth": "User API Token",
+    "mcp": false,
+    "version": "v1.0.0",
+    "hash": "b5e65954d7",
+    "records": 143350,
+    "size": "70.0 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000101",
+    "name": "GitHub",
+    "key": "github",
+    "cat": "DevOps & Code",
+    "type": "mcp",
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.1.7",
+    "hash": "f72395da7f",
+    "records": 144770,
+    "size": "70.69 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000102",
     "name": "GitLab",
+    "key": "gitlab",
     "cat": "DevOps & Code",
-    "auth": "OAuth 2.0, Personal Access Token",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.2.14",
+    "hash": "2c32488ec7",
+    "records": 146190,
+    "size": "71.38 MB",
+    "installed": true
   },
   {
-    "id": 103,
+    "id": "i0000000-0000-0000-0000-000000000103",
     "name": "Bitbucket Cloud",
+    "key": "bitbucket",
     "cat": "DevOps & Code",
-    "auth": "OAuth 2.0, App Password",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.3.1",
+    "hash": "ca21c60481",
+    "records": 147610,
+    "size": "72.08 MB",
+    "installed": true
   },
   {
-    "id": 104,
+    "id": "i0000000-0000-0000-0000-000000000104",
     "name": "Azure DevOps Repos & Pipelines",
+    "key": "azure_devops",
     "cat": "DevOps & Code",
-    "auth": "Microsoft Entra ID, PAT",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Microsoft Entra ID",
+    "mcp": false,
+    "version": "v1.4.8",
+    "hash": "06a8a3d5c8",
+    "records": 149030,
+    "size": "72.77 MB",
+    "installed": true
   },
   {
-    "id": 105,
+    "id": "i0000000-0000-0000-0000-000000000105",
     "name": "Gitea / Forgejo",
+    "key": "gitea",
     "cat": "DevOps & Code",
-    "auth": "Access Token, Basic Auth",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "Access Token",
+    "mcp": true,
+    "version": "v1.0.15",
+    "hash": "02e9f9438b",
+    "records": 150450,
+    "size": "73.46 MB",
+    "installed": true
   },
   {
-    "id": 106,
+    "id": "i0000000-0000-0000-0000-000000000106",
     "name": "Docker Hub Registry",
+    "key": "docker_hub",
     "cat": "DevOps & Code",
+    "type": "mcp",
     "auth": "Personal Access Token",
     "mcp": true,
-    "type": "mcp",
-    "installed": false
+    "version": "v1.1.2",
+    "hash": "4c810d23ac",
+    "records": 151870,
+    "size": "74.16 MB",
+    "installed": true
   },
   {
-    "id": 107,
+    "id": "i0000000-0000-0000-0000-000000000107",
     "name": "Kubernetes Cluster",
+    "key": "kubernetes",
     "cat": "DevOps & Code",
-    "auth": "Kubeconfig, ServiceAccount Bearer Token",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "Kubeconfig",
+    "mcp": true,
+    "version": "v1.2.9",
+    "hash": "c2709678af",
+    "records": 153290,
+    "size": "74.85 MB",
+    "installed": true
   },
   {
-    "id": 108,
+    "id": "i0000000-0000-0000-0000-000000000108",
     "name": "ArgoCD GitOps",
+    "key": "argocd",
     "cat": "DevOps & Code",
-    "auth": "Auth Token, Server URL",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Auth Token",
+    "mcp": false,
+    "version": "v1.3.16",
+    "hash": "ea54d1b702",
+    "records": 154710,
+    "size": "75.54 MB",
+    "installed": true
   },
   {
-    "id": 109,
+    "id": "i0000000-0000-0000-0000-000000000109",
     "name": "Terraform Cloud / HCP",
+    "key": "terraform_cloud",
     "cat": "DevOps & Code",
+    "type": "api",
     "auth": "User / Team API Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.4.3",
+    "hash": "3cfb566caa",
+    "records": 156130,
+    "size": "76.24 MB",
+    "installed": true
   },
   {
-    "id": 110,
+    "id": "i0000000-0000-0000-0000-000000000110",
     "name": "Pulumi Service",
+    "key": "pulumi",
     "cat": "DevOps & Code",
+    "type": "api",
     "auth": "Pulumi Access Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.0.10",
+    "hash": "cb87fbe024",
+    "records": 157550,
+    "size": "76.93 MB",
+    "installed": true
   },
   {
-    "id": 111,
+    "id": "i0000000-0000-0000-0000-000000000111",
     "name": "Jenkins Automation",
+    "key": "jenkins",
     "cat": "DevOps & Code",
-    "auth": "API Token, Username",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "API Token",
+    "mcp": false,
+    "version": "v1.1.17",
+    "hash": "40e727d274",
+    "records": 158970,
+    "size": "77.62 MB",
+    "installed": true
   },
   {
-    "id": 112,
+    "id": "i0000000-0000-0000-0000-000000000112",
     "name": "CircleCI",
+    "key": "circleci",
     "cat": "DevOps & Code",
+    "type": "api",
     "auth": "Personal API Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 113,
-    "name": "JFrog Artifactory",
-    "cat": "DevOps & Code",
-    "auth": "Access Token, Artifactory URL",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 114,
-    "name": "Snyk Security & Vulnerability",
-    "cat": "DevOps & Code",
-    "auth": "API Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 115,
-    "name": "SonarQube / SonarCloud",
-    "cat": "DevOps & Code",
-    "auth": "User Token, Server URL",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 116,
-    "name": "Datadog Observability",
-    "cat": "Observability & Monitoring",
-    "auth": "API Key, Application Key, Site",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 117,
-    "name": "New Relic APM",
-    "cat": "Observability & Monitoring",
-    "auth": "User API Key, Account ID",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 118,
-    "name": "Grafana Cloud / OSS",
-    "cat": "Observability & Monitoring",
-    "auth": "Service Account Token, Host URL",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 119,
-    "name": "Prometheus Metrics",
-    "cat": "Observability & Monitoring",
-    "auth": "Server URL, Basic Auth, TLS",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 120,
-    "name": "Sentry Error Tracking",
-    "cat": "Observability & Monitoring",
-    "auth": "User Auth Token, Organization",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 121,
-    "name": "Splunk Enterprise / Cloud",
-    "cat": "Observability & Monitoring",
-    "auth": "HEC Token, Management Port, TLS",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 122,
-    "name": "Dynatrace Intelligence",
-    "cat": "Observability & Monitoring",
-    "auth": "Environment Token, Tenant URL",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 123,
-    "name": "Elasticsearch / Kibana",
-    "cat": "Observability & Monitoring",
-    "auth": "API Key, Elastic Cloud ID",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 124,
-    "name": "Better Stack (Logtail/Uptime)",
-    "cat": "Observability & Monitoring",
-    "auth": "API Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 125,
-    "name": "PostHog Analytics",
-    "cat": "Observability & Monitoring",
-    "auth": "Personal API Key, Project API Key",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 126,
-    "name": "Mixpanel Product Analytics",
-    "cat": "Observability & Monitoring",
-    "auth": "Service Account Secret, Project ID",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 127,
-    "name": "Amplitude Analytics",
-    "cat": "Observability & Monitoring",
-    "auth": "API Key, Secret Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 128,
-    "name": "Twilio Segment CDP",
-    "cat": "Observability & Monitoring",
-    "auth": "Write Key, Public API Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 129,
-    "name": "Slack Workspace",
-    "cat": "Communication",
-    "auth": "OAuth 2.0, Bot Token, User Token",
-    "mcp": true,
-    "type": "mcp",
+    "version": "v1.2.4",
+    "hash": "762c526299",
+    "records": 160390,
+    "size": "78.32 MB",
     "installed": true
   },
   {
-    "id": 130,
-    "name": "Microsoft Teams",
+    "id": "i0000000-0000-0000-0000-000000000113",
+    "name": "JFrog Artifactory",
+    "key": "artifactory",
+    "cat": "DevOps & Code",
+    "type": "api",
+    "auth": "Access Token",
+    "mcp": false,
+    "version": "v1.3.11",
+    "hash": "a1aaed7e9c",
+    "records": 161810,
+    "size": "79.01 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000114",
+    "name": "Snyk Security & Vulnerability",
+    "key": "snyk",
+    "cat": "DevOps & Code",
+    "type": "mcp",
+    "auth": "API Token",
+    "mcp": true,
+    "version": "v1.4.18",
+    "hash": "e2fc1e980e",
+    "records": 163230,
+    "size": "79.7 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000115",
+    "name": "SonarQube / SonarCloud",
+    "key": "sonarqube",
+    "cat": "DevOps & Code",
+    "type": "api",
+    "auth": "User Token",
+    "mcp": false,
+    "version": "v1.0.5",
+    "hash": "955134981a",
+    "records": 164650,
+    "size": "80.4 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000116",
+    "name": "Datadog Observability",
+    "key": "datadog",
+    "cat": "Observability & Monitoring",
+    "type": "mcp",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.1.12",
+    "hash": "7639d0020c",
+    "records": 166070,
+    "size": "81.09 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000117",
+    "name": "New Relic APM",
+    "key": "newrelic",
+    "cat": "Observability & Monitoring",
+    "type": "api",
+    "auth": "User API Key",
+    "mcp": false,
+    "version": "v1.2.19",
+    "hash": "ca823585fd",
+    "records": 167490,
+    "size": "81.78 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000118",
+    "name": "Grafana Cloud / OSS",
+    "key": "grafana",
+    "cat": "Observability & Monitoring",
+    "type": "mcp",
+    "auth": "Service Account Token",
+    "mcp": true,
+    "version": "v1.3.6",
+    "hash": "c34eb697cc",
+    "records": 168910,
+    "size": "82.48 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000119",
+    "name": "Prometheus Metrics",
+    "key": "prometheus",
+    "cat": "Observability & Monitoring",
+    "type": "api",
+    "auth": "Server URL",
+    "mcp": false,
+    "version": "v1.4.13",
+    "hash": "56766be079",
+    "records": 170330,
+    "size": "83.17 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000120",
+    "name": "Sentry Error Tracking",
+    "key": "sentry",
+    "cat": "Observability & Monitoring",
+    "type": "mcp",
+    "auth": "User Auth Token",
+    "mcp": true,
+    "version": "v1.0.0",
+    "hash": "2907009368",
+    "records": 171750,
+    "size": "83.86 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000121",
+    "name": "Splunk Enterprise / Cloud",
+    "key": "splunk",
+    "cat": "Observability & Monitoring",
+    "type": "api",
+    "auth": "HEC Token",
+    "mcp": false,
+    "version": "v1.1.7",
+    "hash": "c23572c297",
+    "records": 173170,
+    "size": "84.56 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000122",
+    "name": "Dynatrace Intelligence",
+    "key": "dynatrace",
+    "cat": "Observability & Monitoring",
+    "type": "api",
+    "auth": "Environment Token",
+    "mcp": false,
+    "version": "v1.2.14",
+    "hash": "ec9da76db3",
+    "records": 174590,
+    "size": "85.25 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000123",
+    "name": "Elasticsearch / Kibana",
+    "key": "elasticsearch_apm",
+    "cat": "Observability & Monitoring",
+    "type": "mcp",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.3.1",
+    "hash": "51daf9699c",
+    "records": 176010,
+    "size": "85.94 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000124",
+    "name": "Better Stack (Logtail/Uptime)",
+    "key": "betterstack",
+    "cat": "Observability & Monitoring",
+    "type": "api",
+    "auth": "API Token",
+    "mcp": false,
+    "version": "v1.4.8",
+    "hash": "77b8a2c93c",
+    "records": 177430,
+    "size": "86.64 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000125",
+    "name": "PostHog Analytics",
+    "key": "posthog",
+    "cat": "Observability & Monitoring",
+    "type": "mcp",
+    "auth": "Personal API Key",
+    "mcp": true,
+    "version": "v1.0.15",
+    "hash": "d6dac553f3",
+    "records": 178850,
+    "size": "87.33 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000126",
+    "name": "Mixpanel Product Analytics",
+    "key": "mixpanel",
+    "cat": "Observability & Monitoring",
+    "type": "api",
+    "auth": "Service Account Secret",
+    "mcp": false,
+    "version": "v1.1.2",
+    "hash": "597394f0b9",
+    "records": 180270,
+    "size": "88.02 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000127",
+    "name": "Amplitude Analytics",
+    "key": "amplitude",
+    "cat": "Observability & Monitoring",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.2.9",
+    "hash": "3b1b6305db",
+    "records": 181690,
+    "size": "88.72 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000128",
+    "name": "Twilio Segment CDP",
+    "key": "segment",
+    "cat": "Observability & Monitoring",
+    "type": "api",
+    "auth": "Write Key",
+    "mcp": false,
+    "version": "v1.3.16",
+    "hash": "3e259ad3b4",
+    "records": 183110,
+    "size": "89.41 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000129",
+    "name": "Slack Workspace",
+    "key": "slack",
     "cat": "Communication",
+    "type": "mcp",
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.4.3",
+    "hash": "0774e45515",
+    "records": 184530,
+    "size": "90.1 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000130",
+    "name": "Microsoft Teams",
+    "key": "microsoft_teams",
+    "cat": "Communication",
+    "type": "api",
     "auth": "Microsoft Entra ID OAuth 2.0",
     "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 131,
-    "name": "Discord Community",
-    "cat": "Communication",
-    "auth": "Bot Token, Client ID",
-    "mcp": true,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 132,
-    "name": "Telegram Bot",
-    "cat": "Communication",
-    "auth": "Bot Father API Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 133,
-    "name": "WhatsApp Business (Meta)",
-    "cat": "Communication",
-    "auth": "System User Access Token, Phone ID",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 134,
-    "name": "Zoom Video Communications",
-    "cat": "Communication",
-    "auth": "Server-to-Server OAuth",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 135,
-    "name": "Google Meet",
-    "cat": "Communication",
-    "auth": "Google OAuth 2.0, Workspace Admin",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 136,
-    "name": "Cisco Webex",
-    "cat": "Communication",
-    "auth": "OAuth 2.0, Bot Access Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 137,
-    "name": "Mattermost Collaboration",
-    "cat": "Communication",
-    "auth": "Personal Access Token, Bot Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 138,
-    "name": "Matrix / Element Synapse",
-    "cat": "Communication",
-    "auth": "Access Token, Homeserver URL",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 139,
-    "name": "Twilio Voice & SMS",
-    "cat": "Communication",
-    "auth": "Account SID, Auth Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 140,
-    "name": "Twilio SendGrid Email",
-    "cat": "Communication",
-    "auth": "API Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 141,
-    "name": "Resend Modern Email",
-    "cat": "Communication",
-    "auth": "API Key",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 142,
-    "name": "Postmark Transactional Email",
-    "cat": "Communication",
-    "auth": "Server API Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 143,
-    "name": "Generic SMTP / IMAP Email",
-    "cat": "Communication",
-    "auth": "Host, Port, User, TLS/SSL Password",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 144,
-    "name": "Jira Software & Product",
-    "cat": "Project Management",
-    "auth": "OAuth 2.0 (3LO), API Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 145,
-    "name": "Confluence Wiki",
-    "cat": "Project Management",
-    "auth": "OAuth 2.0 (3LO), API Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 146,
-    "name": "Linear Issue Tracker",
-    "cat": "Project Management",
-    "auth": "OAuth 2.0, Personal API Key",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 147,
-    "name": "Asana Work Management",
-    "cat": "Project Management",
-    "auth": "OAuth 2.0, Personal Access Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 148,
-    "name": "Monday.com Work OS",
-    "cat": "Project Management",
-    "auth": "API v2 Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 149,
-    "name": "Trello Boards",
-    "cat": "Project Management",
-    "auth": "API Key, OAuth Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 150,
-    "name": "Notion Workspace",
-    "cat": "Project Management",
-    "auth": "OAuth 2.0, Internal Integration Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 151,
-    "name": "ClickUp All-in-One",
-    "cat": "Project Management",
-    "auth": "OAuth 2.0, Personal API Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 152,
-    "name": "Basecamp 4",
-    "cat": "Project Management",
-    "auth": "OAuth 2.0, Account ID",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 153,
-    "name": "Wrike Collaborative Work",
-    "cat": "Project Management",
-    "auth": "Permanent Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 154,
-    "name": "Shortcut (Clubhouse)",
-    "cat": "Project Management",
-    "auth": "API Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 155,
-    "name": "Coda Interactive Docs",
-    "cat": "Project Management",
-    "auth": "API Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 156,
-    "name": "Miro Visual Collaboration",
-    "cat": "Project Management",
-    "auth": "OAuth 2.0 Access Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 157,
-    "name": "Figma Design & Tokens",
-    "cat": "Project Management",
-    "auth": "Personal Access Token, OAuth",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 158,
-    "name": "Obsidian Local Vault",
-    "cat": "Project Management",
-    "auth": "Local Vault REST API Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 159,
-    "name": "Salesforce CRM & Cloud",
-    "cat": "CRM & Sales",
-    "auth": "OAuth 2.0 Connected App, JWT Flow",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 160,
-    "name": "HubSpot Growth Platform",
-    "cat": "CRM & Sales",
-    "auth": "OAuth 2.0, Private App Access Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 161,
-    "name": "Pipedrive CRM",
-    "cat": "CRM & Sales",
-    "auth": "OAuth 2.0, API Token",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 162,
-    "name": "Zoho CRM",
-    "cat": "CRM & Sales",
-    "auth": "OAuth 2.0 Server-Based",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 163,
-    "name": "Close CRM",
-    "cat": "CRM & Sales",
-    "auth": "API Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 164,
-    "name": "Mailchimp Marketing",
-    "cat": "CRM & Sales",
-    "auth": "API Key, Server Prefix",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 165,
-    "name": "Klaviyo Ecommerce Marketing",
-    "cat": "CRM & Sales",
-    "auth": "Private API Key (pk_...)",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 166,
-    "name": "ActiveCampaign",
-    "cat": "CRM & Sales",
-    "auth": "API URL, API Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 167,
-    "name": "Customer.io Journeys",
-    "cat": "CRM & Sales",
-    "auth": "Site ID, API Key, App API Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 168,
-    "name": "Intercom Engage & CRM",
-    "cat": "CRM & Sales",
-    "auth": "OAuth 2.0, Extended Access Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 169,
-    "name": "Braze Customer Engagement",
-    "cat": "CRM & Sales",
-    "auth": "Rest API Key, REST Endpoint",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 170,
-    "name": "Apollo.io B2B Lead Intel",
-    "cat": "CRM & Sales",
-    "auth": "Master API Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 171,
-    "name": "ZoomInfo Enterprise",
-    "cat": "CRM & Sales",
-    "auth": "Client ID, Private Key PKI",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 172,
-    "name": "Lemlist Cold Outreach",
-    "cat": "CRM & Sales",
-    "auth": "API Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 173,
-    "name": "Zendesk Support",
-    "cat": "Customer Support",
-    "auth": "OAuth 2.0, API Token + Email",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 174,
-    "name": "Freshdesk Omnichannel",
-    "cat": "Customer Support",
-    "auth": "API Key, Domain",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 175,
-    "name": "Help Scout Helpdesk",
-    "cat": "Customer Support",
-    "auth": "OAuth 2.0 App Credentials",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 176,
-    "name": "Front Shared Inbox",
-    "cat": "Customer Support",
-    "auth": "API Token (JWT)",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 177,
-    "name": "Gorgias Ecommerce Support",
-    "cat": "Customer Support",
-    "auth": "Base API Key, Username",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 178,
-    "name": "Kustomer Platform",
-    "cat": "Customer Support",
-    "auth": "API Key with Roles",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 179,
-    "name": "ServiceNow Enterprise ITSM",
-    "cat": "Customer Support",
-    "auth": "OAuth 2.0, Basic Auth",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 180,
-    "name": "PagerDuty Incident Response",
-    "cat": "Customer Support",
-    "auth": "REST API Key, Events API v2 Key",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 181,
-    "name": "Opsgenie Alerting",
-    "cat": "Customer Support",
-    "auth": "GenieKey (API Key)",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 182,
-    "name": "Stripe Payments & Billing",
-    "cat": "E-Commerce & Fintech",
-    "auth": "Restricted API Key (rk_...), Webhook Secret",
-    "mcp": true,
-    "type": "mcp",
+    "version": "v1.0.10",
+    "hash": "c76bfaafb3",
+    "records": 185950,
+    "size": "90.8 MB",
     "installed": true
   },
   {
-    "id": 183,
+    "id": "i0000000-0000-0000-0000-000000000131",
+    "name": "Discord Community",
+    "key": "discord",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "Bot Token",
+    "mcp": true,
+    "version": "v1.1.17",
+    "hash": "ee21f5381f",
+    "records": 187370,
+    "size": "91.49 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000132",
+    "name": "Telegram Bot",
+    "key": "telegram",
+    "cat": "Communication",
+    "type": "mcp",
+    "auth": "Bot Father API Token",
+    "mcp": true,
+    "version": "v1.2.4",
+    "hash": "517512ce0a",
+    "records": 188790,
+    "size": "92.18 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000133",
+    "name": "WhatsApp Business (Meta)",
+    "key": "whatsapp_business",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "System User Access Token",
+    "mcp": false,
+    "version": "v1.3.11",
+    "hash": "5e979990bb",
+    "records": 190210,
+    "size": "92.88 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000134",
+    "name": "Zoom Video Communications",
+    "key": "zoom",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "Server-to-Server OAuth",
+    "mcp": false,
+    "version": "v1.4.18",
+    "hash": "7d62e2753f",
+    "records": 191630,
+    "size": "93.57 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000135",
+    "name": "Google Meet",
+    "key": "google_meet",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "Google OAuth 2.0",
+    "mcp": false,
+    "version": "v1.0.5",
+    "hash": "faea60bb57",
+    "records": 193050,
+    "size": "94.26 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000136",
+    "name": "Cisco Webex",
+    "key": "cisco_webex",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.1.12",
+    "hash": "e8b6d879f9",
+    "records": 194470,
+    "size": "94.96 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000137",
+    "name": "Mattermost Collaboration",
+    "key": "mattermost",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "Personal Access Token",
+    "mcp": false,
+    "version": "v1.2.19",
+    "hash": "956426c44b",
+    "records": 195890,
+    "size": "95.65 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000138",
+    "name": "Matrix / Element Synapse",
+    "key": "matrix",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "Access Token",
+    "mcp": false,
+    "version": "v1.3.6",
+    "hash": "ac8e6cef5f",
+    "records": 197310,
+    "size": "96.34 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000139",
+    "name": "Twilio Voice & SMS",
+    "key": "twilio_sms",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "Account SID",
+    "mcp": false,
+    "version": "v1.4.13",
+    "hash": "1b585b0cbb",
+    "records": 198730,
+    "size": "97.04 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000140",
+    "name": "Twilio SendGrid Email",
+    "key": "sendgrid",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.0.0",
+    "hash": "ced744e611",
+    "records": 200150,
+    "size": "97.73 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000141",
+    "name": "Resend Modern Email",
+    "key": "resend",
+    "cat": "Communication",
+    "type": "mcp",
+    "auth": "API Key",
+    "mcp": true,
+    "version": "v1.1.7",
+    "hash": "1740825ab9",
+    "records": 201570,
+    "size": "98.42 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000142",
+    "name": "Postmark Transactional Email",
+    "key": "postmark",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "Server API Token",
+    "mcp": false,
+    "version": "v1.2.14",
+    "hash": "4a9f4ec659",
+    "records": 202990,
+    "size": "99.12 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000143",
+    "name": "Generic SMTP / IMAP Email",
+    "key": "smtp_imap",
+    "cat": "Communication",
+    "type": "api",
+    "auth": "Host",
+    "mcp": false,
+    "version": "v1.3.1",
+    "hash": "0ffec0e9a0",
+    "records": 204410,
+    "size": "99.81 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000144",
+    "name": "Jira Software & Product",
+    "key": "jira",
+    "cat": "Project Management",
+    "type": "mcp",
+    "auth": "OAuth 2.0 (3LO)",
+    "mcp": true,
+    "version": "v1.4.8",
+    "hash": "9434037682",
+    "records": 205830,
+    "size": "100.5 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000145",
+    "name": "Confluence Wiki",
+    "key": "confluence",
+    "cat": "Project Management",
+    "type": "mcp",
+    "auth": "OAuth 2.0 (3LO)",
+    "mcp": true,
+    "version": "v1.0.15",
+    "hash": "e679156d6f",
+    "records": 207250,
+    "size": "101.2 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000146",
+    "name": "Linear Issue Tracker",
+    "key": "linear",
+    "cat": "Project Management",
+    "type": "mcp",
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.1.2",
+    "hash": "afde714c09",
+    "records": 208670,
+    "size": "101.89 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000147",
+    "name": "Asana Work Management",
+    "key": "asana",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.2.9",
+    "hash": "17752d02b1",
+    "records": 210090,
+    "size": "102.58 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000148",
+    "name": "Monday.com Work OS",
+    "key": "monday",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "API v2 Token",
+    "mcp": false,
+    "version": "v1.3.16",
+    "hash": "42ab6b866b",
+    "records": 211510,
+    "size": "103.28 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000149",
+    "name": "Trello Boards",
+    "key": "trello",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.4.3",
+    "hash": "62c822ea6e",
+    "records": 212930,
+    "size": "103.97 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000150",
+    "name": "Notion Workspace",
+    "key": "notion",
+    "cat": "Project Management",
+    "type": "mcp",
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.0.10",
+    "hash": "f1858d1890",
+    "records": 214350,
+    "size": "104.66 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000151",
+    "name": "ClickUp All-in-One",
+    "key": "clickup",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.1.17",
+    "hash": "d0cf664885",
+    "records": 215770,
+    "size": "105.36 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000152",
+    "name": "Basecamp 4",
+    "key": "basecamp",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.2.4",
+    "hash": "81fb68ff01",
+    "records": 217190,
+    "size": "106.05 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000153",
+    "name": "Wrike Collaborative Work",
+    "key": "wrike",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "Permanent Token",
+    "mcp": false,
+    "version": "v1.3.11",
+    "hash": "e7dfd7d23a",
+    "records": 218610,
+    "size": "106.74 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000154",
+    "name": "Shortcut (Clubhouse)",
+    "key": "shortcut",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "API Token",
+    "mcp": false,
+    "version": "v1.4.18",
+    "hash": "935e9345a5",
+    "records": 220030,
+    "size": "107.44 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000155",
+    "name": "Coda Interactive Docs",
+    "key": "coda",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "API Token",
+    "mcp": false,
+    "version": "v1.0.5",
+    "hash": "abfd098532",
+    "records": 221450,
+    "size": "108.13 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000156",
+    "name": "Miro Visual Collaboration",
+    "key": "miro",
+    "cat": "Project Management",
+    "type": "api",
+    "auth": "OAuth 2.0 Access Token",
+    "mcp": false,
+    "version": "v1.1.12",
+    "hash": "2592e14a6b",
+    "records": 222870,
+    "size": "108.82 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000157",
+    "name": "Figma Design & Tokens",
+    "key": "figma",
+    "cat": "Project Management",
+    "type": "mcp",
+    "auth": "Personal Access Token",
+    "mcp": true,
+    "version": "v1.2.19",
+    "hash": "09e1e80afc",
+    "records": 224290,
+    "size": "109.52 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000158",
+    "name": "Obsidian Local Vault",
+    "key": "obsidian",
+    "cat": "Project Management",
+    "type": "mcp",
+    "auth": "Local Vault REST API Token",
+    "mcp": true,
+    "version": "v1.3.6",
+    "hash": "90846d0728",
+    "records": 225710,
+    "size": "110.21 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000159",
+    "name": "Salesforce CRM & Cloud",
+    "key": "salesforce",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "OAuth 2.0 Connected App",
+    "mcp": false,
+    "version": "v1.4.13",
+    "hash": "5aacf74479",
+    "records": 227130,
+    "size": "110.9 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000160",
+    "name": "HubSpot Growth Platform",
+    "key": "hubspot",
+    "cat": "CRM & Sales",
+    "type": "mcp",
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.0.0",
+    "hash": "9fdc0c7c5a",
+    "records": 228550,
+    "size": "111.6 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000161",
+    "name": "Pipedrive CRM",
+    "key": "pipedrive",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.1.7",
+    "hash": "5bf8d6a500",
+    "records": 229970,
+    "size": "112.29 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000162",
+    "name": "Zoho CRM",
+    "key": "zoho_crm",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "OAuth 2.0 Server-Based",
+    "mcp": false,
+    "version": "v1.2.14",
+    "hash": "4799dba59e",
+    "records": 231390,
+    "size": "112.98 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000163",
+    "name": "Close CRM",
+    "key": "close_crm",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.3.1",
+    "hash": "25a6c1f71e",
+    "records": 232810,
+    "size": "113.68 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000164",
+    "name": "Mailchimp Marketing",
+    "key": "mailchimp",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.4.8",
+    "hash": "d5d46771d7",
+    "records": 234230,
+    "size": "114.37 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000165",
+    "name": "Klaviyo Ecommerce Marketing",
+    "key": "klaviyo",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "Private API Key (pk_...)",
+    "mcp": false,
+    "version": "v1.0.15",
+    "hash": "eeaeeb0b74",
+    "records": 235650,
+    "size": "115.06 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000166",
+    "name": "ActiveCampaign",
+    "key": "activecampaign",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "API URL",
+    "mcp": false,
+    "version": "v1.1.2",
+    "hash": "29699d1d5a",
+    "records": 237070,
+    "size": "115.76 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000167",
+    "name": "Customer.io Journeys",
+    "key": "customer_io",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "Site ID",
+    "mcp": false,
+    "version": "v1.2.9",
+    "hash": "66e4285728",
+    "records": 238490,
+    "size": "116.45 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000168",
+    "name": "Intercom Engage & CRM",
+    "key": "intercom_crm",
+    "cat": "CRM & Sales",
+    "type": "mcp",
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.3.16",
+    "hash": "b978d1ef40",
+    "records": 239910,
+    "size": "117.14 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000169",
+    "name": "Braze Customer Engagement",
+    "key": "braze",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "Rest API Key",
+    "mcp": false,
+    "version": "v1.4.3",
+    "hash": "ddf4e91b2d",
+    "records": 241330,
+    "size": "117.84 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000170",
+    "name": "Apollo.io B2B Lead Intel",
+    "key": "apollo_io",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "Master API Key",
+    "mcp": false,
+    "version": "v1.0.10",
+    "hash": "a68ff7368e",
+    "records": 242750,
+    "size": "118.53 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000171",
+    "name": "ZoomInfo Enterprise",
+    "key": "zoominfo",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "Client ID",
+    "mcp": false,
+    "version": "v1.1.17",
+    "hash": "89f481bad2",
+    "records": 244170,
+    "size": "119.22 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000172",
+    "name": "Lemlist Cold Outreach",
+    "key": "lemlist",
+    "cat": "CRM & Sales",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.2.4",
+    "hash": "91b60995a7",
+    "records": 245590,
+    "size": "119.92 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000173",
+    "name": "Zendesk Support",
+    "key": "zendesk_support",
+    "cat": "Customer Support",
+    "type": "mcp",
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.3.11",
+    "hash": "c3ff1eb016",
+    "records": 247010,
+    "size": "120.61 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000174",
+    "name": "Freshdesk Omnichannel",
+    "key": "freshdesk",
+    "cat": "Customer Support",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.4.18",
+    "hash": "0c8f109a2e",
+    "records": 248430,
+    "size": "121.3 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000175",
+    "name": "Help Scout Helpdesk",
+    "key": "helpscout",
+    "cat": "Customer Support",
+    "type": "api",
+    "auth": "OAuth 2.0 App Credentials",
+    "mcp": false,
+    "version": "v1.0.5",
+    "hash": "a35134c602",
+    "records": 249850,
+    "size": "122.0 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000176",
+    "name": "Front Shared Inbox",
+    "key": "front_app",
+    "cat": "Customer Support",
+    "type": "api",
+    "auth": "API Token (JWT)",
+    "mcp": false,
+    "version": "v1.1.12",
+    "hash": "b1e393d1b7",
+    "records": 1270,
+    "size": "0.62 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000177",
+    "name": "Gorgias Ecommerce Support",
+    "key": "gorgias",
+    "cat": "Customer Support",
+    "type": "api",
+    "auth": "Base API Key",
+    "mcp": false,
+    "version": "v1.2.19",
+    "hash": "467bcfde32",
+    "records": 2690,
+    "size": "1.31 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000178",
+    "name": "Kustomer Platform",
+    "key": "kustomer",
+    "cat": "Customer Support",
+    "type": "api",
+    "auth": "API Key with Roles",
+    "mcp": false,
+    "version": "v1.3.6",
+    "hash": "451d8c8694",
+    "records": 4110,
+    "size": "2.01 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000179",
+    "name": "ServiceNow Enterprise ITSM",
+    "key": "servicenow",
+    "cat": "Customer Support",
+    "type": "api",
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.4.13",
+    "hash": "b286c1e5d6",
+    "records": 5530,
+    "size": "2.7 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000180",
+    "name": "PagerDuty Incident Response",
+    "key": "pagerduty",
+    "cat": "Customer Support",
+    "type": "mcp",
+    "auth": "REST API Key",
+    "mcp": true,
+    "version": "v1.0.0",
+    "hash": "f3749f674e",
+    "records": 6950,
+    "size": "3.39 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000181",
+    "name": "Opsgenie Alerting",
+    "key": "opsgenie",
+    "cat": "Customer Support",
+    "type": "api",
+    "auth": "GenieKey (API Key)",
+    "mcp": false,
+    "version": "v1.1.7",
+    "hash": "52bc9794c3",
+    "records": 8370,
+    "size": "4.09 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000182",
+    "name": "Stripe Payments & Billing",
+    "key": "stripe",
+    "cat": "E-Commerce & Fintech",
+    "type": "mcp",
+    "auth": "Restricted API Key (rk_...)",
+    "mcp": true,
+    "version": "v1.2.14",
+    "hash": "0978ec7c82",
+    "records": 9790,
+    "size": "4.78 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000183",
     "name": "PayPal Developer",
+    "key": "paypal",
     "cat": "E-Commerce & Fintech",
-    "auth": "Client ID, Secret Key, Environment",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Client ID",
+    "mcp": false,
+    "version": "v1.3.1",
+    "hash": "94c0f013ec",
+    "records": 11210,
+    "size": "5.47 MB",
+    "installed": true
   },
   {
-    "id": 184,
+    "id": "i0000000-0000-0000-0000-000000000184",
     "name": "Shopify Plus / Store",
+    "key": "shopify",
     "cat": "E-Commerce & Fintech",
-    "auth": "Admin API Access Token, Store Domain",
-    "mcp": true,
     "type": "mcp",
-    "installed": false
+    "auth": "Admin API Access Token",
+    "mcp": true,
+    "version": "v1.4.8",
+    "hash": "20723fd2d3",
+    "records": 12630,
+    "size": "6.17 MB",
+    "installed": true
   },
   {
-    "id": 185,
+    "id": "i0000000-0000-0000-0000-000000000185",
     "name": "WooCommerce WordPress",
+    "key": "woocommerce",
     "cat": "E-Commerce & Fintech",
-    "auth": "Consumer Key, Consumer Secret",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Consumer Key",
+    "mcp": false,
+    "version": "v1.0.15",
+    "hash": "86e00a600e",
+    "records": 14050,
+    "size": "6.86 MB",
+    "installed": true
   },
   {
-    "id": 186,
+    "id": "i0000000-0000-0000-0000-000000000186",
     "name": "BigCommerce",
+    "key": "bigcommerce",
     "cat": "E-Commerce & Fintech",
-    "auth": "Store Hash, Access Token",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Store Hash",
+    "mcp": false,
+    "version": "v1.1.2",
+    "hash": "1863618c36",
+    "records": 15470,
+    "size": "7.55 MB",
+    "installed": true
   },
   {
-    "id": 187,
+    "id": "i0000000-0000-0000-0000-000000000187",
     "name": "Square POS & Ecommerce",
+    "key": "square",
     "cat": "E-Commerce & Fintech",
-    "auth": "OAuth 2.0, Personal Access Token",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "OAuth 2.0",
+    "mcp": false,
+    "version": "v1.2.9",
+    "hash": "11a18a772a",
+    "records": 16890,
+    "size": "8.25 MB",
+    "installed": true
   },
   {
-    "id": 188,
+    "id": "i0000000-0000-0000-0000-000000000188",
     "name": "Paddle Billing",
+    "key": "paddle",
     "cat": "E-Commerce & Fintech",
-    "auth": "API Key, Vendor ID",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.3.16",
+    "hash": "6430d58128",
+    "records": 18310,
+    "size": "8.94 MB",
+    "installed": true
   },
   {
-    "id": 189,
+    "id": "i0000000-0000-0000-0000-000000000189",
     "name": "Adyen Global Payments",
+    "key": "adyen",
     "cat": "E-Commerce & Fintech",
-    "auth": "API Key, Merchant Account",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.4.3",
+    "hash": "caad0c3598",
+    "records": 19730,
+    "size": "9.63 MB",
+    "installed": true
   },
   {
-    "id": 190,
+    "id": "i0000000-0000-0000-0000-000000000190",
     "name": "Lemon Squeezy Merchant",
+    "key": "lemon_squeezy",
     "cat": "E-Commerce & Fintech",
-    "auth": "API Key, Store ID",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.0.10",
+    "hash": "b54069dea4",
+    "records": 21150,
+    "size": "10.33 MB",
+    "installed": true
   },
   {
-    "id": 191,
+    "id": "i0000000-0000-0000-0000-000000000191",
     "name": "Chargebee Subscription",
+    "key": "chargebee",
     "cat": "E-Commerce & Fintech",
-    "auth": "API Key, Site Name",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.1.17",
+    "hash": "6086ca5522",
+    "records": 22570,
+    "size": "11.02 MB",
+    "installed": true
   },
   {
-    "id": 192,
+    "id": "i0000000-0000-0000-0000-000000000192",
     "name": "Plaid Financial Data",
+    "key": "plaid",
     "cat": "E-Commerce & Fintech",
-    "auth": "Client ID, Secret, Environment",
-    "mcp": false,
     "type": "api",
-    "installed": false
+    "auth": "Client ID",
+    "mcp": false,
+    "version": "v1.2.4",
+    "hash": "e0539020af",
+    "records": 23990,
+    "size": "11.71 MB",
+    "installed": true
   },
   {
-    "id": 193,
+    "id": "i0000000-0000-0000-0000-000000000193",
     "name": "QuickBooks Online (Intuit)",
+    "key": "quickbooks",
     "cat": "Finance & HR",
-    "auth": "OAuth 2.0 Refresh Token, Realm ID",
-    "mcp": false,
     "type": "api",
-    "installed": false
-  },
-  {
-    "id": 194,
-    "name": "Xero Accounting",
-    "cat": "Finance & HR",
-    "auth": "OAuth 2.0 PKCE, Tenant ID",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 195,
-    "name": "Google Sheets",
-    "cat": "Spreadsheet & Docs",
-    "auth": "Google OAuth 2.0, Service Account",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 196,
-    "name": "Airtable Connected Apps",
-    "cat": "Spreadsheet & Docs",
-    "auth": "OAuth 2.0, Personal Access Token",
-    "mcp": true,
-    "type": "mcp",
-    "installed": false
-  },
-  {
-    "id": 197,
-    "name": "DocuSign eSignature",
-    "cat": "Finance & HR",
-    "auth": "JWT Grant RSA Keypair, Integration Key",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 198,
-    "name": "BambooHR Human Resources",
-    "cat": "Finance & HR",
-    "auth": "API Key, Subdomain",
-    "mcp": false,
-    "type": "api",
-    "installed": false
-  },
-  {
-    "id": 199,
-    "name": "Gusto Payroll & HR",
-    "cat": "Finance & HR",
     "auth": "OAuth 2.0 Refresh Token",
     "mcp": false,
-    "type": "api",
-    "installed": false
+    "version": "v1.3.11",
+    "hash": "ec17061431",
+    "records": 25410,
+    "size": "12.41 MB",
+    "installed": true
   },
   {
-    "id": 200,
-    "name": "Auth0 Identity & Security",
-    "cat": "Security & Identity",
-    "auth": "OAuth 2.0 Device Flow, Client Credentials",
-    "mcp": true,
+    "id": "i0000000-0000-0000-0000-000000000194",
+    "name": "Xero Accounting",
+    "key": "xero",
+    "cat": "Finance & HR",
+    "type": "api",
+    "auth": "OAuth 2.0 PKCE",
+    "mcp": false,
+    "version": "v1.4.18",
+    "hash": "e7287bc778",
+    "records": 26830,
+    "size": "13.1 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000195",
+    "name": "Google Sheets",
+    "key": "google_sheets",
+    "cat": "Spreadsheet & Docs",
     "type": "mcp",
-    "installed": false
+    "auth": "Google OAuth 2.0",
+    "mcp": true,
+    "version": "v1.0.5",
+    "hash": "8d7fc75637",
+    "records": 28250,
+    "size": "13.79 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000196",
+    "name": "Airtable Connected Apps",
+    "key": "airtable",
+    "cat": "Spreadsheet & Docs",
+    "type": "mcp",
+    "auth": "OAuth 2.0",
+    "mcp": true,
+    "version": "v1.1.12",
+    "hash": "2ecb708024",
+    "records": 29670,
+    "size": "14.49 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000197",
+    "name": "DocuSign eSignature",
+    "key": "docusign",
+    "cat": "Finance & HR",
+    "type": "api",
+    "auth": "JWT Grant RSA Keypair",
+    "mcp": false,
+    "version": "v1.2.19",
+    "hash": "5930d76281",
+    "records": 31090,
+    "size": "15.18 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000198",
+    "name": "BambooHR Human Resources",
+    "key": "bamboohr",
+    "cat": "Finance & HR",
+    "type": "api",
+    "auth": "API Key",
+    "mcp": false,
+    "version": "v1.3.6",
+    "hash": "81a910c26e",
+    "records": 32510,
+    "size": "15.87 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000199",
+    "name": "Gusto Payroll & HR",
+    "key": "gusto",
+    "cat": "Finance & HR",
+    "type": "api",
+    "auth": "OAuth 2.0 Refresh Token",
+    "mcp": false,
+    "version": "v1.4.13",
+    "hash": "6a353677f4",
+    "records": 33930,
+    "size": "16.57 MB",
+    "installed": true
+  },
+  {
+    "id": "i0000000-0000-0000-0000-000000000200",
+    "name": "Auth0 Identity & Security",
+    "key": "auth0_identity",
+    "cat": "Security & Identity",
+    "type": "mcp",
+    "auth": "OAuth 2.0 Device Flow",
+    "mcp": true,
+    "version": "v1.0.0",
+    "hash": "9992a609d5",
+    "records": 35350,
+    "size": "17.26 MB",
+    "installed": true
   }
 ];
 
@@ -2074,20 +3107,19 @@
       tbody.innerHTML = filtered.map(c => `
         <tr class="hover:bg-[var(--card)]/50 transition-colors">
           <td class="py-2 px-3 font-bold text-[var(--foreground)] font-sans flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             ${c.name}
-            ${c.installed ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>' : ''}
+            <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">${c.version}</span>
           </td>
           <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-[var(--border)] text-[var(--foreground)]">${c.cat}</span></td>
           <td class="py-2 px-3 text-[var(--muted-foreground)] font-mono text-[11px]">${c.auth}</td>
           <td class="py-2 px-3">
             ${c.mcp 
-              ? '<span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-500 border border-purple-500/20">MCP Unterstützt</span>' 
+              ? '<span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-500 border border-purple-500/20 font-bold">MCP Aktiv</span>' 
               : '<span class="px-2 py-0.5 rounded text-[10px] text-[var(--muted-foreground)]">REST API</span>'}
           </td>
           <td class="py-2 px-3 text-right">
-            ${c.installed 
-              ? '<button onclick="simulateTest(\'' + c.name + '\')" class="px-2.5 py-1 text-[11px] rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 hover:bg-emerald-500/20 font-sans font-medium">Testen</button>' 
-              : '<button class="px-2.5 py-1 text-[11px] rounded bg-[var(--primary)] text-[var(--primary-foreground)] font-sans font-medium hover:opacity-90">Installieren</button>'}
+            <button onclick="simulateTest('${c.name}', '${c.version}', '${c.hash}')" class="px-2.5 py-1 text-[11px] rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 hover:bg-emerald-500/20 font-sans font-medium">Testen</button>
           </td>
         </tr>
       `).join('');
@@ -2099,15 +3131,33 @@
         btn.className = 'cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]';
       });
       event.target.className = 'cat-pill px-2.5 py-1 text-xs rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)]';
-      renderCatalog();
+      
+    function renderVersions() {
+      const tbody = document.getElementById('versionsTbody');
+      if (!tbody) return;
+      tbody.innerHTML = connectors.map(c => `
+        <tr class="hover:bg-[var(--card)]/50 transition-colors">
+          <td class="py-2 px-3 font-sans font-bold text-[var(--foreground)]">${c.name}</td>
+          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20">${c.version}</span></td>
+          <td class="py-2 px-3 text-blue-400 font-bold font-mono">sha256:${c.hash}...</td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)]">${c.records.toLocaleString()} Zeilen</td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)]">${c.size} (Parquet)</td>
+          <td class="py-2 px-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">verifiziert</span></td>
+        </tr>
+      `).join('');
+    }
+
+    renderCatalog();
+    renderVersions();
     }
 
     function switchTab(tab) {
       document.getElementById('viewCatalog').classList.add('hidden');
       document.getElementById('viewUpload').classList.add('hidden');
       document.getElementById('viewJobs').classList.add('hidden');
+      if (document.getElementById('viewVersions')) document.getElementById('viewVersions').classList.add('hidden');
 
-      ['tabBtnCatalog', 'tabBtnUpload', 'tabBtnJobs'].forEach(id => {
+      ['tabBtnCatalog', 'tabBtnUpload', 'tabBtnVersions', 'tabBtnJobs'].forEach(id => {
         document.getElementById(id).className = 'px-3 py-1.5 rounded-md font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]';
       });
 
@@ -2117,19 +3167,41 @@
       } else if (tab === 'upload') {
         document.getElementById('viewUpload').classList.remove('hidden');
         document.getElementById('tabBtnUpload').className = 'px-3 py-1.5 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]';
+      } else if (tab === 'versions') {
+        document.getElementById('viewVersions').classList.remove('hidden');
+        document.getElementById('tabBtnVersions').className = 'px-3 py-1.5 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]';
+        renderVersions();
       } else if (tab === 'jobs') {
         document.getElementById('viewJobs').classList.remove('hidden');
         document.getElementById('tabBtnJobs').className = 'px-3 py-1.5 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]';
       }
     }
 
-    function simulateTest(name) {
+    function simulateTest(name, ver, hash) {
+      alert('✅ Verbindungstest für ' + name + ' (' + ver + ') erfolgreich!\nSecret Manager KMS-Referenz verifiziert.\nDaten-Version Snapshot: sha256:' + hash + '...\nLatenz: 38ms'); return;
       alert('✅ Verbindungstest für ' + name + ' erfolgreich!\nSecret Manager Referenz verifiziert.\nHandshake-Latenz: 42ms');
     }
 
     function switchTenant() {
       const select = document.getElementById('tenantSelect');
-      renderCatalog();
+      
+    function renderVersions() {
+      const tbody = document.getElementById('versionsTbody');
+      if (!tbody) return;
+      tbody.innerHTML = connectors.map(c => `
+        <tr class="hover:bg-[var(--card)]/50 transition-colors">
+          <td class="py-2 px-3 font-sans font-bold text-[var(--foreground)]">${c.name}</td>
+          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20">${c.version}</span></td>
+          <td class="py-2 px-3 text-blue-400 font-bold font-mono">sha256:${c.hash}...</td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)]">${c.records.toLocaleString()} Zeilen</td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)]">${c.size} (Parquet)</td>
+          <td class="py-2 px-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">verifiziert</span></td>
+        </tr>
+      `).join('');
+    }
+
+    renderCatalog();
+    renderVersions();
     }
 
     // --- Resumable S3 Uploader Simulation Logic ---
@@ -2279,7 +3351,24 @@
       alert('S3 Multipart Upload abgebrochen (AbortMultipartUpload gesendet, Session gelöscht).');
     }
 
+    
+    function renderVersions() {
+      const tbody = document.getElementById('versionsTbody');
+      if (!tbody) return;
+      tbody.innerHTML = connectors.map(c => `
+        <tr class="hover:bg-[var(--card)]/50 transition-colors">
+          <td class="py-2 px-3 font-sans font-bold text-[var(--foreground)]">${c.name}</td>
+          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20">${c.version}</span></td>
+          <td class="py-2 px-3 text-blue-400 font-bold font-mono">sha256:${c.hash}...</td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)]">${c.records.toLocaleString()} Zeilen</td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)]">${c.size} (Parquet)</td>
+          <td class="py-2 px-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">verifiziert</span></td>
+        </tr>
+      `).join('');
+    }
+
     renderCatalog();
+    renderVersions();
   </script>
 </body>
 </html>

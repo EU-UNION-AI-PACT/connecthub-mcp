@@ -64,8 +64,8 @@ CREATE TABLE connector_installations (
     tenant_id           UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
     connector_id        UUID NOT NULL REFERENCES connector_catalog(id),
     display_name        TEXT NOT NULL,
-    status              TEXT NOT NULL DEFAULT 'draft'
-                        CHECK (status IN ('draft', 'active', 'error', 'disabled', 'deleted')),
+    status              TEXT NOT NULL DEFAULT 'catalogued'
+                        CHECK (status IN ('catalogued', 'configured', 'authenticated', 'verified', 'active', 'disabled', 'failed', 'deleted')),
     endpoint_url        TEXT,
     auth_method         TEXT,
     configuration       JSONB NOT NULL DEFAULT '{}'::jsonb,

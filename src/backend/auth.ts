@@ -6,6 +6,7 @@ export interface AuthenticatedUser {
   sub: string;
   tenant_id: string;
   role: 'owner' | 'admin' | 'editor' | 'viewer';
+  allowed_tenants: string[];
 }
 
 declare global {
@@ -35,13 +36,39 @@ export const checkJwt = jwt({
 export const resolveTenantContext = (req: Request, res: Response, next: NextFunction) => {
   const tokenPayload = (req as any).auth;
   if (!tokenPayload) {
-    return res.status(401).json({ error: 'Unauthorized: Missing token' });
+    return res.status(401).json({ error: 'Unauthorized: Missing or invalid token' });
+  }
+
+  // 1. Resolve permitted tenants directly from cryptographically signed claims
+  const primaryTenant = tokenPayload[`${CLAIM_NS}/tenant_id`] || tokenPayload.org_id;
+  const allowedTenants: string[] = tokenPayload[`${CLAIM_NS}/allowed_tenants`] ||
+    (tokenPayload.org_id ? [tokenPayload.org_id] : (primaryTenant ? [primaryTenant] : []));
+
+  // 2. Reject if no verified tenant claims exist in the token
+  if (!primaryTenant && allowedTenants.length === 0) {
+    return res.status(403).json({
+      error: 'Forbidden: Token contains no verified tenant claims. Access denied.'
+    });
+  }
+
+  // 3. Strictly validate any client-requested tenant against the allowed list (anti-spoofing)
+  const requestedTenant = req.headers['x-tenant-id'] as string | undefined;
+  let activeTenant = primaryTenant || allowedTenants[0];
+
+  if (requestedTenant) {
+    if (!allowedTenants.includes(requestedTenant)) {
+      return res.status(403).json({
+        error: `Forbidden: Tenant '${requestedTenant}' is not authorized for this identity. Cross-tenant access blocked.`
+      });
+    }
+    activeTenant = requestedTenant;
   }
 
   req.user = {
     sub: tokenPayload.sub,
-    tenant_id: tokenPayload[`${CLAIM_NS}/tenant_id`] || (req.headers['x-tenant-id'] as string) || 'default_tenant',
-    role: tokenPayload[`${CLAIM_NS}/role`] || 'viewer'
+    tenant_id: activeTenant,
+    role: tokenPayload[`${CLAIM_NS}/role`] || 'viewer',
+    allowed_tenants: allowedTenants
   };
 
   next();

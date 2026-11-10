@@ -102,7 +102,36 @@ router.post('/uploads/:sessionId/part-complete', requireRole(['owner', 'admin', 
   res.json({ status: 'recorded', partNumber });
 });
 
-// 8. Complete Upload & Enqueue Processing Job
+// 8. Get Upload Session Status
+router.get('/uploads/:sessionId/status', requireRole(['owner', 'admin', 'editor', 'viewer']), async (req, res) => {
+  const session = uploadSessions.get(req.params.sessionId);
+  if (!session) return res.status(404).json({ error: 'Upload session not found' });
+  res.json({
+    sessionId: session.sessionId,
+    status: session.status || 'uploading',
+    objectKey: session.objectKey,
+    totalParts: session.totalParts,
+    completedParts: session.parts,
+    completedPartsCount: session.parts.length
+  });
+});
+
+// 9. Abort Upload Session
+router.post('/uploads/:sessionId/abort', requireRole(['owner', 'admin', 'editor']), async (req, res) => {
+  const session = uploadSessions.get(req.params.sessionId);
+  if (!session) return res.status(404).json({ error: 'Upload session not found' });
+
+  try {
+    await UploadService.abortUpload(session.objectKey, session.uploadId);
+  } catch (err: any) {
+    console.warn('S3 AbortMultipartUpload warning:', err.message);
+  }
+
+  uploadSessions.delete(req.params.sessionId);
+  res.json({ status: 'aborted', sessionId: req.params.sessionId });
+});
+
+// 10. Complete Upload & Enqueue Processing Job
 router.post('/uploads/:sessionId/complete', requireRole(['owner', 'admin', 'editor']), async (req, res) => {
   const session = uploadSessions.get(req.params.sessionId);
   if (!session) return res.status(404).json({ error: 'Upload session not found' });
@@ -120,7 +149,7 @@ router.post('/uploads/:sessionId/complete', requireRole(['owner', 'admin', 'edit
   res.json({ status: 'completed', objectKey: session.objectKey });
 });
 
-// 9. Dispatch Background Job (sync, connection_test, export)
+// 11. Dispatch Background Job (sync, connection_test, export)
 router.post('/jobs/dispatch', requireRole(['owner', 'admin', 'editor']), async (req, res) => {
   const { connectorKey, jobType, inputMetadata, idempotencyKey } = req.body;
   if (!connectorKey || !jobType) {
@@ -138,19 +167,52 @@ router.post('/jobs/dispatch', requireRole(['owner', 'admin', 'editor']), async (
   res.json({ status: 'queued', job });
 });
 
-// 10. List Jobs for Tenant
+// 12. List Jobs for Tenant
 router.get('/jobs', async (req, res) => {
   const jobs = jobQueue.list(req.user!.tenant_id);
   res.json({ tenant: req.user!.tenant_id, count: jobs.length, jobs });
 });
 
-// 11. Get Job by ID
+// 13. Get Job by ID
 router.get('/jobs/:id', async (req, res) => {
   const job = jobQueue.get(req.params.id);
   if (!job || job.tenantId !== req.user!.tenant_id) {
     return res.status(404).json({ error: 'Job not found' });
   }
   res.json(job);
+});
+
+// 14. Real Metrics Summary (Direct from DB & Queue, no hardcoded stats)
+router.get('/metrics/summary', async (req, res) => {
+  try {
+    const db = new DatabaseSync(DB_PATH);
+    const totalInst: any = db.prepare('SELECT COUNT(*) as count FROM connector_installations WHERE tenant_id = ?').get(req.user!.tenant_id);
+    const verifiedInst: any = db.prepare("SELECT COUNT(*) as count FROM connector_installations WHERE tenant_id = ? AND status IN ('verified', 'active')").get(req.user!.tenant_id);
+    const cataloguedInst: any = db.prepare("SELECT COUNT(*) as count FROM connector_installations WHERE tenant_id = ? AND status = 'catalogued'").get(req.user!.tenant_id);
+    const totalVersions: any = db.prepare('SELECT COUNT(*) as count FROM data_versions WHERE tenant_id = ?').get(req.user!.tenant_id);
+    db.close();
+
+    const jobs = jobQueue.list(req.user!.tenant_id);
+    const succeededJobs = jobs.filter(j => j.status === 'succeeded').length;
+    const successRate = jobs.length > 0 ? ((succeededJobs / jobs.length) * 100).toFixed(1) : '100.0';
+
+    res.json({
+      tenantId: req.user!.tenant_id,
+      connectors: {
+        total: totalInst?.count || 0,
+        verified: verifiedInst?.count || 0,
+        catalogued: cataloguedInst?.count || 0
+      },
+      dataVersions: totalVersions?.count || 0,
+      jobs: {
+        total: jobs.length,
+        succeeded: succeededJobs,
+        successRate: `${successRate}%`
+      }
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 export default router;

@@ -7,15 +7,15 @@
     },
     "duckdb": {
       "command": "uvx",
-      "args": ["--with", "mcp<1.2.0", "mcp-server-duckdb", "--db-path", "/home/antigravity/mcp-gateway/data/analytics.duckdb"]
+      "args": ["--with", "mcp<1.2.0", "mcp-server-duckdb", "--db-path", "./data/analytics.duckdb"]
     },
     "sqlite": {
       "command": "uvx",
-      "args": ["--with", "mcp<1.2.0", "mcp-server-sqlite", "--db-path", "/home/antigravity/mcp-gateway/data/relational.db"]
+      "args": ["--with", "mcp<1.2.0", "mcp-server-sqlite", "--db-path", "./data/relational.db"]
     },
     "storage": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/antigravity/mcp-gateway/data/storage"]
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./data/storage"]
     }
   }
 }

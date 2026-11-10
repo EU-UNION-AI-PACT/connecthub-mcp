@@ -22,8 +22,8 @@ VALUES ('c0000000-0000-0000-0000-000000000001', 'openai', 'OpenAI', 'AI & Machin
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000001', 'OpenAI', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000001', 'OpenAI', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000001', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:openai')
@@ -40,8 +40,8 @@ VALUES ('c0000000-0000-0000-0000-000000000002', 'anthropic', 'Anthropic Claude',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000002', 'Anthropic Claude', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000002', 'Anthropic Claude', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000002', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:anthropic')
@@ -58,8 +58,8 @@ VALUES ('c0000000-0000-0000-0000-000000000003', 'huggingface', 'Hugging Face', '
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000003', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000003', 'Hugging Face', 'active', 'Access Token (User/Write)', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000003', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000003', 'Hugging Face', 'catalogued', 'Access Token (User/Write)', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000003', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000003', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:huggingface')
@@ -76,8 +76,8 @@ VALUES ('c0000000-0000-0000-0000-000000000004', 'cohere', 'Cohere', 'AI & Machin
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000004', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000004', 'Cohere', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000004', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000004', 'Cohere', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000004', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000004', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:cohere')
@@ -94,8 +94,8 @@ VALUES ('c0000000-0000-0000-0000-000000000005', 'mistral', 'Mistral AI', 'AI & M
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000005', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000005', 'Mistral AI', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000005', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000005', 'Mistral AI', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000005', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000005', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:mistral')
@@ -112,8 +112,8 @@ VALUES ('c0000000-0000-0000-0000-000000000006', 'perplexity', 'Perplexity AI', '
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000006', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000006', 'Perplexity AI', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000006', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000006', 'Perplexity AI', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000006', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000006', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:perplexity')
@@ -130,8 +130,8 @@ VALUES ('c0000000-0000-0000-0000-000000000007', 'replicate', 'Replicate', 'AI & 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000007', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000007', 'Replicate', 'active', 'API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000007', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000007', 'Replicate', 'catalogued', 'API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000007', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000007', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:replicate')
@@ -148,8 +148,8 @@ VALUES ('c0000000-0000-0000-0000-000000000008', 'together_ai', 'Together AI', 'A
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000008', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000008', 'Together AI', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000008', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000008', 'Together AI', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000008', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000008', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:together_ai')
@@ -166,8 +166,8 @@ VALUES ('c0000000-0000-0000-0000-000000000009', 'groq', 'Groq LPU', 'AI & Machin
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000009', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000009', 'Groq LPU', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000009', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000009', 'Groq LPU', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000009', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000009', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:groq')
@@ -184,8 +184,8 @@ VALUES ('c0000000-0000-0000-0000-000000000010', 'deepseek', 'DeepSeek', 'AI & Ma
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000010', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000010', 'DeepSeek', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000010', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000010', 'DeepSeek', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000010', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000010', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:deepseek')
@@ -202,8 +202,8 @@ VALUES ('c0000000-0000-0000-0000-000000000011', 'ollama', 'Ollama (Local/Self-ho
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000011', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000011', 'Ollama (Local/Self-hosted)', 'active', 'Endpoint URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000011', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000011', 'Ollama (Local/Self-hosted)', 'catalogued', 'Endpoint URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000011', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000011', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:ollama')
@@ -220,8 +220,8 @@ VALUES ('c0000000-0000-0000-0000-000000000012', 'vllm', 'vLLM Engine', 'AI & Mac
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000012', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000012', 'vLLM Engine', 'active', 'Endpoint URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000012', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000012', 'vLLM Engine', 'catalogued', 'Endpoint URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000012', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000012', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:vllm')
@@ -238,8 +238,8 @@ VALUES ('c0000000-0000-0000-0000-000000000013', 'langsmith', 'LangSmith (LangCha
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000013', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000013', 'LangSmith (LangChain)', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000013', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000013', 'LangSmith (LangChain)', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000013', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000013', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:langsmith')
@@ -256,8 +256,8 @@ VALUES ('c0000000-0000-0000-0000-000000000014', 'llamaindex', 'LlamaCloud', 'AI 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000014', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000014', 'LlamaCloud', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000014', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000014', 'LlamaCloud', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000014', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000014', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:llamaindex')
@@ -274,8 +274,8 @@ VALUES ('c0000000-0000-0000-0000-000000000015', 'wandb', 'Weights & Biases', 'AI
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000015', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000015', 'Weights & Biases', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000015', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000015', 'Weights & Biases', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000015', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000015', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:wandb')
@@ -292,8 +292,8 @@ VALUES ('c0000000-0000-0000-0000-000000000016', 'elevenlabs', 'ElevenLabs Voice 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000016', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000016', 'ElevenLabs Voice AI', 'active', 'xi-api-key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000016', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000016', 'ElevenLabs Voice AI', 'catalogued', 'xi-api-key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000016', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000016', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:elevenlabs')
@@ -310,8 +310,8 @@ VALUES ('c0000000-0000-0000-0000-000000000017', 'runway', 'Runway Gen AI', 'AI &
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000017', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000017', 'Runway Gen AI', 'active', 'Secret Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000017', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000017', 'Runway Gen AI', 'catalogued', 'Secret Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000017', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000017', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:runway')
@@ -328,8 +328,8 @@ VALUES ('c0000000-0000-0000-0000-000000000018', 'stability_ai', 'Stability AI', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000018', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000018', 'Stability AI', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000018', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000018', 'Stability AI', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000018', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000018', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:stability_ai')
@@ -346,8 +346,8 @@ VALUES ('c0000000-0000-0000-0000-000000000019', 'pinecone', 'Pinecone Vector DB'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000019', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000019', 'Pinecone Vector DB', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000019', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000019', 'Pinecone Vector DB', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000019', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000019', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:pinecone')
@@ -364,8 +364,8 @@ VALUES ('c0000000-0000-0000-0000-000000000020', 'qdrant', 'Qdrant Vector Search'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000020', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000020', 'Qdrant Vector Search', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000020', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000020', 'Qdrant Vector Search', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000020', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000020', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:qdrant')
@@ -382,8 +382,8 @@ VALUES ('c0000000-0000-0000-0000-000000000021', 'weaviate', 'Weaviate Cloud', 'V
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000021', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000021', 'Weaviate Cloud', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000021', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000021', 'Weaviate Cloud', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000021', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000021', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:weaviate')
@@ -400,8 +400,8 @@ VALUES ('c0000000-0000-0000-0000-000000000022', 'chroma', 'ChromaDB', 'Vector Da
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000022', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000022', 'ChromaDB', 'active', 'Endpoint URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000022', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000022', 'ChromaDB', 'catalogued', 'Endpoint URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000022', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000022', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:chroma')
@@ -418,8 +418,8 @@ VALUES ('c0000000-0000-0000-0000-000000000023', 'milvus', 'Milvus / Zilliz', 'Ve
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000023', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000023', 'Milvus / Zilliz', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000023', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000023', 'Milvus / Zilliz', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000023', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000023', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:milvus')
@@ -436,8 +436,8 @@ VALUES ('c0000000-0000-0000-0000-000000000024', 'meilisearch', 'Meilisearch', 'S
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000024', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000024', 'Meilisearch', 'active', 'Master API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000024', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000024', 'Meilisearch', 'catalogued', 'Master API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000024', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000024', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:meilisearch')
@@ -454,8 +454,8 @@ VALUES ('c0000000-0000-0000-0000-000000000025', 'algolia', 'Algolia Search', 'Se
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000025', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000025', 'Algolia Search', 'active', 'Application ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000025', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000025', 'Algolia Search', 'catalogued', 'Application ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000025', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000025', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:algolia')
@@ -472,8 +472,8 @@ VALUES ('c0000000-0000-0000-0000-000000000026', 'typesense', 'Typesense Cloud', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000026', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000026', 'Typesense Cloud', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000026', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000026', 'Typesense Cloud', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000026', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000026', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:typesense')
@@ -490,8 +490,8 @@ VALUES ('c0000000-0000-0000-0000-000000000027', 'vespa', 'Vespa AI', 'Search & D
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000027', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000027', 'Vespa AI', 'active', 'Certificate', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000027', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000027', 'Vespa AI', 'catalogued', 'Certificate', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000027', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000027', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:vespa')
@@ -508,8 +508,8 @@ VALUES ('c0000000-0000-0000-0000-000000000028', 'marqo', 'Marqo Vector Search', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000028', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000028', 'Marqo Vector Search', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000028', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000028', 'Marqo Vector Search', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000028', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000028', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:marqo')
@@ -526,8 +526,8 @@ VALUES ('c0000000-0000-0000-0000-000000000029', 'postgresql', 'PostgreSQL', 'Rel
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000029', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000029', 'PostgreSQL', 'active', 'User/Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000029', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000029', 'PostgreSQL', 'catalogued', 'User/Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000029', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000029', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:postgresql')
@@ -544,8 +544,8 @@ VALUES ('c0000000-0000-0000-0000-000000000030', 'mysql', 'MySQL', 'Relational Da
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000030', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000030', 'MySQL', 'active', 'User/Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000030', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000030', 'MySQL', 'catalogued', 'User/Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000030', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000030', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:mysql')
@@ -562,8 +562,8 @@ VALUES ('c0000000-0000-0000-0000-000000000031', 'sqlite', 'SQLite', 'Relational 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000031', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000031', 'SQLite', 'active', 'Database File Path', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000031', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000031', 'SQLite', 'catalogued', 'Database File Path', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000031', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000031', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:sqlite')
@@ -580,8 +580,8 @@ VALUES ('c0000000-0000-0000-0000-000000000032', 'mariadb', 'MariaDB', 'Relationa
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000032', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000032', 'MariaDB', 'active', 'User/Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000032', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000032', 'MariaDB', 'catalogued', 'User/Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000032', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000032', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:mariadb')
@@ -598,8 +598,8 @@ VALUES ('c0000000-0000-0000-0000-000000000033', 'sqlserver', 'Microsoft SQL Serv
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000033', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000033', 'Microsoft SQL Server', 'active', 'SQL Auth', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000033', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000033', 'Microsoft SQL Server', 'catalogued', 'SQL Auth', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000033', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000033', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:sqlserver')
@@ -616,8 +616,8 @@ VALUES ('c0000000-0000-0000-0000-000000000034', 'oracle_db', 'Oracle Database', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000034', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000034', 'Oracle Database', 'active', 'TNS', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000034', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000034', 'Oracle Database', 'catalogued', 'TNS', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000034', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000034', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:oracle_db')
@@ -634,8 +634,8 @@ VALUES ('c0000000-0000-0000-0000-000000000035', 'cockroachdb', 'CockroachDB Dedi
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000035', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000035', 'CockroachDB Dedicated', 'active', 'User/Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000035', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000035', 'CockroachDB Dedicated', 'catalogued', 'User/Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000035', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000035', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:cockroachdb')
@@ -652,8 +652,8 @@ VALUES ('c0000000-0000-0000-0000-000000000036', 'tidb', 'TiDB Serverless', 'Rela
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000036', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000036', 'TiDB Serverless', 'active', 'User/Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000036', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000036', 'TiDB Serverless', 'catalogued', 'User/Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000036', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000036', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:tidb')
@@ -670,8 +670,8 @@ VALUES ('c0000000-0000-0000-0000-000000000037', 'neon', 'Neon Serverless Postgre
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000037', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000037', 'Neon Serverless Postgres', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000037', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000037', 'Neon Serverless Postgres', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000037', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000037', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:neon')
@@ -688,8 +688,8 @@ VALUES ('c0000000-0000-0000-0000-000000000038', 'supabase', 'Supabase (DB & Auth
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000038', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000038', 'Supabase (DB & Auth)', 'active', 'Service Role Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000038', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000038', 'Supabase (DB & Auth)', 'catalogued', 'Service Role Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000038', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000038', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:supabase')
@@ -706,8 +706,8 @@ VALUES ('c0000000-0000-0000-0000-000000000039', 'planetscale', 'PlanetScale MySQ
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000039', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000039', 'PlanetScale MySQL', 'active', 'Service Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000039', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000039', 'PlanetScale MySQL', 'catalogued', 'Service Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000039', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000039', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:planetscale')
@@ -724,8 +724,8 @@ VALUES ('c0000000-0000-0000-0000-000000000040', 'timescaledb', 'TimescaleDB (Tim
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000040', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000040', 'TimescaleDB (Time Series)', 'active', 'User/Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000040', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000040', 'TimescaleDB (Time Series)', 'catalogued', 'User/Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000040', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000040', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:timescaledb')
@@ -742,8 +742,8 @@ VALUES ('c0000000-0000-0000-0000-000000000041', 'yugabytedb', 'YugabyteDB', 'Rel
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000041', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000041', 'YugabyteDB', 'active', 'User/Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000041', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000041', 'YugabyteDB', 'catalogued', 'User/Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000041', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000041', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:yugabytedb')
@@ -760,8 +760,8 @@ VALUES ('c0000000-0000-0000-0000-000000000042', 'questdb', 'QuestDB Time-Series'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000042', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000042', 'QuestDB Time-Series', 'active', 'HTTP Influx / PostgreSQL Wire', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000042', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000042', 'QuestDB Time-Series', 'catalogued', 'HTTP Influx / PostgreSQL Wire', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000042', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000042', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:questdb')
@@ -778,8 +778,8 @@ VALUES ('c0000000-0000-0000-0000-000000000043', 'clickhouse_local', 'ClickHouse 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000043', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000043', 'ClickHouse Cloud / Local', 'active', 'Native / HTTP', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000043', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000043', 'ClickHouse Cloud / Local', 'catalogued', 'Native / HTTP', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000043', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000043', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:clickhouse_local')
@@ -796,8 +796,8 @@ VALUES ('c0000000-0000-0000-0000-000000000044', 'duckdb', 'DuckDB (Big Data Engi
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000044', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000044', 'DuckDB (Big Data Engine)', 'active', 'Embedded', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000044', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000044', 'DuckDB (Big Data Engine)', 'catalogued', 'Embedded', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000044', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000044', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:duckdb')
@@ -814,8 +814,8 @@ VALUES ('c0000000-0000-0000-0000-000000000045', 'snowflake', 'Snowflake Warehous
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000045', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000045', 'Snowflake Warehouse', 'active', 'OAuth', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000045', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000045', 'Snowflake Warehouse', 'catalogued', 'OAuth', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000045', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000045', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:snowflake')
@@ -832,8 +832,8 @@ VALUES ('c0000000-0000-0000-0000-000000000046', 'bigquery', 'Google BigQuery', '
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000046', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000046', 'Google BigQuery', 'active', 'Google OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000046', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000046', 'Google BigQuery', 'catalogued', 'Google OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000046', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000046', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:bigquery')
@@ -850,8 +850,8 @@ VALUES ('c0000000-0000-0000-0000-000000000047', 'redshift', 'Amazon Redshift', '
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000047', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000047', 'Amazon Redshift', 'active', 'IAM Temp Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000047', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000047', 'Amazon Redshift', 'catalogued', 'IAM Temp Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000047', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000047', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:redshift')
@@ -868,8 +868,8 @@ VALUES ('c0000000-0000-0000-0000-000000000048', 'databricks', 'Databricks Lakeho
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000048', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000048', 'Databricks Lakehouse', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000048', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000048', 'Databricks Lakehouse', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000048', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000048', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:databricks')
@@ -886,8 +886,8 @@ VALUES ('c0000000-0000-0000-0000-000000000049', 'clickhouse_cloud', 'ClickHouse 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000049', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000049', 'ClickHouse Analytical', 'active', 'User', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000049', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000049', 'ClickHouse Analytical', 'catalogued', 'User', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000049', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000049', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:clickhouse_cloud')
@@ -904,8 +904,8 @@ VALUES ('c0000000-0000-0000-0000-000000000050', 'apache_spark', 'Apache Spark / 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000050', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000050', 'Apache Spark / Livy', 'active', 'Master URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000050', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000050', 'Apache Spark / Livy', 'catalogued', 'Master URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000050', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000050', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:apache_spark')
@@ -922,8 +922,8 @@ VALUES ('c0000000-0000-0000-0000-000000000051', 'trino', 'Trino / Presto Distrib
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000051', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000051', 'Trino / Presto Distributed', 'active', 'User', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000051', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000051', 'Trino / Presto Distributed', 'catalogued', 'User', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000051', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000051', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:trino')
@@ -940,8 +940,8 @@ VALUES ('c0000000-0000-0000-0000-000000000052', 'apache_druid', 'Apache Druid Re
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000052', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000052', 'Apache Druid Real-Time', 'active', 'Router URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000052', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000052', 'Apache Druid Real-Time', 'catalogued', 'Router URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000052', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000052', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:apache_druid')
@@ -958,8 +958,8 @@ VALUES ('c0000000-0000-0000-0000-000000000053', 'starrocks', 'StarRocks OLAP', '
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000053', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000053', 'StarRocks OLAP', 'active', 'FE Host', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000053', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000053', 'StarRocks OLAP', 'catalogued', 'FE Host', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000053', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000053', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:starrocks')
@@ -976,8 +976,8 @@ VALUES ('c0000000-0000-0000-0000-000000000054', 'dbt_cloud', 'dbt Cloud', 'Big D
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000054', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000054', 'dbt Cloud', 'active', 'Service Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000054', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000054', 'dbt Cloud', 'catalogued', 'Service Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000054', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000054', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:dbt_cloud')
@@ -994,8 +994,8 @@ VALUES ('c0000000-0000-0000-0000-000000000055', 'cubejs', 'Cube Semantic Layer',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000055', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000055', 'Cube Semantic Layer', 'active', 'API Secret', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000055', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000055', 'Cube Semantic Layer', 'catalogued', 'API Secret', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000055', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000055', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:cubejs')
@@ -1012,8 +1012,8 @@ VALUES ('c0000000-0000-0000-0000-000000000056', 'motherduck', 'MotherDuck (Cloud
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000056', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000056', 'MotherDuck (Cloud DuckDB)', 'active', 'Service Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000056', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000056', 'MotherDuck (Cloud DuckDB)', 'catalogued', 'Service Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000056', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000056', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:motherduck')
@@ -1030,8 +1030,8 @@ VALUES ('c0000000-0000-0000-0000-000000000057', 'firebolt', 'Firebolt Cloud Data
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000057', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000057', 'Firebolt Cloud Data Warehouse', 'active', 'Service Account ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000057', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000057', 'Firebolt Cloud Data Warehouse', 'catalogued', 'Service Account ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000057', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000057', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:firebolt')
@@ -1048,8 +1048,8 @@ VALUES ('c0000000-0000-0000-0000-000000000058', 'singlestore', 'SingleStoreDB', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000058', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000058', 'SingleStoreDB', 'active', 'User/Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000058', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000058', 'SingleStoreDB', 'catalogued', 'User/Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000058', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000058', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:singlestore')
@@ -1066,8 +1066,8 @@ VALUES ('c0000000-0000-0000-0000-000000000059', 'redis', 'Redis / Valkey Cache',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000059', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000059', 'Redis / Valkey Cache', 'active', 'Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000059', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000059', 'Redis / Valkey Cache', 'catalogued', 'Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000059', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000059', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:redis')
@@ -1084,8 +1084,8 @@ VALUES ('c0000000-0000-0000-0000-000000000060', 'mongodb', 'MongoDB Atlas / Ente
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000060', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000060', 'MongoDB Atlas / Enterprise', 'active', 'SCRAM-SHA-256', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000060', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000060', 'MongoDB Atlas / Enterprise', 'catalogued', 'SCRAM-SHA-256', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000060', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000060', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:mongodb')
@@ -1102,8 +1102,8 @@ VALUES ('c0000000-0000-0000-0000-000000000061', 'cassandra', 'Apache Cassandra /
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000061', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000061', 'Apache Cassandra / Astra DB', 'active', 'Secure Connect Bundle', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000061', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000061', 'Apache Cassandra / Astra DB', 'catalogued', 'Secure Connect Bundle', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000061', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000061', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:cassandra')
@@ -1120,8 +1120,8 @@ VALUES ('c0000000-0000-0000-0000-000000000062', 'couchbase', 'Couchbase Capella'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000062', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000062', 'Couchbase Capella', 'active', 'Cluster URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000062', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000062', 'Couchbase Capella', 'catalogued', 'Cluster URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000062', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000062', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:couchbase')
@@ -1138,8 +1138,8 @@ VALUES ('c0000000-0000-0000-0000-000000000063', 'scylladb', 'ScyllaDB NoSQL', 'N
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000063', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000063', 'ScyllaDB NoSQL', 'active', 'Contact Points', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000063', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000063', 'ScyllaDB NoSQL', 'catalogued', 'Contact Points', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000063', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000063', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:scylladb')
@@ -1156,8 +1156,8 @@ VALUES ('c0000000-0000-0000-0000-000000000064', 'dynamodb', 'Amazon DynamoDB', '
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000064', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000064', 'Amazon DynamoDB', 'active', 'IAM Role', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000064', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000064', 'Amazon DynamoDB', 'catalogued', 'IAM Role', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000064', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000064', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:dynamodb')
@@ -1174,8 +1174,8 @@ VALUES ('c0000000-0000-0000-0000-000000000065', 'firestore', 'Google Cloud Fires
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000065', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000065', 'Google Cloud Firestore', 'active', 'Google Service Account', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000065', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000065', 'Google Cloud Firestore', 'catalogued', 'Google Service Account', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000065', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000065', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:firestore')
@@ -1192,8 +1192,8 @@ VALUES ('c0000000-0000-0000-0000-000000000066', 'firebase_rtdb', 'Firebase Realt
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000066', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000066', 'Firebase Realtime Database', 'active', 'Firebase Secret / Admin SDK', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000066', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000066', 'Firebase Realtime Database', 'catalogued', 'Firebase Secret / Admin SDK', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000066', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000066', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:firebase_rtdb')
@@ -1210,8 +1210,8 @@ VALUES ('c0000000-0000-0000-0000-000000000067', 'upstash', 'Upstash Serverless R
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000067', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000067', 'Upstash Serverless Redis', 'active', 'REST URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000067', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000067', 'Upstash Serverless Redis', 'catalogued', 'REST URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000067', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000067', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:upstash')
@@ -1228,8 +1228,8 @@ VALUES ('c0000000-0000-0000-0000-000000000068', 'dragonfly', 'DragonflyDB Cache'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000068', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000068', 'DragonflyDB Cache', 'active', 'Redis Wire Protocol', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000068', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000068', 'DragonflyDB Cache', 'catalogued', 'Redis Wire Protocol', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000068', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000068', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:dragonfly')
@@ -1246,8 +1246,8 @@ VALUES ('c0000000-0000-0000-0000-000000000069', 'neo4j', 'Neo4j Graph Database',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000069', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000069', 'Neo4j Graph Database', 'active', 'Bolt Protocol', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000069', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000069', 'Neo4j Graph Database', 'catalogued', 'Bolt Protocol', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000069', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000069', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:neo4j')
@@ -1264,8 +1264,8 @@ VALUES ('c0000000-0000-0000-0000-000000000070', 'memcached', 'Memcached', 'NoSQL
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000070', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000070', 'Memcached', 'active', 'Host', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000070', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000070', 'Memcached', 'catalogued', 'Host', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000070', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000070', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:memcached')
@@ -1282,8 +1282,8 @@ VALUES ('c0000000-0000-0000-0000-000000000071', 'aws_s3', 'AWS S3 Object Storage
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000071', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000071', 'AWS S3 Object Storage', 'active', 'IAM Role', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000071', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000071', 'AWS S3 Object Storage', 'catalogued', 'IAM Role', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000071', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000071', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:aws_s3')
@@ -1300,8 +1300,8 @@ VALUES ('c0000000-0000-0000-0000-000000000072', 'gcs', 'Google Cloud Storage', '
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000072', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000072', 'Google Cloud Storage', 'active', 'Workload Identity', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000072', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000072', 'Google Cloud Storage', 'catalogued', 'Workload Identity', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000072', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000072', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:gcs')
@@ -1318,8 +1318,8 @@ VALUES ('c0000000-0000-0000-0000-000000000073', 'azure_blob', 'Azure Blob Storag
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000073', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000073', 'Azure Blob Storage', 'active', 'Entra ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000073', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000073', 'Azure Blob Storage', 'catalogued', 'Entra ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000073', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000073', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:azure_blob')
@@ -1336,8 +1336,8 @@ VALUES ('c0000000-0000-0000-0000-000000000074', 'minio', 'MinIO Object Storage',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000074', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000074', 'MinIO Object Storage', 'active', 'Access Key + Secret Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000074', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000074', 'MinIO Object Storage', 'catalogued', 'Access Key + Secret Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000074', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000074', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:minio')
@@ -1354,8 +1354,8 @@ VALUES ('c0000000-0000-0000-0000-000000000075', 'cloudflare_r2', 'Cloudflare R2 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000075', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000075', 'Cloudflare R2 Storage', 'active', 'S3 Compatible Credentials', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000075', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000075', 'Cloudflare R2 Storage', 'catalogued', 'S3 Compatible Credentials', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000075', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000075', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:cloudflare_r2')
@@ -1372,8 +1372,8 @@ VALUES ('c0000000-0000-0000-0000-000000000076', 'wasabi', 'Wasabi Hot Cloud Stor
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000076', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000076', 'Wasabi Hot Cloud Storage', 'active', 'Access Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000076', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000076', 'Wasabi Hot Cloud Storage', 'catalogued', 'Access Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000076', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000076', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:wasabi')
@@ -1390,8 +1390,8 @@ VALUES ('c0000000-0000-0000-0000-000000000077', 'backblaze_b2', 'Backblaze B2', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000077', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000077', 'Backblaze B2', 'active', 'Application Key ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000077', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000077', 'Backblaze B2', 'catalogued', 'Application Key ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000077', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000077', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:backblaze_b2')
@@ -1408,8 +1408,8 @@ VALUES ('c0000000-0000-0000-0000-000000000078', 'google_drive', 'Google Drive', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000078', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000078', 'Google Drive', 'active', 'Google OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000078', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000078', 'Google Drive', 'catalogued', 'Google OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000078', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000078', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:google_drive')
@@ -1426,8 +1426,8 @@ VALUES ('c0000000-0000-0000-0000-000000000079', 'onedrive', 'Microsoft OneDrive'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000079', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000079', 'Microsoft OneDrive', 'active', 'Microsoft Entra ID OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000079', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000079', 'Microsoft OneDrive', 'catalogued', 'Microsoft Entra ID OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000079', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000079', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:onedrive')
@@ -1444,8 +1444,8 @@ VALUES ('c0000000-0000-0000-0000-000000000080', 'sharepoint', 'Microsoft SharePo
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000080', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000080', 'Microsoft SharePoint Online', 'active', 'Microsoft Entra ID OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000080', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000080', 'Microsoft SharePoint Online', 'catalogued', 'Microsoft Entra ID OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000080', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000080', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:sharepoint')
@@ -1462,8 +1462,8 @@ VALUES ('c0000000-0000-0000-0000-000000000081', 'dropbox', 'Dropbox', 'File Stor
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000081', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000081', 'Dropbox', 'active', 'OAuth 2.0 PKCE', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000081', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000081', 'Dropbox', 'catalogued', 'OAuth 2.0 PKCE', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000081', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000081', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:dropbox')
@@ -1480,8 +1480,8 @@ VALUES ('c0000000-0000-0000-0000-000000000082', 'box', 'Box Enterprise Storage',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000082', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000082', 'Box Enterprise Storage', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000082', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000082', 'Box Enterprise Storage', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000082', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000082', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:box')
@@ -1498,8 +1498,8 @@ VALUES ('c0000000-0000-0000-0000-000000000083', 'sftp', 'SFTP / SSH File Transfe
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000083', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000083', 'SFTP / SSH File Transfer', 'active', 'SSH Private Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000083', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000083', 'SFTP / SSH File Transfer', 'catalogued', 'SSH Private Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000083', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000083', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:sftp')
@@ -1516,8 +1516,8 @@ VALUES ('c0000000-0000-0000-0000-000000000084', 'ipfs', 'IPFS / Pinata Storage',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000084', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000084', 'IPFS / Pinata Storage', 'active', 'Pinata JWT', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000084', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000084', 'IPFS / Pinata Storage', 'catalogued', 'Pinata JWT', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000084', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000084', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:ipfs')
@@ -1534,8 +1534,8 @@ VALUES ('c0000000-0000-0000-0000-000000000085', 'nextcloud', 'Nextcloud Storage'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000085', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000085', 'Nextcloud Storage', 'active', 'App Password', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000085', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000085', 'Nextcloud Storage', 'catalogued', 'App Password', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000085', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000085', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:nextcloud')
@@ -1552,8 +1552,8 @@ VALUES ('c0000000-0000-0000-0000-000000000086', 'aws_ec2_iam', 'AWS Cloud Manage
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000086', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000086', 'AWS Cloud Management', 'active', 'IAM Role', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000086', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000086', 'AWS Cloud Management', 'catalogued', 'IAM Role', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000086', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000086', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:aws_ec2_iam')
@@ -1570,8 +1570,8 @@ VALUES ('c0000000-0000-0000-0000-000000000087', 'azure_rm', 'Microsoft Azure Res
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000087', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000087', 'Microsoft Azure Resource Manager', 'active', 'Entra ID Service Principal', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000087', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000087', 'Microsoft Azure Resource Manager', 'catalogued', 'Entra ID Service Principal', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000087', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000087', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:azure_rm')
@@ -1588,8 +1588,8 @@ VALUES ('c0000000-0000-0000-0000-000000000088', 'gcp_compute', 'Google Cloud Pla
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000088', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000088', 'Google Cloud Platform (GCP)', 'active', 'Service Account JSON', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000088', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000088', 'Google Cloud Platform (GCP)', 'catalogued', 'Service Account JSON', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000088', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000088', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:gcp_compute')
@@ -1606,8 +1606,8 @@ VALUES ('c0000000-0000-0000-0000-000000000089', 'cloudflare', 'Cloudflare DNS & 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000089', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000089', 'Cloudflare DNS & Edge', 'active', 'API Token (Scoped)', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000089', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000089', 'Cloudflare DNS & Edge', 'catalogued', 'API Token (Scoped)', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000089', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000089', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:cloudflare')
@@ -1624,8 +1624,8 @@ VALUES ('c0000000-0000-0000-0000-000000000090', 'digitalocean', 'DigitalOcean Cl
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000090', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000090', 'DigitalOcean Cloud', 'active', 'Personal Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000090', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000090', 'DigitalOcean Cloud', 'catalogued', 'Personal Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000090', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000090', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:digitalocean')
@@ -1642,8 +1642,8 @@ VALUES ('c0000000-0000-0000-0000-000000000091', 'hetzner', 'Hetzner Cloud', 'Clo
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000091', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000091', 'Hetzner Cloud', 'active', 'API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000091', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000091', 'Hetzner Cloud', 'catalogued', 'API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000091', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000091', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:hetzner')
@@ -1660,8 +1660,8 @@ VALUES ('c0000000-0000-0000-0000-000000000092', 'linode', 'Linode / Akamai Cloud
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000092', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000092', 'Linode / Akamai Cloud', 'active', 'Personal Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000092', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000092', 'Linode / Akamai Cloud', 'catalogued', 'Personal Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000092', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000092', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:linode')
@@ -1678,8 +1678,8 @@ VALUES ('c0000000-0000-0000-0000-000000000093', 'vercel', 'Vercel Deployment Pla
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000093', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000093', 'Vercel Deployment Platform', 'active', 'Personal / Team Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000093', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000093', 'Vercel Deployment Platform', 'catalogued', 'Personal / Team Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000093', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000093', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:vercel')
@@ -1696,8 +1696,8 @@ VALUES ('c0000000-0000-0000-0000-000000000094', 'netlify', 'Netlify Edge', 'Clou
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000094', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000094', 'Netlify Edge', 'active', 'Personal Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000094', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000094', 'Netlify Edge', 'catalogued', 'Personal Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000094', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000094', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:netlify')
@@ -1714,8 +1714,8 @@ VALUES ('c0000000-0000-0000-0000-000000000095', 'render', 'Render Cloud Platform
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000095', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000095', 'Render Cloud Platform', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000095', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000095', 'Render Cloud Platform', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000095', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000095', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:render')
@@ -1732,8 +1732,8 @@ VALUES ('c0000000-0000-0000-0000-000000000096', 'railway', 'Railway Infrastructu
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000096', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000096', 'Railway Infrastructure', 'active', 'API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000096', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000096', 'Railway Infrastructure', 'catalogued', 'API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000096', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000096', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:railway')
@@ -1750,8 +1750,8 @@ VALUES ('c0000000-0000-0000-0000-000000000097', 'fly_io', 'Fly.io App Platform',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000097', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000097', 'Fly.io App Platform', 'active', 'Auth Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000097', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000097', 'Fly.io App Platform', 'catalogued', 'Auth Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000097', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000097', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:fly_io')
@@ -1768,8 +1768,8 @@ VALUES ('c0000000-0000-0000-0000-000000000098', 'ovhcloud', 'OVHcloud', 'Cloud I
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000098', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000098', 'OVHcloud', 'active', 'Application Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000098', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000098', 'OVHcloud', 'catalogued', 'Application Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000098', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000098', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:ovhcloud')
@@ -1786,8 +1786,8 @@ VALUES ('c0000000-0000-0000-0000-000000000099', 'scaleaway', 'Scaleway Elements'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000099', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000099', 'Scaleway Elements', 'active', 'Secret Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000099', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000099', 'Scaleway Elements', 'catalogued', 'Secret Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000099', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000099', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:scaleaway')
@@ -1804,8 +1804,8 @@ VALUES ('c0000000-0000-0000-0000-000000000100', 'equinix_metal', 'Equinix Metal 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000100', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000100', 'Equinix Metal Bare Metal', 'active', 'User API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000100', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000100', 'Equinix Metal Bare Metal', 'catalogued', 'User API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000100', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000100', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:equinix_metal')
@@ -1822,8 +1822,8 @@ VALUES ('c0000000-0000-0000-0000-000000000101', 'github', 'GitHub', 'DevOps & Co
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000101', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000101', 'GitHub', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000101', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000101', 'GitHub', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000101', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000101', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:github')
@@ -1840,8 +1840,8 @@ VALUES ('c0000000-0000-0000-0000-000000000102', 'gitlab', 'GitLab', 'DevOps & Co
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000102', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000102', 'GitLab', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000102', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000102', 'GitLab', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000102', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000102', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:gitlab')
@@ -1858,8 +1858,8 @@ VALUES ('c0000000-0000-0000-0000-000000000103', 'bitbucket', 'Bitbucket Cloud', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000103', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000103', 'Bitbucket Cloud', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000103', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000103', 'Bitbucket Cloud', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000103', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000103', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:bitbucket')
@@ -1876,8 +1876,8 @@ VALUES ('c0000000-0000-0000-0000-000000000104', 'azure_devops', 'Azure DevOps Re
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000104', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000104', 'Azure DevOps Repos & Pipelines', 'active', 'Microsoft Entra ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000104', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000104', 'Azure DevOps Repos & Pipelines', 'catalogued', 'Microsoft Entra ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000104', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000104', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:azure_devops')
@@ -1894,8 +1894,8 @@ VALUES ('c0000000-0000-0000-0000-000000000105', 'gitea', 'Gitea / Forgejo', 'Dev
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000105', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000105', 'Gitea / Forgejo', 'active', 'Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000105', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000105', 'Gitea / Forgejo', 'catalogued', 'Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000105', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000105', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:gitea')
@@ -1912,8 +1912,8 @@ VALUES ('c0000000-0000-0000-0000-000000000106', 'docker_hub', 'Docker Hub Regist
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000106', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000106', 'Docker Hub Registry', 'active', 'Personal Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000106', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000106', 'Docker Hub Registry', 'catalogued', 'Personal Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000106', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000106', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:docker_hub')
@@ -1930,8 +1930,8 @@ VALUES ('c0000000-0000-0000-0000-000000000107', 'kubernetes', 'Kubernetes Cluste
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000107', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000107', 'Kubernetes Cluster', 'active', 'Kubeconfig', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000107', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000107', 'Kubernetes Cluster', 'catalogued', 'Kubeconfig', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000107', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000107', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:kubernetes')
@@ -1948,8 +1948,8 @@ VALUES ('c0000000-0000-0000-0000-000000000108', 'argocd', 'ArgoCD GitOps', 'DevO
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000108', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000108', 'ArgoCD GitOps', 'active', 'Auth Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000108', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000108', 'ArgoCD GitOps', 'catalogued', 'Auth Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000108', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000108', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:argocd')
@@ -1966,8 +1966,8 @@ VALUES ('c0000000-0000-0000-0000-000000000109', 'terraform_cloud', 'Terraform Cl
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000109', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000109', 'Terraform Cloud / HCP', 'active', 'User / Team API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000109', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000109', 'Terraform Cloud / HCP', 'catalogued', 'User / Team API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000109', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000109', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:terraform_cloud')
@@ -1984,8 +1984,8 @@ VALUES ('c0000000-0000-0000-0000-000000000110', 'pulumi', 'Pulumi Service', 'Dev
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000110', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000110', 'Pulumi Service', 'active', 'Pulumi Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000110', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000110', 'Pulumi Service', 'catalogued', 'Pulumi Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000110', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000110', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:pulumi')
@@ -2002,8 +2002,8 @@ VALUES ('c0000000-0000-0000-0000-000000000111', 'jenkins', 'Jenkins Automation',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000111', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000111', 'Jenkins Automation', 'active', 'API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000111', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000111', 'Jenkins Automation', 'catalogued', 'API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000111', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000111', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:jenkins')
@@ -2020,8 +2020,8 @@ VALUES ('c0000000-0000-0000-0000-000000000112', 'circleci', 'CircleCI', 'DevOps 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000112', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000112', 'CircleCI', 'active', 'Personal API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000112', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000112', 'CircleCI', 'catalogued', 'Personal API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000112', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000112', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:circleci')
@@ -2038,8 +2038,8 @@ VALUES ('c0000000-0000-0000-0000-000000000113', 'artifactory', 'JFrog Artifactor
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000113', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000113', 'JFrog Artifactory', 'active', 'Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000113', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000113', 'JFrog Artifactory', 'catalogued', 'Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000113', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000113', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:artifactory')
@@ -2056,8 +2056,8 @@ VALUES ('c0000000-0000-0000-0000-000000000114', 'snyk', 'Snyk Security & Vulnera
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000114', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000114', 'Snyk Security & Vulnerability', 'active', 'API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000114', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000114', 'Snyk Security & Vulnerability', 'catalogued', 'API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000114', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000114', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:snyk')
@@ -2074,8 +2074,8 @@ VALUES ('c0000000-0000-0000-0000-000000000115', 'sonarqube', 'SonarQube / SonarC
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000115', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000115', 'SonarQube / SonarCloud', 'active', 'User Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000115', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000115', 'SonarQube / SonarCloud', 'catalogued', 'User Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000115', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000115', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:sonarqube')
@@ -2092,8 +2092,8 @@ VALUES ('c0000000-0000-0000-0000-000000000116', 'datadog', 'Datadog Observabilit
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000116', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000116', 'Datadog Observability', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000116', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000116', 'Datadog Observability', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000116', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000116', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:datadog')
@@ -2110,8 +2110,8 @@ VALUES ('c0000000-0000-0000-0000-000000000117', 'newrelic', 'New Relic APM', 'Ob
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000117', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000117', 'New Relic APM', 'active', 'User API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000117', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000117', 'New Relic APM', 'catalogued', 'User API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000117', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000117', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:newrelic')
@@ -2128,8 +2128,8 @@ VALUES ('c0000000-0000-0000-0000-000000000118', 'grafana', 'Grafana Cloud / OSS'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000118', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000118', 'Grafana Cloud / OSS', 'active', 'Service Account Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000118', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000118', 'Grafana Cloud / OSS', 'catalogued', 'Service Account Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000118', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000118', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:grafana')
@@ -2146,8 +2146,8 @@ VALUES ('c0000000-0000-0000-0000-000000000119', 'prometheus', 'Prometheus Metric
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000119', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000119', 'Prometheus Metrics', 'active', 'Server URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000119', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000119', 'Prometheus Metrics', 'catalogued', 'Server URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000119', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000119', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:prometheus')
@@ -2164,8 +2164,8 @@ VALUES ('c0000000-0000-0000-0000-000000000120', 'sentry', 'Sentry Error Tracking
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000120', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000120', 'Sentry Error Tracking', 'active', 'User Auth Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000120', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000120', 'Sentry Error Tracking', 'catalogued', 'User Auth Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000120', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000120', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:sentry')
@@ -2182,8 +2182,8 @@ VALUES ('c0000000-0000-0000-0000-000000000121', 'splunk', 'Splunk Enterprise / C
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000121', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000121', 'Splunk Enterprise / Cloud', 'active', 'HEC Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000121', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000121', 'Splunk Enterprise / Cloud', 'catalogued', 'HEC Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000121', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000121', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:splunk')
@@ -2200,8 +2200,8 @@ VALUES ('c0000000-0000-0000-0000-000000000122', 'dynatrace', 'Dynatrace Intellig
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000122', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000122', 'Dynatrace Intelligence', 'active', 'Environment Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000122', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000122', 'Dynatrace Intelligence', 'catalogued', 'Environment Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000122', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000122', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:dynatrace')
@@ -2218,8 +2218,8 @@ VALUES ('c0000000-0000-0000-0000-000000000123', 'elasticsearch_apm', 'Elasticsea
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000123', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000123', 'Elasticsearch / Kibana', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000123', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000123', 'Elasticsearch / Kibana', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000123', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000123', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:elasticsearch_apm')
@@ -2236,8 +2236,8 @@ VALUES ('c0000000-0000-0000-0000-000000000124', 'betterstack', 'Better Stack (Lo
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000124', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000124', 'Better Stack (Logtail/Uptime)', 'active', 'API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000124', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000124', 'Better Stack (Logtail/Uptime)', 'catalogued', 'API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000124', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000124', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:betterstack')
@@ -2254,8 +2254,8 @@ VALUES ('c0000000-0000-0000-0000-000000000125', 'posthog', 'PostHog Analytics', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000125', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000125', 'PostHog Analytics', 'active', 'Personal API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000125', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000125', 'PostHog Analytics', 'catalogued', 'Personal API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000125', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000125', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:posthog')
@@ -2272,8 +2272,8 @@ VALUES ('c0000000-0000-0000-0000-000000000126', 'mixpanel', 'Mixpanel Product An
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000126', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000126', 'Mixpanel Product Analytics', 'active', 'Service Account Secret', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000126', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000126', 'Mixpanel Product Analytics', 'catalogued', 'Service Account Secret', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000126', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000126', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:mixpanel')
@@ -2290,8 +2290,8 @@ VALUES ('c0000000-0000-0000-0000-000000000127', 'amplitude', 'Amplitude Analytic
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000127', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000127', 'Amplitude Analytics', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000127', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000127', 'Amplitude Analytics', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000127', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000127', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:amplitude')
@@ -2308,8 +2308,8 @@ VALUES ('c0000000-0000-0000-0000-000000000128', 'segment', 'Twilio Segment CDP',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000128', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000128', 'Twilio Segment CDP', 'active', 'Write Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000128', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000128', 'Twilio Segment CDP', 'catalogued', 'Write Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000128', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000128', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:segment')
@@ -2326,8 +2326,8 @@ VALUES ('c0000000-0000-0000-0000-000000000129', 'slack', 'Slack Workspace', 'Com
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000129', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000129', 'Slack Workspace', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000129', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000129', 'Slack Workspace', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000129', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000129', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:slack')
@@ -2344,8 +2344,8 @@ VALUES ('c0000000-0000-0000-0000-000000000130', 'microsoft_teams', 'Microsoft Te
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000130', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000130', 'Microsoft Teams', 'active', 'Microsoft Entra ID OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000130', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000130', 'Microsoft Teams', 'catalogued', 'Microsoft Entra ID OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000130', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000130', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:microsoft_teams')
@@ -2362,8 +2362,8 @@ VALUES ('c0000000-0000-0000-0000-000000000131', 'discord', 'Discord Community', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000131', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000131', 'Discord Community', 'active', 'Bot Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000131', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000131', 'Discord Community', 'catalogued', 'Bot Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000131', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000131', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:discord')
@@ -2380,8 +2380,8 @@ VALUES ('c0000000-0000-0000-0000-000000000132', 'telegram', 'Telegram Bot', 'Com
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000132', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000132', 'Telegram Bot', 'active', 'Bot Father API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000132', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000132', 'Telegram Bot', 'catalogued', 'Bot Father API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000132', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000132', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:telegram')
@@ -2398,8 +2398,8 @@ VALUES ('c0000000-0000-0000-0000-000000000133', 'whatsapp_business', 'WhatsApp B
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000133', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000133', 'WhatsApp Business (Meta)', 'active', 'System User Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000133', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000133', 'WhatsApp Business (Meta)', 'catalogued', 'System User Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000133', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000133', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:whatsapp_business')
@@ -2416,8 +2416,8 @@ VALUES ('c0000000-0000-0000-0000-000000000134', 'zoom', 'Zoom Video Communicatio
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000134', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000134', 'Zoom Video Communications', 'active', 'Server-to-Server OAuth', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000134', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000134', 'Zoom Video Communications', 'catalogued', 'Server-to-Server OAuth', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000134', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000134', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:zoom')
@@ -2434,8 +2434,8 @@ VALUES ('c0000000-0000-0000-0000-000000000135', 'google_meet', 'Google Meet', 'C
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000135', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000135', 'Google Meet', 'active', 'Google OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000135', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000135', 'Google Meet', 'catalogued', 'Google OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000135', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000135', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:google_meet')
@@ -2452,8 +2452,8 @@ VALUES ('c0000000-0000-0000-0000-000000000136', 'cisco_webex', 'Cisco Webex', 'C
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000136', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000136', 'Cisco Webex', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000136', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000136', 'Cisco Webex', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000136', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000136', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:cisco_webex')
@@ -2470,8 +2470,8 @@ VALUES ('c0000000-0000-0000-0000-000000000137', 'mattermost', 'Mattermost Collab
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000137', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000137', 'Mattermost Collaboration', 'active', 'Personal Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000137', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000137', 'Mattermost Collaboration', 'catalogued', 'Personal Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000137', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000137', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:mattermost')
@@ -2488,8 +2488,8 @@ VALUES ('c0000000-0000-0000-0000-000000000138', 'matrix', 'Matrix / Element Syna
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000138', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000138', 'Matrix / Element Synapse', 'active', 'Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000138', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000138', 'Matrix / Element Synapse', 'catalogued', 'Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000138', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000138', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:matrix')
@@ -2506,8 +2506,8 @@ VALUES ('c0000000-0000-0000-0000-000000000139', 'twilio_sms', 'Twilio Voice & SM
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000139', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000139', 'Twilio Voice & SMS', 'active', 'Account SID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000139', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000139', 'Twilio Voice & SMS', 'catalogued', 'Account SID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000139', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000139', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:twilio_sms')
@@ -2524,8 +2524,8 @@ VALUES ('c0000000-0000-0000-0000-000000000140', 'sendgrid', 'Twilio SendGrid Ema
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000140', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000140', 'Twilio SendGrid Email', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000140', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000140', 'Twilio SendGrid Email', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000140', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000140', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:sendgrid')
@@ -2542,8 +2542,8 @@ VALUES ('c0000000-0000-0000-0000-000000000141', 'resend', 'Resend Modern Email',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000141', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000141', 'Resend Modern Email', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000141', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000141', 'Resend Modern Email', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000141', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000141', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:resend')
@@ -2560,8 +2560,8 @@ VALUES ('c0000000-0000-0000-0000-000000000142', 'postmark', 'Postmark Transactio
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000142', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000142', 'Postmark Transactional Email', 'active', 'Server API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000142', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000142', 'Postmark Transactional Email', 'catalogued', 'Server API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000142', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000142', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:postmark')
@@ -2578,8 +2578,8 @@ VALUES ('c0000000-0000-0000-0000-000000000143', 'smtp_imap', 'Generic SMTP / IMA
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000143', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000143', 'Generic SMTP / IMAP Email', 'active', 'Host', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000143', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000143', 'Generic SMTP / IMAP Email', 'catalogued', 'Host', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000143', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000143', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:smtp_imap')
@@ -2596,8 +2596,8 @@ VALUES ('c0000000-0000-0000-0000-000000000144', 'jira', 'Jira Software & Product
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000144', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000144', 'Jira Software & Product', 'active', 'OAuth 2.0 (3LO)', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000144', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000144', 'Jira Software & Product', 'catalogued', 'OAuth 2.0 (3LO)', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000144', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000144', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:jira')
@@ -2614,8 +2614,8 @@ VALUES ('c0000000-0000-0000-0000-000000000145', 'confluence', 'Confluence Wiki',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000145', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000145', 'Confluence Wiki', 'active', 'OAuth 2.0 (3LO)', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000145', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000145', 'Confluence Wiki', 'catalogued', 'OAuth 2.0 (3LO)', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000145', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000145', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:confluence')
@@ -2632,8 +2632,8 @@ VALUES ('c0000000-0000-0000-0000-000000000146', 'linear', 'Linear Issue Tracker'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000146', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000146', 'Linear Issue Tracker', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000146', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000146', 'Linear Issue Tracker', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000146', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000146', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:linear')
@@ -2650,8 +2650,8 @@ VALUES ('c0000000-0000-0000-0000-000000000147', 'asana', 'Asana Work Management'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000147', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000147', 'Asana Work Management', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000147', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000147', 'Asana Work Management', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000147', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000147', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:asana')
@@ -2668,8 +2668,8 @@ VALUES ('c0000000-0000-0000-0000-000000000148', 'monday', 'Monday.com Work OS', 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000148', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000148', 'Monday.com Work OS', 'active', 'API v2 Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000148', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000148', 'Monday.com Work OS', 'catalogued', 'API v2 Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000148', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000148', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:monday')
@@ -2686,8 +2686,8 @@ VALUES ('c0000000-0000-0000-0000-000000000149', 'trello', 'Trello Boards', 'Proj
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000149', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000149', 'Trello Boards', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000149', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000149', 'Trello Boards', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000149', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000149', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:trello')
@@ -2704,8 +2704,8 @@ VALUES ('c0000000-0000-0000-0000-000000000150', 'notion', 'Notion Workspace', 'P
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000150', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000150', 'Notion Workspace', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000150', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000150', 'Notion Workspace', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000150', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000150', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:notion')
@@ -2722,8 +2722,8 @@ VALUES ('c0000000-0000-0000-0000-000000000151', 'clickup', 'ClickUp All-in-One',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000151', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000151', 'ClickUp All-in-One', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000151', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000151', 'ClickUp All-in-One', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000151', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000151', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:clickup')
@@ -2740,8 +2740,8 @@ VALUES ('c0000000-0000-0000-0000-000000000152', 'basecamp', 'Basecamp 4', 'Proje
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000152', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000152', 'Basecamp 4', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000152', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000152', 'Basecamp 4', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000152', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000152', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:basecamp')
@@ -2758,8 +2758,8 @@ VALUES ('c0000000-0000-0000-0000-000000000153', 'wrike', 'Wrike Collaborative Wo
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000153', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000153', 'Wrike Collaborative Work', 'active', 'Permanent Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000153', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000153', 'Wrike Collaborative Work', 'catalogued', 'Permanent Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000153', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000153', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:wrike')
@@ -2776,8 +2776,8 @@ VALUES ('c0000000-0000-0000-0000-000000000154', 'shortcut', 'Shortcut (Clubhouse
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000154', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000154', 'Shortcut (Clubhouse)', 'active', 'API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000154', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000154', 'Shortcut (Clubhouse)', 'catalogued', 'API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000154', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000154', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:shortcut')
@@ -2794,8 +2794,8 @@ VALUES ('c0000000-0000-0000-0000-000000000155', 'coda', 'Coda Interactive Docs',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000155', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000155', 'Coda Interactive Docs', 'active', 'API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000155', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000155', 'Coda Interactive Docs', 'catalogued', 'API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000155', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000155', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:coda')
@@ -2812,8 +2812,8 @@ VALUES ('c0000000-0000-0000-0000-000000000156', 'miro', 'Miro Visual Collaborati
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000156', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000156', 'Miro Visual Collaboration', 'active', 'OAuth 2.0 Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000156', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000156', 'Miro Visual Collaboration', 'catalogued', 'OAuth 2.0 Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000156', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000156', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:miro')
@@ -2830,8 +2830,8 @@ VALUES ('c0000000-0000-0000-0000-000000000157', 'figma', 'Figma Design & Tokens'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000157', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000157', 'Figma Design & Tokens', 'active', 'Personal Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000157', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000157', 'Figma Design & Tokens', 'catalogued', 'Personal Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000157', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000157', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:figma')
@@ -2848,8 +2848,8 @@ VALUES ('c0000000-0000-0000-0000-000000000158', 'obsidian', 'Obsidian Local Vaul
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000158', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000158', 'Obsidian Local Vault', 'active', 'Local Vault REST API Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000158', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000158', 'Obsidian Local Vault', 'catalogued', 'Local Vault REST API Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000158', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000158', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:obsidian')
@@ -2866,8 +2866,8 @@ VALUES ('c0000000-0000-0000-0000-000000000159', 'salesforce', 'Salesforce CRM & 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000159', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000159', 'Salesforce CRM & Cloud', 'active', 'OAuth 2.0 Connected App', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000159', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000159', 'Salesforce CRM & Cloud', 'catalogued', 'OAuth 2.0 Connected App', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000159', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000159', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:salesforce')
@@ -2884,8 +2884,8 @@ VALUES ('c0000000-0000-0000-0000-000000000160', 'hubspot', 'HubSpot Growth Platf
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000160', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000160', 'HubSpot Growth Platform', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000160', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000160', 'HubSpot Growth Platform', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000160', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000160', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:hubspot')
@@ -2902,8 +2902,8 @@ VALUES ('c0000000-0000-0000-0000-000000000161', 'pipedrive', 'Pipedrive CRM', 'C
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000161', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000161', 'Pipedrive CRM', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000161', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000161', 'Pipedrive CRM', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000161', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000161', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:pipedrive')
@@ -2920,8 +2920,8 @@ VALUES ('c0000000-0000-0000-0000-000000000162', 'zoho_crm', 'Zoho CRM', 'CRM & S
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000162', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000162', 'Zoho CRM', 'active', 'OAuth 2.0 Server-Based', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000162', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000162', 'Zoho CRM', 'catalogued', 'OAuth 2.0 Server-Based', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000162', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000162', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:zoho_crm')
@@ -2938,8 +2938,8 @@ VALUES ('c0000000-0000-0000-0000-000000000163', 'close_crm', 'Close CRM', 'CRM &
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000163', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000163', 'Close CRM', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000163', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000163', 'Close CRM', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000163', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000163', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:close_crm')
@@ -2956,8 +2956,8 @@ VALUES ('c0000000-0000-0000-0000-000000000164', 'mailchimp', 'Mailchimp Marketin
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000164', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000164', 'Mailchimp Marketing', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000164', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000164', 'Mailchimp Marketing', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000164', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000164', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:mailchimp')
@@ -2974,8 +2974,8 @@ VALUES ('c0000000-0000-0000-0000-000000000165', 'klaviyo', 'Klaviyo Ecommerce Ma
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000165', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000165', 'Klaviyo Ecommerce Marketing', 'active', 'Private API Key (pk_...)', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000165', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000165', 'Klaviyo Ecommerce Marketing', 'catalogued', 'Private API Key (pk_...)', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000165', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000165', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:klaviyo')
@@ -2992,8 +2992,8 @@ VALUES ('c0000000-0000-0000-0000-000000000166', 'activecampaign', 'ActiveCampaig
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000166', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000166', 'ActiveCampaign', 'active', 'API URL', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000166', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000166', 'ActiveCampaign', 'catalogued', 'API URL', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000166', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000166', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:activecampaign')
@@ -3010,8 +3010,8 @@ VALUES ('c0000000-0000-0000-0000-000000000167', 'customer_io', 'Customer.io Jour
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000167', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000167', 'Customer.io Journeys', 'active', 'Site ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000167', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000167', 'Customer.io Journeys', 'catalogued', 'Site ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000167', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000167', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:customer_io')
@@ -3028,8 +3028,8 @@ VALUES ('c0000000-0000-0000-0000-000000000168', 'intercom_crm', 'Intercom Engage
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000168', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000168', 'Intercom Engage & CRM', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000168', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000168', 'Intercom Engage & CRM', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000168', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000168', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:intercom_crm')
@@ -3046,8 +3046,8 @@ VALUES ('c0000000-0000-0000-0000-000000000169', 'braze', 'Braze Customer Engagem
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000169', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000169', 'Braze Customer Engagement', 'active', 'Rest API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000169', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000169', 'Braze Customer Engagement', 'catalogued', 'Rest API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000169', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000169', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:braze')
@@ -3064,8 +3064,8 @@ VALUES ('c0000000-0000-0000-0000-000000000170', 'apollo_io', 'Apollo.io B2B Lead
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000170', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000170', 'Apollo.io B2B Lead Intel', 'active', 'Master API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000170', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000170', 'Apollo.io B2B Lead Intel', 'catalogued', 'Master API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000170', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000170', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:apollo_io')
@@ -3082,8 +3082,8 @@ VALUES ('c0000000-0000-0000-0000-000000000171', 'zoominfo', 'ZoomInfo Enterprise
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000171', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000171', 'ZoomInfo Enterprise', 'active', 'Client ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000171', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000171', 'ZoomInfo Enterprise', 'catalogued', 'Client ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000171', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000171', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:zoominfo')
@@ -3100,8 +3100,8 @@ VALUES ('c0000000-0000-0000-0000-000000000172', 'lemlist', 'Lemlist Cold Outreac
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000172', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000172', 'Lemlist Cold Outreach', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000172', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000172', 'Lemlist Cold Outreach', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000172', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000172', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:lemlist')
@@ -3118,8 +3118,8 @@ VALUES ('c0000000-0000-0000-0000-000000000173', 'zendesk_support', 'Zendesk Supp
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000173', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000173', 'Zendesk Support', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000173', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000173', 'Zendesk Support', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000173', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000173', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:zendesk_support')
@@ -3136,8 +3136,8 @@ VALUES ('c0000000-0000-0000-0000-000000000174', 'freshdesk', 'Freshdesk Omnichan
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000174', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000174', 'Freshdesk Omnichannel', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000174', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000174', 'Freshdesk Omnichannel', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000174', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000174', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:freshdesk')
@@ -3154,8 +3154,8 @@ VALUES ('c0000000-0000-0000-0000-000000000175', 'helpscout', 'Help Scout Helpdes
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000175', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000175', 'Help Scout Helpdesk', 'active', 'OAuth 2.0 App Credentials', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000175', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000175', 'Help Scout Helpdesk', 'catalogued', 'OAuth 2.0 App Credentials', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000175', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000175', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:helpscout')
@@ -3172,8 +3172,8 @@ VALUES ('c0000000-0000-0000-0000-000000000176', 'front_app', 'Front Shared Inbox
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000176', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000176', 'Front Shared Inbox', 'active', 'API Token (JWT)', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000176', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000176', 'Front Shared Inbox', 'catalogued', 'API Token (JWT)', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000176', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000176', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:front_app')
@@ -3190,8 +3190,8 @@ VALUES ('c0000000-0000-0000-0000-000000000177', 'gorgias', 'Gorgias Ecommerce Su
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000177', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000177', 'Gorgias Ecommerce Support', 'active', 'Base API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000177', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000177', 'Gorgias Ecommerce Support', 'catalogued', 'Base API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000177', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000177', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:gorgias')
@@ -3208,8 +3208,8 @@ VALUES ('c0000000-0000-0000-0000-000000000178', 'kustomer', 'Kustomer Platform',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000178', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000178', 'Kustomer Platform', 'active', 'API Key with Roles', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000178', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000178', 'Kustomer Platform', 'catalogued', 'API Key with Roles', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000178', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000178', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:kustomer')
@@ -3226,8 +3226,8 @@ VALUES ('c0000000-0000-0000-0000-000000000179', 'servicenow', 'ServiceNow Enterp
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000179', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000179', 'ServiceNow Enterprise ITSM', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000179', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000179', 'ServiceNow Enterprise ITSM', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000179', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000179', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:servicenow')
@@ -3244,8 +3244,8 @@ VALUES ('c0000000-0000-0000-0000-000000000180', 'pagerduty', 'PagerDuty Incident
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000180', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000180', 'PagerDuty Incident Response', 'active', 'REST API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000180', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000180', 'PagerDuty Incident Response', 'catalogued', 'REST API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000180', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000180', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:pagerduty')
@@ -3262,8 +3262,8 @@ VALUES ('c0000000-0000-0000-0000-000000000181', 'opsgenie', 'Opsgenie Alerting',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000181', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000181', 'Opsgenie Alerting', 'active', 'GenieKey (API Key)', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000181', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000181', 'Opsgenie Alerting', 'catalogued', 'GenieKey (API Key)', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000181', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000181', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:opsgenie')
@@ -3280,8 +3280,8 @@ VALUES ('c0000000-0000-0000-0000-000000000182', 'stripe', 'Stripe Payments & Bil
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000182', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000182', 'Stripe Payments & Billing', 'active', 'Restricted API Key (rk_...)', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000182', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000182', 'Stripe Payments & Billing', 'catalogued', 'Restricted API Key (rk_...)', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000182', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000182', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:stripe')
@@ -3298,8 +3298,8 @@ VALUES ('c0000000-0000-0000-0000-000000000183', 'paypal', 'PayPal Developer', 'E
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000183', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000183', 'PayPal Developer', 'active', 'Client ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000183', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000183', 'PayPal Developer', 'catalogued', 'Client ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000183', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000183', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:paypal')
@@ -3316,8 +3316,8 @@ VALUES ('c0000000-0000-0000-0000-000000000184', 'shopify', 'Shopify Plus / Store
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000184', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000184', 'Shopify Plus / Store', 'active', 'Admin API Access Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000184', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000184', 'Shopify Plus / Store', 'catalogued', 'Admin API Access Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000184', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000184', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:shopify')
@@ -3334,8 +3334,8 @@ VALUES ('c0000000-0000-0000-0000-000000000185', 'woocommerce', 'WooCommerce Word
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000185', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000185', 'WooCommerce WordPress', 'active', 'Consumer Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000185', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000185', 'WooCommerce WordPress', 'catalogued', 'Consumer Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000185', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000185', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:woocommerce')
@@ -3352,8 +3352,8 @@ VALUES ('c0000000-0000-0000-0000-000000000186', 'bigcommerce', 'BigCommerce', 'E
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000186', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000186', 'BigCommerce', 'active', 'Store Hash', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000186', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000186', 'BigCommerce', 'catalogued', 'Store Hash', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000186', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000186', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:bigcommerce')
@@ -3370,8 +3370,8 @@ VALUES ('c0000000-0000-0000-0000-000000000187', 'square', 'Square POS & Ecommerc
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000187', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000187', 'Square POS & Ecommerce', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000187', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000187', 'Square POS & Ecommerce', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000187', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000187', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:square')
@@ -3388,8 +3388,8 @@ VALUES ('c0000000-0000-0000-0000-000000000188', 'paddle', 'Paddle Billing', 'E-C
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000188', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000188', 'Paddle Billing', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000188', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000188', 'Paddle Billing', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000188', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000188', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:paddle')
@@ -3406,8 +3406,8 @@ VALUES ('c0000000-0000-0000-0000-000000000189', 'adyen', 'Adyen Global Payments'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000189', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000189', 'Adyen Global Payments', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000189', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000189', 'Adyen Global Payments', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000189', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000189', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:adyen')
@@ -3424,8 +3424,8 @@ VALUES ('c0000000-0000-0000-0000-000000000190', 'lemon_squeezy', 'Lemon Squeezy 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000190', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000190', 'Lemon Squeezy Merchant', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000190', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000190', 'Lemon Squeezy Merchant', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000190', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000190', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:lemon_squeezy')
@@ -3442,8 +3442,8 @@ VALUES ('c0000000-0000-0000-0000-000000000191', 'chargebee', 'Chargebee Subscrip
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000191', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000191', 'Chargebee Subscription', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000191', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000191', 'Chargebee Subscription', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000191', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000191', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:chargebee')
@@ -3460,8 +3460,8 @@ VALUES ('c0000000-0000-0000-0000-000000000192', 'plaid', 'Plaid Financial Data',
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000192', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000192', 'Plaid Financial Data', 'active', 'Client ID', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000192', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000192', 'Plaid Financial Data', 'catalogued', 'Client ID', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000192', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000192', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:plaid')
@@ -3478,8 +3478,8 @@ VALUES ('c0000000-0000-0000-0000-000000000193', 'quickbooks', 'QuickBooks Online
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000193', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000193', 'QuickBooks Online (Intuit)', 'active', 'OAuth 2.0 Refresh Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000193', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000193', 'QuickBooks Online (Intuit)', 'catalogued', 'OAuth 2.0 Refresh Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000193', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000193', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:quickbooks')
@@ -3496,8 +3496,8 @@ VALUES ('c0000000-0000-0000-0000-000000000194', 'xero', 'Xero Accounting', 'Fina
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000194', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000194', 'Xero Accounting', 'active', 'OAuth 2.0 PKCE', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000194', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000194', 'Xero Accounting', 'catalogued', 'OAuth 2.0 PKCE', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000194', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000194', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:xero')
@@ -3514,8 +3514,8 @@ VALUES ('c0000000-0000-0000-0000-000000000195', 'google_sheets', 'Google Sheets'
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000195', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000195', 'Google Sheets', 'active', 'Google OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000195', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000195', 'Google Sheets', 'catalogued', 'Google OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000195', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000195', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:google_sheets')
@@ -3532,8 +3532,8 @@ VALUES ('c0000000-0000-0000-0000-000000000196', 'airtable', 'Airtable Connected 
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000196', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000196', 'Airtable Connected Apps', 'active', 'OAuth 2.0', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000196', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000196', 'Airtable Connected Apps', 'catalogued', 'OAuth 2.0', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000196', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000196', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:airtable')
@@ -3550,8 +3550,8 @@ VALUES ('c0000000-0000-0000-0000-000000000197', 'docusign', 'DocuSign eSignature
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000197', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000197', 'DocuSign eSignature', 'active', 'JWT Grant RSA Keypair', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000197', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000197', 'DocuSign eSignature', 'catalogued', 'JWT Grant RSA Keypair', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000197', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000197', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:docusign')
@@ -3568,8 +3568,8 @@ VALUES ('c0000000-0000-0000-0000-000000000198', 'bamboohr', 'BambooHR Human Reso
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000198', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000198', 'BambooHR Human Resources', 'active', 'API Key', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000198', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000198', 'BambooHR Human Resources', 'catalogued', 'API Key', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000198', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000198', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:bamboohr')
@@ -3586,8 +3586,8 @@ VALUES ('c0000000-0000-0000-0000-000000000199', 'gusto', 'Gusto Payroll & HR', '
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000199', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000199', 'Gusto Payroll & HR', 'active', 'OAuth 2.0 Refresh Token', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000199', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000199', 'Gusto Payroll & HR', 'catalogued', 'OAuth 2.0 Refresh Token', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000199', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000199', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:gusto')
@@ -3604,8 +3604,8 @@ VALUES ('c0000000-0000-0000-0000-000000000200', 'auth0_identity', 'Auth0 Identit
 ON CONFLICT (key) DO UPDATE SET display_name = EXCLUDED.display_name;
 
 INSERT INTO connector_installations (id, tenant_id, connector_id, display_name, status, auth_method, last_tested_at)
-VALUES ('i0000000-0000-0000-0000-000000000200', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000200', 'Auth0 Identity & Security', 'active', 'OAuth 2.0 Device Flow', now())
-ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'active';
+VALUES ('i0000000-0000-0000-0000-000000000200', 'a0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000200', 'Auth0 Identity & Security', 'catalogued', 'OAuth 2.0 Device Flow', now())
+ON CONFLICT (tenant_id, id) DO UPDATE SET status = 'catalogued';
 
 INSERT INTO connector_secret_refs (id, tenant_id, installation_id, secret_provider, secret_ref)
 VALUES ('s0000000-0000-0000-0000-000000000200', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000200', 'aws_secrets_manager', 'arn:aws:secretsmanager:eu-central-1:tenant-acme:secret:auth0_identity')
@@ -3615,4 +3615,9 @@ INSERT INTO data_versions (id, tenant_id, installation_id, version_tag, commit_h
 VALUES ('v0000000-0000-0000-0000-000000000200', 'a0000000-0000-0000-0000-000000000001', 'i0000000-0000-0000-0000-000000000200', 'v1.0.0', '9992a609d59776960e0a8fa37d6b308c90e6963bb412e4b62fd1a1584ad11b88', 35350, 18099200, 's3://connecthub-tenant-acme/auth0_identity/snapshots/9992a609d597.parquet')
 ON CONFLICT (id) DO NOTHING;
 
+COMMIT;
+-- Mark confirmed operational connectors as verified
+UPDATE connector_installations 
+SET status = 'verified' 
+WHERE display_name IN ('GitHub', 'SQLite', 'DuckDB', 'Auth0', 'AWS S3', 'PostgreSQL');
 COMMIT;

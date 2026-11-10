@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>MCP Proxy & Auth0 Gateway Hub</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-0 m-0 text-sm">
+  <div class="py-3 space-y-4">
+    <!-- Header -->
+    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[var(--card-border)]">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-[var(--success)] animate-pulse"></span>
+          <h1 class="text-base font-bold tracking-tight text-[var(--foreground)]">MCP Proxy &amp; Gateway Control Center</h1>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mt-0.5">
+          Supergateway Proxy &bull; 46 MCP Tools aktiv &bull; Auth0 Device Flow &bull; DuckDB + SQLite + Storage
+        </p>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+          Proxy Port :8000
+        </span>
+        <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-blue-500/10 text-blue-500 border border-blue-500/20">
+          46 Tools Bereit
+        </span>
+      </div>
+    </div>
+
+    <!-- Auth0 Connect Action Card -->
+    <div class="p-4 rounded-xl border border-amber-500/30 bg-amber-500/5 space-y-3">
+      <div class="flex items-start justify-between gap-3">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="text-xs uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-500">
+              Auth0 Connect
+            </span>
+            <span class="text-xs text-[var(--muted-foreground)]">OAuth 2.0 Device Flow</span>
+          </div>
+          <h2 class="text-sm font-semibold text-[var(--foreground)]">Browser-Login für persistente Auth0 Verbindung</h2>
+          <p class="text-xs text-[var(--muted-foreground)]">
+            Klicke auf den Button, um den Login im Browser abzuschließen. Der Code ist bereits vorausgefüllt. Nach Bestätigung speichert der Proxy das Refresh-Token für dauerhafte Konnektivität.
+          </p>
+        </div>
+        <div class="text-right whitespace-nowrap">
+          <span class="text-[10px] text-[var(--muted-foreground)] uppercase block">Device Code</span>
+          <code class="text-sm font-mono font-bold text-amber-500 bg-amber-500/10 px-2 py-1 rounded border border-amber-500/20">FQQR-KWBS</code>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 pt-1">
+        <a href="https://auth0.auth0.com/activate?user_code=FQQR-KWBS" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] font-medium text-xs hover:opacity-90 transition-opacity shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+          Auth0 Browser Login starten (FQQR-KWBS)
+        </a>
+        <span class="text-xs text-[var(--muted-foreground)] flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+          Wartet auf Token-Freigabe im Browser...
+        </span>
+      </div>
+    </div>
+
+    <!-- Storage & Engines Summary -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-2.5">
+      <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)] space-y-1">
+        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+          <span class="font-medium text-[var(--foreground)]">Auth0 IAM</span>
+          <span class="text-xs text-blue-500 font-bold">23 Tools</span>
+        </div>
+        <p class="text-[11px] text-[var(--muted-foreground)]">Applications, Grants, Actions, Logs, Forms &amp; Resource Servers</p>
+      </div>
+
+      <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)] space-y-1">
+        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+          <span class="font-medium text-[var(--foreground)]">DuckDB Analytics</span>
+          <span class="text-xs text-purple-500 font-bold">Big Data Engine</span>
+        </div>
+        <p class="text-[11px] text-[var(--muted-foreground)]">Kolumnare Analysen für Gigabyte-/Terabyte-Parquet &amp; SQL Daten</p>
+      </div>
+
+      <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)] space-y-1">
+        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+          <span class="font-medium text-[var(--foreground)]">SQLite Relational</span>
+          <span class="text-xs text-emerald-500 font-bold">6 Tools</span>
+        </div>
+        <p class="text-[11px] text-[var(--muted-foreground)]">Tabellen, Schemas, Abfragen (read_query, write_query, create_table)</p>
+      </div>
+
+      <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)] space-y-1">
+        <div class="flex items-center justify-between text-xs text-[var(--muted-foreground)]">
+          <span class="font-medium text-[var(--foreground)]">Dataset Storage</span>
+          <span class="text-xs text-amber-500 font-bold">16 Tools</span>
+        </div>
+        <p class="text-[11px] text-[var(--muted-foreground)]">Hochleistungs-Dateisystem &amp; Dataset-Cluster (read/write/search/tree)</p>
+      </div>
+    </div>
+
+    <!-- Interactive Tools List with Filter -->
+    <div class="space-y-3 pt-2">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5" id="categoryFilters">
+          <button onclick="filterTools('all')" class="tab-btn px-2.5 py-1 text-xs rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)]">Alle (46)</button>
+          <button onclick="filterTools('Auth0')" class="tab-btn px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">Auth0 (23)</button>
+          <button onclick="filterTools('DuckDB')" class="tab-btn px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">DuckDB (1)</button>
+          <button onclick="filterTools('SQLite')" class="tab-btn px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">SQLite (6)</button>
+          <button onclick="filterTools('Storage')" class="tab-btn px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">Storage (16)</button>
+        </div>
+        <input id="searchInput" type="text" placeholder="Tools filtern..." onkeyup="searchTools()"
+               class="px-2.5 py-1 text-xs rounded-md border border-[var(--card-border)] bg-[var(--card)] text-[var(--foreground)] placeholder-[var(--placeholder)] focus:outline-none focus:ring-1 focus:ring-[var(--primary)] w-48" />
+      </div>
+
+      <!-- Tools Table -->
+      <div class="border border-[var(--card-border)] rounded-lg overflow-hidden max-h-72 overflow-y-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead class="bg-[var(--card)] border-b border-[var(--card-border)] sticky top-0">
+            <tr>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)] w-1/4">Tool Name</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)] w-1/5">Kategorie</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Beschreibung</th>
+            </tr>
+          </thead>
+          <tbody id="toolsTbody" class="divide-y divide-[var(--card-border)] font-mono">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Proxy Endpoints & Config -->
+    <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)] space-y-2 text-xs">
+      <div class="flex items-center justify-between">
+        <span class="font-semibold text-[var(--foreground)]">Supergateway Endpunkte (SSE)</span>
+        <span class="text-[11px] text-[var(--muted-foreground)]">Protokoll: MCP 2024-11-05</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
+        <div class="p-2 rounded bg-[var(--background)] border border-[var(--border)] font-mono">
+          <span class="text-blue-500 font-bold">Auth0 SSE:</span> http://localhost:8000/auth0/sse
+        </div>
+        <div class="p-2 rounded bg-[var(--background)] border border-[var(--border)] font-mono">
+          <span class="text-purple-500 font-bold">DuckDB SSE:</span> http://localhost:8000/duckdb/sse
+        </div>
+        <div class="p-2 rounded bg-[var(--background)] border border-[var(--border)] font-mono">
+          <span class="text-emerald-500 font-bold">SQLite SSE:</span> http://localhost:8000/sqlite/sse
+        </div>
+        <div class="p-2 rounded bg-[var(--background)] border border-[var(--border)] font-mono">
+          <span class="text-amber-500 font-bold">Storage SSE:</span> http://localhost:8000/storage/sse
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tools = [
+      { name: "auth0_list_applications", cat: "Auth0", desc: "List all applications in the Auth0 tenant or search by name" },
+      { name: "auth0_get_application", cat: "Auth0", desc: "Get details about a specific Auth0 application by client ID" },
+      { name: "auth0_create_application", cat: "Auth0", desc: "Create a new Auth0 application (SPA, M2M, Regular Web App)" },
+      { name: "auth0_update_application", cat: "Auth0", desc: "Update application callbacks, logout URLs, and client settings" },
+      { name: "auth0_save_credentials_to_file", cat: "Auth0", desc: "Save client ID and secrets safely into project .env configuration" },
+      { name: "auth0_list_resource_servers", cat: "Auth0", desc: "List all APIs / Resource Servers defined in the Auth0 tenant" },
+      { name: "auth0_get_resource_server", cat: "Auth0", desc: "Get identifier, signing algorithms, and scopes for an API" },
+      { name: "auth0_create_resource_server", cat: "Auth0", desc: "Register a new secure API resource server with custom scopes" },
+      { name: "auth0_update_resource_server", cat: "Auth0", desc: "Modify token expiration, signing algorithms, or defined scopes" },
+      { name: "auth0_create_application_grant", cat: "Auth0", desc: "Grant M2M application permission to access an API with scopes" },
+      { name: "auth0_list_actions", cat: "Auth0", desc: "List serverless Auth0 login/post-login actions and custom flows" },
+      { name: "auth0_get_action", cat: "Auth0", desc: "Retrieve source code and configuration of a specific action" },
+      { name: "auth0_create_action", cat: "Auth0", desc: "Create dynamic authentication, token decoration, or MFA action" },
+      { name: "auth0_update_action", cat: "Auth0", desc: "Update code, secrets, or dependencies of an action" },
+      { name: "auth0_deploy_action", cat: "Auth0", desc: "Deploy an action version to production execution" },
+      { name: "auth0_list_logs", cat: "Auth0", desc: "Stream and query tenant authentication logs and audit trails" },
+      { name: "auth0_get_log", cat: "Auth0", desc: "Inspect specific authentication attempt details and error reason" },
+      { name: "auth0_list_forms", cat: "Auth0", desc: "List custom visual login, registration, and prompt forms" },
+      { name: "auth0_get_form", cat: "Auth0", desc: "Inspect form structure, fields, branding, and schema" },
+      { name: "auth0_create_form", cat: "Auth0", desc: "Create user onboarding or KYC dynamic input forms" },
+      { name: "auth0_update_form", cat: "Auth0", desc: "Modify form fields, colors, validation, and layout" },
+      { name: "auth0_onboarding", cat: "Auth0", desc: "Bootstrap framework SDK integration and write credentials" },
+      { name: "auth0_get_quickstart_guide", cat: "Auth0", desc: "Generate tailored authentication code snippets for target stack" },
+      { name: "query", cat: "DuckDB", desc: "Execute high-performance analytical SQL on gigabyte/terabyte datasets" },
+      { name: "read_query", cat: "SQLite", desc: "Execute SELECT queries on relational database tables" },
+      { name: "write_query", cat: "SQLite", desc: "Execute INSERT, UPDATE, DELETE queries on relational database" },
+      { name: "create_table", cat: "SQLite", desc: "Create new relational schema tables with types and constraints" },
+      { name: "list_tables", cat: "SQLite", desc: "Inspect database schema and list all existing database tables" },
+      { name: "describe_table", cat: "SQLite", desc: "Return column definitions, primary keys, and nullability" },
+      { name: "append_insight", cat: "SQLite", desc: "Append analytical findings and business memo insights" },
+      { name: "read_file", cat: "Storage", desc: "Read complete contents of dataset or file from storage volume" },
+      { name: "read_text_file", cat: "Storage", desc: "Stream UTF-8 text file directly from storage system" },
+      { name: "read_media_file", cat: "Storage", desc: "Read binary or media file returning base64 encoded data" },
+      { name: "read_multiple_files", cat: "Storage", desc: "Batch read multiple storage files concurrently" },
+      { name: "write_file", cat: "Storage", desc: "Write or overwrite dataset files into storage volume" },
+      { name: "append_file", cat: "Storage", desc: "Append log entries or stream data to existing storage files" },
+      { name: "edit_file", cat: "Storage", desc: "Perform line-level surgical modifications on stored files" },
+      { name: "create_directory", cat: "Storage", desc: "Create nested storage directories or volume partitions" },
+      { name: "list_directory", cat: "Storage", desc: "Enumerate directories, volumes, and storage partitions" },
+      { name: "list_directory_with_sizes", cat: "Storage", desc: "List directory contents including exact byte sizes" },
+      { name: "directory_tree", cat: "Storage", desc: "Generate full recursive JSON tree of dataset storage volume" },
+      { name: "move_file", cat: "Storage", desc: "Move or rename datasets and partitions inside storage" },
+      { name: "copy_file", cat: "Storage", desc: "Fast file clone inside storage without memory overhead" },
+      { name: "search_files", cat: "Storage", desc: "Pattern search for files across massive storage hierarchies" },
+      { name: "get_file_info", cat: "Storage", desc: "Fetch filesystem metadata, creation timestamps, and permissions" },
+      { name: "list_allowed_directories", cat: "Storage", desc: "List sandbox root directories accessible by storage MCP" }
+    ];
+
+    let currentFilter = 'all';
+
+    function renderTools() {
+      const tbody = document.getElementById('toolsTbody');
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      
+      const filtered = tools.filter(t => {
+        const matchesCat = currentFilter === 'all' || t.cat.toLowerCase().includes(currentFilter.toLowerCase());
+        const matchesSearch = t.name.toLowerCase().includes(search) || t.desc.toLowerCase().includes(search) || t.cat.toLowerCase().includes(search);
+        return matchesCat && matchesSearch;
+      });
+
+      tbody.innerHTML = filtered.map(t => {
+        let badgeColor = "bg-blue-500/10 text-blue-500 border-blue-500/20";
+        if (t.cat === "DuckDB") badgeColor = "bg-purple-500/10 text-purple-500 border-purple-500/20";
+        if (t.cat === "SQLite") badgeColor = "bg-emerald-500/10 text-emerald-500 border-emerald-500/20";
+        if (t.cat === "Storage") badgeColor = "bg-amber-500/10 text-amber-500 border-amber-500/20";
+
+        return `
+          <tr class="hover:bg-[var(--card)]/50 transition-colors">
+            <td class="py-1.5 px-3 font-bold text-[var(--foreground)]">${t.name}</td>
+            <td class="py-1.5 px-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-semibold border ${badgeColor}">${t.cat}</span>
+            </td>
+            <td class="py-1.5 px-3 text-[var(--muted-foreground)] font-sans text-xs">${t.desc}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterTools(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = 'tab-btn px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]';
+      });
+      event.target.className = 'tab-btn px-2.5 py-1 text-xs rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)]';
+      renderTools();
+    }
+
+    function searchTools() {
+      renderTools();
+    }
+
+    renderTools();
+  </script>
+</body>
+</html>

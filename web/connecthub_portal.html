@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>ConnectHub MCP – Portal Prototype</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-0 m-0 text-sm">
+  <div class="py-2 space-y-4">
+    <!-- Top Bar with Tenant and User Context -->
+    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[var(--card-border)]">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] flex items-center justify-center font-bold text-sm shadow">
+          CH
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base font-bold text-[var(--foreground)]">ConnectHub MCP</h1>
+            <span class="px-2 py-0.5 text-[10px] font-semibold rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+              v1.0-MVP
+            </span>
+          </div>
+          <p class="text-xs text-[var(--muted-foreground)]">Mandantenfähige Integrationsplattform für MCP &amp; Big Data Storage</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <!-- Tenant Switcher -->
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-[var(--card-border)] bg-[var(--card)] text-xs">
+          <span class="text-[var(--muted-foreground)]">Mandant:</span>
+          <select id="tenantSelect" onchange="switchTenant()" class="bg-transparent font-semibold text-[var(--foreground)] outline-none cursor-pointer">
+            <option value="tenant_acme">Acme Corp (ID: t-8491)</option>
+            <option value="tenant_fintech">FinTech Labs (ID: t-2041)</option>
+            <option value="tenant_ai">OmniAI Systems (ID: t-9932)</option>
+          </select>
+        </div>
+
+        <!-- Auth0 User Badge -->
+        <div class="flex items-center gap-2 px-2.5 py-1 rounded-md border border-[var(--card-border)] bg-[var(--card)] text-xs">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span class="font-mono text-[var(--foreground)]">admin@acme.com</span>
+          <span class="px-1.5 py-0.5 rounded text-[10px] uppercase font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">
+            Admin
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Metric Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+      <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)]">
+        <span class="text-xs text-[var(--muted-foreground)]">Aktive Verbindungen</span>
+        <div class="text-lg font-bold text-[var(--foreground)] mt-0.5" id="activeConnCount">14 / 40</div>
+        <span class="text-[10px] text-emerald-500">Alle Health-Checks OK</span>
+      </div>
+      <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)]">
+        <span class="text-xs text-[var(--muted-foreground)]">Storage Belegung</span>
+        <div class="text-lg font-bold text-[var(--foreground)] mt-0.5">1.84 TB <span class="text-xs font-normal text-[var(--muted-foreground)]">/ 10 TB</span></div>
+        <div class="w-full bg-[var(--border)] h-1 rounded-full mt-1.5 overflow-hidden">
+          <div class="bg-[var(--primary)] h-full w-[18%]"></div>
+        </div>
+      </div>
+      <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)]">
+        <span class="text-xs text-[var(--muted-foreground)]">Jobs Heute</span>
+        <div class="text-lg font-bold text-[var(--foreground)] mt-0.5">142 <span class="text-xs font-normal text-emerald-500 font-semibold">(99.3% Erfolg)</span></div>
+        <span class="text-[10px] text-[var(--muted-foreground)]">1 Job aktiv in Queue</span>
+      </div>
+      <div class="p-3 rounded-lg border border-[var(--card-border)] bg-[var(--card)]">
+        <span class="text-xs text-[var(--muted-foreground)]">Sicherheitsstatus</span>
+        <div class="text-lg font-bold text-emerald-500 mt-0.5 flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          RLS &amp; KMS Aktiv
+        </div>
+        <span class="text-[10px] text-[var(--muted-foreground)]">0 Secrets im Klartext</span>
+      </div>
+    </div>
+
+    <!-- Main Tabs -->
+    <div class="flex items-center gap-2 border-b border-[var(--card-border)] pb-2 text-xs">
+      <button onclick="switchTab('catalog')" id="tabBtnCatalog" class="px-3 py-1.5 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]">
+        Connector-Katalog (40)
+      </button>
+      <button onclick="switchTab('upload')" id="tabBtnUpload" class="px-3 py-1.5 rounded-md font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">
+        Resumable Upload Simulator
+      </button>
+      <button onclick="switchTab('jobs')" id="tabBtnJobs" class="px-3 py-1.5 rounded-md font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]">
+        Sync Jobs &amp; Audit Logs
+      </button>
+    </div>
+
+    <!-- TAB 1: Catalog -->
+    <div id="viewCatalog" class="space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5" id="catBadges">
+          <button onclick="filterCat('all')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)]">Alle (40)</button>
+          <button onclick="filterCat('mcp')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]">MCP-Nativ</button>
+          <button onclick="filterCat('Database')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]">Datenbanken</button>
+          <button onclick="filterCat('Storage')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]">Cloud Storage</button>
+          <button onclick="filterCat('Development')" class="cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]">Code &amp; Dev</button>
+        </div>
+        <input id="catalogSearch" type="text" placeholder="Connector suchen..." onkeyup="renderCatalog()"
+               class="px-2.5 py-1 text-xs rounded-md border border-[var(--card-border)] bg-[var(--card)] text-[var(--foreground)] placeholder-[var(--placeholder)] focus:outline-none focus:ring-1 focus:ring-[var(--primary)] w-56" />
+      </div>
+
+      <div class="border border-[var(--card-border)] rounded-lg overflow-hidden max-h-72 overflow-y-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead class="bg-[var(--card)] border-b border-[var(--card-border)] sticky top-0">
+            <tr>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Connector</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Kategorie</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Authentifizierung</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">MCP-Support</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)] text-right">Aktion</th>
+            </tr>
+          </thead>
+          <tbody id="catalogTbody" class="divide-y divide-[var(--card-border)] font-mono">
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: Upload Simulator -->
+    <div id="viewUpload" class="space-y-3 hidden">
+      <div class="p-4 rounded-xl border border-[var(--card-border)] bg-[var(--card)] space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-semibold text-[var(--foreground)]">Multipart Resumable S3/MinIO Uploader</h3>
+            <p class="text-xs text-[var(--muted-foreground)]">Direktübertragung via Presigned URLs mit 4 parallelen Concurrency-Streams, Pause/Resume &amp; LocalStorage-Recovery.</p>
+          </div>
+          <span class="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 border border-blue-500/20 font-mono">25 MB Chunks &bull; S3 Direct</span>
+        </div>
+
+        <!-- File Info Bar -->
+        <div class="p-3 rounded-lg bg-[var(--background)] border border-[var(--border)] flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold text-xs">PAR</span>
+            <div>
+              <div class="font-bold text-[var(--foreground)]">enterprise_analytics_dump_2026.parquet</div>
+              <div class="text-[11px] text-[var(--muted-foreground)] font-mono">5.40 GB &bull; 216 Chunks &bull; SHA-256 e3b0c44298fc1c149afbf4c8996fb924</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2" id="uploadActionGroup">
+            <button id="btnStart" onclick="clientStart()" class="px-3 py-1.5 rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] font-medium text-xs hover:opacity-90">
+              Upload Starten
+            </button>
+            <button id="btnPause" onclick="clientPause()" class="px-3 py-1.5 rounded-lg bg-[var(--card)] border border-[var(--card-border)] text-[var(--foreground)] font-medium text-xs hover:bg-[var(--border)] hidden">
+              Pausieren
+            </button>
+            <button id="btnResume" onclick="clientResume()" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-medium text-xs hover:bg-emerald-700 hidden">
+              Fortsetzen
+            </button>
+            <button id="btnFail" onclick="clientSimulateDrop()" class="px-3 py-1.5 rounded-lg bg-amber-500/10 text-amber-500 border border-amber-500/20 font-medium text-xs hover:bg-amber-500/20 hidden">
+              Netzwerk-Drop Simulieren
+            </button>
+            <button id="btnAbort" onclick="clientAbort()" class="px-3 py-1.5 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20 font-medium text-xs hover:bg-red-500/20 hidden">
+              Abbrechen
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Overview -->
+        <div id="uploadProgressBox" class="space-y-2 hidden">
+          <div class="flex justify-between text-xs">
+            <span id="uploadStatusText" class="font-medium text-[var(--foreground)]">Bereit</span>
+            <span id="uploadPercent" class="font-mono font-bold text-[var(--foreground)]">0%</span>
+          </div>
+          <div class="w-full bg-[var(--border)] h-2 rounded-full overflow-hidden">
+            <div id="uploadBar" class="bg-emerald-500 h-full w-0 transition-all duration-150"></div>
+          </div>
+          <div class="flex justify-between text-[11px] font-mono text-[var(--muted-foreground)]">
+            <span id="chunkIndicator">Chunk 0 von 216 abgeschlossen</span>
+            <span id="speedIndicator">0.0 MB/s &bull; Restzeit: --</span>
+          </div>
+
+          <!-- Active Concurrency Worker Streams -->
+          <div class="pt-2 border-t border-[var(--card-border)]">
+            <span class="text-[11px] font-semibold text-[var(--muted-foreground)] uppercase tracking-wider block mb-1.5">
+              Aktive Concurrency Streams (4 Worker)
+            </span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="workerPillGrid">
+              <div class="p-2 rounded bg-[var(--background)] border border-[var(--border)] text-[11px] font-mono" id="w1">
+                <span class="text-[var(--muted-foreground)]">Worker 1:</span> <span class="text-blue-400 font-bold">Idle</span>
+              </div>
+              <div class="p-2 rounded bg-[var(--background)] border border-[var(--border)] text-[11px] font-mono" id="w2">
+                <span class="text-[var(--muted-foreground)]">Worker 2:</span> <span class="text-blue-400 font-bold">Idle</span>
+              </div>
+              <div class="p-2 rounded bg-[var(--background)] border border-[var(--border)] text-[11px] font-mono" id="w3">
+                <span class="text-[var(--muted-foreground)]">Worker 3:</span> <span class="text-blue-400 font-bold">Idle</span>
+              </div>
+              <div class="p-2 rounded bg-[var(--background)] border border-[var(--border)] text-[11px] font-mono" id="w4">
+                <span class="text-[var(--muted-foreground)]">Worker 4:</span> <span class="text-blue-400 font-bold">Idle</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Session State / LocalStorage Inspector -->
+          <div class="p-2.5 rounded bg-[var(--background)] border border-[var(--border)] text-[11px] font-mono space-y-1">
+            <div class="flex items-center justify-between text-[var(--muted-foreground)]">
+              <span>LocalStorage Recovery State:</span>
+              <span id="stateBadge" class="text-emerald-400 font-bold">In Sync</span>
+            </div>
+            <div id="stateJson" class="text-[var(--foreground)] truncate text-[10px]">
+              {"sessionId":"sess_live_9012","completedParts":0,"totalParts":216}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Jobs & Audit -->
+    <div id="viewJobs" class="space-y-3 hidden">
+      <div class="border border-[var(--card-border)] rounded-lg overflow-hidden">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead class="bg-[var(--card)] border-b border-[var(--card-border)]">
+            <tr>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Job ID</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Typ</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Connector</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Datensätze / Größe</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Status</th>
+              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)] text-right">Dauer</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--card-border)] font-mono">
+            <tr>
+              <td class="py-2 px-3 font-bold text-[var(--foreground)]">job_sync_7841</td>
+              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-500 border border-blue-500/20">sync</span></td>
+              <td class="py-2 px-3 font-sans">GitHub Enterprise</td>
+              <td class="py-2 px-3">14,200 Commits</td>
+              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">succeeded</span></td>
+              <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">14.2s</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-bold text-[var(--foreground)]">job_upload_9012</td>
+              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-500 border border-purple-500/20">upload_process</span></td>
+              <td class="py-2 px-3 font-sans">AWS S3 Parquet</td>
+              <td class="py-2 px-3">5.40 GB</td>
+              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-500 animate-pulse">running (84%)</span></td>
+              <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">42.8s</td>
+            </tr>
+            <tr>
+              <td class="py-2 px-3 font-bold text-[var(--foreground)]">job_test_3319</td>
+              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-500 border border-amber-500/20">connection_test</span></td>
+              <td class="py-2 px-3 font-sans">PostgreSQL Cluster</td>
+              <td class="py-2 px-3">Ping handshake</td>
+              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">succeeded</span></td>
+              <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">0.4s</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const connectors = [
+      { name: "GitHub", cat: "Development", auth: "OAuth 2.0 / App / PAT", mcp: true, installed: true },
+      { name: "GitLab", cat: "Development", auth: "OAuth 2.0 / PAT", mcp: true, installed: false },
+      { name: "PostgreSQL", cat: "Database", auth: "TLS / Password / IAM", mcp: true, installed: true },
+      { name: "DuckDB (Big Data)", cat: "Database", auth: "Storage Attached", mcp: true, installed: true },
+      { name: "AWS S3", cat: "Storage", auth: "IAM Role / STS", mcp: true, installed: true },
+      { name: "Google Cloud Storage", cat: "Storage", auth: "Workload Identity", mcp: true, installed: false },
+      { name: "Azure Blob Storage", cat: "Storage", auth: "Entra ID / SAS", mcp: false, installed: false },
+      { name: "MinIO", cat: "Storage", auth: "Access / Secret Key", mcp: true, installed: true },
+      { name: "Slack", cat: "Communication", auth: "OAuth 2.0 Bot Token", mcp: true, installed: true },
+      { name: "Notion", cat: "Documentation", auth: "OAuth 2.0 / Token", mcp: true, installed: false },
+      { name: "Google Drive", cat: "Storage", auth: "OAuth 2.0 / Service Acc", mcp: true, installed: true },
+      { name: "Jira", cat: "Project", auth: "OAuth 2.0 (3LO) / Token", mcp: false, installed: true },
+      { name: "Confluence", cat: "Documentation", auth: "OAuth 2.0 / API Token", mcp: false, installed: false },
+      { name: "Snowflake", cat: "Database", auth: "Key-Pair / OAuth", mcp: true, installed: false },
+      { name: "BigQuery", cat: "Database", auth: "Google OAuth / Service Acc", mcp: true, installed: true },
+      { name: "Salesforce", cat: "CRM", auth: "OAuth 2.0 Connected App", mcp: false, installed: false },
+      { name: "HubSpot", cat: "CRM", auth: "OAuth 2.0 Private App", mcp: false, installed: false },
+      { name: "Stripe", cat: "Payments", auth: "Restricted API Key", mcp: false, installed: true },
+      { name: "Redis", cat: "Database", auth: "TLS / Password", mcp: true, installed: true },
+      { name: "Elasticsearch", cat: "Search", auth: "API Key / TLS", mcp: true, installed: false }
+    ];
+
+    let currentCat = 'all';
+
+    function renderCatalog() {
+      const tbody = document.getElementById('catalogTbody');
+      const search = document.getElementById('catalogSearch').value.toLowerCase();
+
+      const filtered = connectors.filter(c => {
+        const matchesCat = currentCat === 'all' || 
+                           (currentCat === 'mcp' && c.mcp) || 
+                           c.cat.toLowerCase().includes(currentCat.toLowerCase());
+        const matchesSearch = c.name.toLowerCase().includes(search) || c.cat.toLowerCase().includes(search);
+        return matchesCat && matchesSearch;
+      });
+
+      tbody.innerHTML = filtered.map(c => `
+        <tr class="hover:bg-[var(--card)]/50 transition-colors">
+          <td class="py-2 px-3 font-bold text-[var(--foreground)] font-sans flex items-center gap-2">
+            ${c.name}
+            ${c.installed ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>' : ''}
+          </td>
+          <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-[var(--border)] text-[var(--foreground)]">${c.cat}</span></td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)] font-mono text-[11px]">${c.auth}</td>
+          <td class="py-2 px-3">
+            ${c.mcp 
+              ? '<span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-500 border border-purple-500/20">MCP Unterstützt</span>' 
+              : '<span class="px-2 py-0.5 rounded text-[10px] text-[var(--muted-foreground)]">REST API</span>'}
+          </td>
+          <td class="py-2 px-3 text-right">
+            ${c.installed 
+              ? '<button onclick="simulateTest(\'' + c.name + '\')" class="px-2.5 py-1 text-[11px] rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 hover:bg-emerald-500/20 font-sans font-medium">Testen</button>' 
+              : '<button class="px-2.5 py-1 text-[11px] rounded bg-[var(--primary)] text-[var(--primary-foreground)] font-sans font-medium hover:opacity-90">Installieren</button>'}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterCat(cat) {
+      currentCat = cat;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        btn.className = 'cat-pill px-2.5 py-1 text-xs rounded-md font-medium text-[var(--muted-foreground)] hover:bg-[var(--card)]';
+      });
+      event.target.className = 'cat-pill px-2.5 py-1 text-xs rounded-md font-medium bg-[var(--primary)] text-[var(--primary-foreground)]';
+      renderCatalog();
+    }
+
+    function switchTab(tab) {
+      document.getElementById('viewCatalog').classList.add('hidden');
+      document.getElementById('viewUpload').classList.add('hidden');
+      document.getElementById('viewJobs').classList.add('hidden');
+
+      ['tabBtnCatalog', 'tabBtnUpload', 'tabBtnJobs'].forEach(id => {
+        document.getElementById(id).className = 'px-3 py-1.5 rounded-md font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--card)]';
+      });
+
+      if (tab === 'catalog') {
+        document.getElementById('viewCatalog').classList.remove('hidden');
+        document.getElementById('tabBtnCatalog').className = 'px-3 py-1.5 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]';
+      } else if (tab === 'upload') {
+        document.getElementById('viewUpload').classList.remove('hidden');
+        document.getElementById('tabBtnUpload').className = 'px-3 py-1.5 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]';
+      } else if (tab === 'jobs') {
+        document.getElementById('viewJobs').classList.remove('hidden');
+        document.getElementById('tabBtnJobs').className = 'px-3 py-1.5 rounded-md font-semibold bg-[var(--primary)] text-[var(--primary-foreground)]';
+      }
+    }
+
+    function simulateTest(name) {
+      alert('✅ Verbindungstest für ' + name + ' erfolgreich!\nSecret Manager Referenz verifiziert.\nHandshake-Latenz: 42ms');
+    }
+
+    function switchTenant() {
+      const select = document.getElementById('tenantSelect');
+      renderCatalog();
+    }
+
+    // --- Resumable S3 Uploader Simulation Logic ---
+    let uploadTimer = null;
+    let completedChunks = 0;
+    const totalChunks = 216;
+    let isUploading = false;
+    let isPaused = false;
+    let retryBackoff = 0;
+
+    function updateActionButtons(state) {
+      document.getElementById('btnStart').classList.toggle('hidden', state !== 'idle');
+      document.getElementById('btnPause').classList.toggle('hidden', state !== 'running');
+      document.getElementById('btnResume').classList.toggle('hidden', state !== 'paused');
+      document.getElementById('btnFail').classList.toggle('hidden', state !== 'running');
+      document.getElementById('btnAbort').classList.toggle('hidden', state === 'idle' || state === 'completed');
+    }
+
+    function updateWorkerDisplay(activeBase) {
+      for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById('w' + i);
+        if (!isUploading || isPaused) {
+          el.innerHTML = `<span class="text-[var(--muted-foreground)]">Worker ${i}:</span> <span class="text-gray-400 font-bold">Idle</span>`;
+        } else if (retryBackoff > 0) {
+          el.innerHTML = `<span class="text-[var(--muted-foreground)]">Worker ${i}:</span> <span class="text-amber-500 font-bold animate-pulse">Backoff (${retryBackoff}ms)</span>`;
+        } else {
+          const currentChunk = activeBase + i;
+          if (currentChunk <= totalChunks) {
+            el.innerHTML = `<span class="text-[var(--muted-foreground)]">Worker ${i}:</span> <span class="text-blue-400 font-bold">Chunk #${currentChunk} (PUT)</span>`;
+          } else {
+            el.innerHTML = `<span class="text-[var(--muted-foreground)]">Worker ${i}:</span> <span class="text-emerald-400 font-bold">Done</span>`;
+          }
+        }
+      }
+    }
+
+    function updateUiState() {
+      const pct = Math.min(100, Math.round((completedChunks / totalChunks) * 100));
+      document.getElementById('uploadBar').style.width = pct + '%';
+      document.getElementById('uploadPercent').innerText = pct + '%';
+      document.getElementById('chunkIndicator').innerText = `Chunk ${completedChunks} von ${totalChunks} abgeschlossen`;
+
+      const speed = isUploading && !isPaused && retryBackoff === 0 ? (62 + (Math.random() * 8)).toFixed(1) : '0.0';
+      const remSec = isUploading && !isPaused ? Math.max(0, Math.round((totalChunks - completedChunks) * 0.4)) : '--';
+      document.getElementById('speedIndicator').innerText = `${speed} MB/s &bull; Restzeit: ${remSec}s`;
+
+      const stateObj = {
+        sessionId: "sess_acme_dump_2026",
+        tenant: document.getElementById('tenantSelect').value,
+        completedChunks,
+        totalChunks,
+        isPaused,
+        lastEtag: "d41d8cd98f00b204e9800998ecf8427e"
+      };
+      document.getElementById('stateJson').innerText = JSON.stringify(stateObj);
+    }
+
+    function clientStart() {
+      isUploading = true;
+      isPaused = false;
+      document.getElementById('uploadProgressBox').classList.remove('hidden');
+      document.getElementById('uploadStatusText').innerText = "Streaming via Presigned S3 URLs (4 Streams)...";
+      document.getElementById('stateBadge').innerText = "Active Sync";
+      document.getElementById('stateBadge').className = "text-blue-400 font-bold";
+      updateActionButtons('running');
+
+      clearInterval(uploadTimer);
+      uploadTimer = setInterval(() => {
+        if (!isPaused && retryBackoff === 0) {
+          completedChunks = Math.min(totalChunks, completedChunks + 2);
+          updateUiState();
+          updateWorkerDisplay(completedChunks);
+
+          if (completedChunks >= totalChunks) {
+            clearInterval(uploadTimer);
+            isUploading = false;
+            updateActionButtons('completed');
+            document.getElementById('uploadStatusText').innerText = "✅ Upload vollständig & SHA-256 Prüfsumme verifiziert!";
+            document.getElementById('stateBadge').innerText = "Saved to StoredObjects";
+            document.getElementById('stateBadge').className = "text-emerald-400 font-bold";
+            updateWorkerDisplay(totalChunks);
+          }
+        }
+      }, 300);
+    }
+
+    function clientPause() {
+      isPaused = true;
+      clearInterval(uploadTimer);
+      updateActionButtons('paused');
+      document.getElementById('uploadStatusText').innerText = "⏸️ Upload pausiert (Part-State in LocalStorage gesichert)";
+      document.getElementById('stateBadge').innerText = "Paused (Preserved)";
+      document.getElementById('stateBadge').className = "text-amber-400 font-bold";
+      updateWorkerDisplay(completedChunks);
+      updateUiState();
+    }
+
+    function clientResume() {
+      isPaused = false;
+      document.getElementById('uploadStatusText').innerText = "▶️ Wiederaufnahme ab Chunk #" + (completedChunks + 1) + " ohne Datenverlust...";
+      document.getElementById('stateBadge').innerText = "Resumed Sync";
+      document.getElementById('stateBadge').className = "text-blue-400 font-bold";
+      updateActionButtons('running');
+
+      uploadTimer = setInterval(() => {
+        if (!isPaused && retryBackoff === 0) {
+          completedChunks = Math.min(totalChunks, completedChunks + 2);
+          updateUiState();
+          updateWorkerDisplay(completedChunks);
+
+          if (completedChunks >= totalChunks) {
+            clearInterval(uploadTimer);
+            isUploading = false;
+            updateActionButtons('completed');
+            document.getElementById('uploadStatusText').innerText = "✅ Upload vollständig & SHA-256 Prüfsumme verifiziert!";
+            document.getElementById('stateBadge').innerText = "Saved to StoredObjects";
+            document.getElementById('stateBadge').className = "text-emerald-400 font-bold";
+            updateWorkerDisplay(totalChunks);
+          }
+        }
+      }, 300);
+    }
+
+    function clientSimulateDrop() {
+      retryBackoff = 2000;
+      document.getElementById('uploadStatusText').innerText = "⚠️ Netzwerk-Verbindung verloren! Starte Exponential-Backoff Retry...";
+      document.getElementById('stateBadge').innerText = "Retrying in 2s";
+      document.getElementById('stateBadge').className = "text-amber-500 font-bold animate-pulse";
+      updateWorkerDisplay(completedChunks);
+
+      setTimeout(() => {
+        retryBackoff = 0;
+        document.getElementById('uploadStatusText').innerText = "✅ Verbindung wiederhergestellt! Setze Stream fort...";
+        document.getElementById('stateBadge').innerText = "Recovered";
+        document.getElementById('stateBadge').className = "text-emerald-400 font-bold";
+      }, 2000);
+    }
+
+    function clientAbort() {
+      clearInterval(uploadTimer);
+      isUploading = false;
+      isPaused = false;
+      completedChunks = 0;
+      updateActionButtons('idle');
+      document.getElementById('uploadProgressBox').classList.add('hidden');
+      updateUiState();
+      alert('S3 Multipart Upload abgebrochen (AbortMultipartUpload gesendet, Session gelöscht).');
+    }
+
+    renderCatalog();
+  </script>
+</body>
+</html>

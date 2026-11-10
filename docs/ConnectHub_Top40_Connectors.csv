@@ -1,0 +1,41 @@
+id,key,name,category,integration_type,auth_methods,has_official_mcp,secret_store_keys,health_check_type
+1,github,GitHub,Development / Code,mcp,"OAuth 2.0, GitHub App, PAT",true,"access_token,client_id,client_secret",api_ping
+2,gitlab,GitLab,Development / Code,mcp,"OAuth 2.0, PAT",true,"access_token,pat",api_ping
+3,bitbucket,Bitbucket,Development / Code,api,"OAuth 2.0, App Password",false,"username,app_password",api_ping
+4,azure_devops,Azure DevOps,Development / Code,api,"Microsoft Entra ID, PAT",false,"pat,tenant_id,client_id",api_ping
+5,gitea,Gitea,Development / Code,mcp,"PAT, Basic Auth",true,"access_token",api_ping
+6,jira,Jira,Project Management,api,"OAuth 2.0 (3LO), API Token",false,"api_token,email,cloud_id",api_ping
+7,confluence,Confluence,Documentation,api,"OAuth 2.0 (3LO), API Token",false,"api_token,email,cloud_id",api_ping
+8,asana,Asana,Project Management,api,"OAuth 2.0, PAT",false,"access_token",api_ping
+9,trello,Trello,Project Management,api,"OAuth 1.0a, API Key + Token",false,"api_key,api_token",api_ping
+10,linear,Linear,Project Management,api,"OAuth 2.0, API Key",false,"api_key",api_ping
+11,notion,Notion,Documentation,mcp,"OAuth 2.0, Integration Token",true,"internal_token",api_ping
+12,slack,Slack,Communication,mcp,"OAuth 2.0, Bot Token",true,"bot_token,user_token",api_ping
+13,microsoft_teams,Microsoft Teams,Communication,api,"Microsoft Entra ID OAuth",false,"tenant_id,client_id,client_secret",api_ping
+14,discord,Discord,Communication,api,"OAuth 2.0, Bot Token",false,"bot_token",api_ping
+15,google_drive,Google Drive,File Storage,mcp,"Google OAuth 2.0, Service Account",true,"service_account_json,refresh_token",api_ping
+16,dropbox,Dropbox,File Storage,api,"OAuth 2.0",false,"refresh_token,app_key,app_secret",api_ping
+17,onedrive,OneDrive,File Storage,api,"Microsoft Entra ID OAuth",false,"refresh_token,client_id,client_secret",api_ping
+18,sharepoint,SharePoint,File Storage,api,"Microsoft Entra ID OAuth",false,"tenant_id,client_id,client_secret",api_ping
+19,box,Box,File Storage,api,"OAuth 2.0, JWT Keypair",false,"jwt_config_json",api_ping
+20,sftp,SFTP,File Transfer,file_transfer,"SSH Key, Password",false,"ssh_private_key,passphrase,password",tcp_handshake
+21,aws_s3,AWS S3,Cloud Storage,storage,"IAM Role, STS, Access Keys",true,"aws_access_key_id,aws_secret_access_key,role_arn",s3_head_bucket
+22,azure_blob,Azure Blob Storage,Cloud Storage,storage,"Managed Identity, SAS, Shared Key",false,"connection_string,sas_token",blob_list_containers
+23,gcs,Google Cloud Storage,Cloud Storage,storage,"Workload Identity, Service Account",true,"service_account_json",gcs_bucket_get
+24,minio,MinIO,Cloud Storage,storage,"Access Key + Secret Key",true,"access_key,secret_key",s3_head_bucket
+25,postgresql,PostgreSQL,Database,database,"User/Password, TLS, IAM Token",true,"db_host,db_port,db_user,db_password,db_name",sql_select_one
+26,mysql,MySQL,Database,database,"User/Password, TLS",true,"db_host,db_port,db_user,db_password,db_name",sql_select_one
+27,mongodb_atlas,MongoDB Atlas,Database,database,"SCRAM, X.509, API Key",false,"connection_string,public_key,private_key",mongo_ping
+28,redis,Redis,Database / Cache,database,"Password, ACL, TLS",true,"redis_url,password,tls_ca",redis_ping
+29,duckdb,DuckDB (Big Data),Database,mcp,"Local/Attached Storage, S3 Token",true,"s3_credentials",duckdb_query
+30,snowflake,Snowflake,Data Warehouse,database,"OAuth, Key-Pair, User/Password",true,"account,username,rsa_key_p8,password",sql_select_one
+31,bigquery,Google BigQuery,Data Warehouse,database,"Google OAuth, Service Account",true,"service_account_json",api_ping
+32,redshift,Amazon Redshift,Data Warehouse,database,"IAM Temporary Credentials, Password",false,"aws_access_key_id,aws_secret_key,db_user",sql_select_one
+33,databricks,Databricks,Data Platform,api,"OAuth 2.0, PAT",false,"databricks_host,token",api_ping
+34,elasticsearch,Elasticsearch,Search / Analytics,api,"API Key, Basic Auth, TLS",true,"elastic_url,api_key,ca_cert",elastic_ping
+35,salesforce,Salesforce,CRM,api,"OAuth 2.0, Connected App",false,"refresh_token,client_id,client_secret",api_ping
+36,hubspot,HubSpot,CRM / Marketing,api,"OAuth 2.0, Private App Token",false,"private_app_token",api_ping
+37,shopify,Shopify,Commerce,api,"OAuth 2.0, Admin API Token",false,"admin_access_token,shop_domain",api_ping
+38,stripe,Stripe,Payments,api,"Restricted API Key",false,"restricted_api_key",api_ping
+39,zendesk,Zendesk,Support,api,"OAuth 2.0, API Token",false,"subdomain,email,api_token",api_ping
+40,google_sheets,Google Sheets,Tables,mcp,"Google OAuth 2.0, Service Account",true,"service_account_json,refresh_token",api_ping

@@ -1,0 +1,21 @@
+{
+  "cors": true,
+  "mcpServers": {
+    "auth0": {
+      "command": "npx",
+      "args": ["-y", "@auth0/auth0-mcp-server", "run"]
+    },
+    "duckdb": {
+      "command": "uvx",
+      "args": ["--with", "mcp<1.2.0", "mcp-server-duckdb", "--db-path", "/home/antigravity/mcp-gateway/data/analytics.duckdb"]
+    },
+    "sqlite": {
+      "command": "uvx",
+      "args": ["--with", "mcp<1.2.0", "mcp-server-sqlite", "--db-path", "/home/antigravity/mcp-gateway/data/relational.db"]
+    },
+    "storage": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/antigravity/mcp-gateway/data/storage"]
+    }
+  }
+}

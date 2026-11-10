@@ -1,0 +1,36 @@
+{
+  "name": "connecthub-mcp",
+  "version": "1.0.0",
+  "description": "Multi-Tenant MCP & Big Data Integration Platform with Auth0 and Resumable S3 Uploads",
+  "main": "dist/backend/api-routes.js",
+  "scripts": {
+    "build": "tsc",
+    "start:gateway": "bash gateway/start-gateway.sh",
+    "list:tools": "node gateway/list-all-tools.js",
+    "auth0:login": "node gateway/auth0-login.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "auth0",
+    "s3",
+    "resumable-upload",
+    "duckdb",
+    "multi-tenant"
+  ],
+  "author": "ConnectHub Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.750.0",
+    "@aws-sdk/s3-request-presigner": "^3.750.0",
+    "express": "^4.21.2",
+    "express-jwt": "^8.5.1",
+    "jwks-rsa": "^3.1.0",
+    "supergateway": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

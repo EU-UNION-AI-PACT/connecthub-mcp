@@ -2,7 +2,9 @@ import { Router } from 'express';
 import { checkJwt, resolveTenantContext, requireRole } from './auth';
 import { UploadService } from './upload-service';
 import { DynamicConnectorRouter } from './dynamic-connector-router';
-import sqlite3 from 'sqlite3';
+import { jobQueue } from '../worker/queue';
+import '../worker/job-processor';
+import { DatabaseSync } from 'node:sqlite';
 import path from 'path';
 
 const router = Router();
@@ -21,39 +23,41 @@ router.use(checkJwt, resolveTenantContext);
 
 // 2. Connector Catalog & 200 Active Installations
 router.get('/connectors/installed', async (req, res) => {
-  const db = new sqlite3.Database(DB_PATH);
-  db.all(
-    `SELECT i.id, i.display_name, i.status, i.version_tag, i.endpoint_url, i.auth_method, i.last_tested_at,
-            c.category, c.integration_type, c.has_official_mcp
-     FROM connector_installations i
-     JOIN connector_catalog c ON i.connector_id = c.id
-     WHERE i.tenant_id = ?`,
-    [req.user!.tenant_id],
-    (err, rows) => {
-      db.close();
-      if (err) return res.status(500).json({ error: err.message });
-      res.json({ tenant: req.user!.tenant_id, count: rows.length, installations: rows });
-    }
-  );
+  try {
+    const db = new DatabaseSync(DB_PATH);
+    const stmt = db.prepare(`
+      SELECT i.id, i.display_name, i.status, i.version_tag, i.endpoint_url, i.auth_method, i.last_tested_at,
+             c.category, c.integration_type, c.has_official_mcp
+      FROM connector_installations i
+      JOIN connector_catalog c ON i.connector_id = c.id
+      WHERE i.tenant_id = ?
+    `);
+    const rows = stmt.all(req.user!.tenant_id);
+    db.close();
+    res.json({ tenant: req.user!.tenant_id, count: rows.length, installations: rows });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // 3. Data Versions Audit & Git-like Snapshots
 router.get('/data-versions', async (req, res) => {
-  const db = new sqlite3.Database(DB_PATH);
-  db.all(
-    `SELECT v.id, v.version_tag, v.commit_hash, v.records_count, v.size_bytes, v.storage_location, v.created_at,
-            i.display_name AS connector_name
-     FROM data_versions v
-     JOIN connector_installations i ON v.installation_id = i.id
-     WHERE v.tenant_id = ?
-     ORDER BY v.created_at DESC LIMIT 100`,
-    [req.user!.tenant_id],
-    (err, rows) => {
-      db.close();
-      if (err) return res.status(500).json({ error: err.message });
-      res.json({ tenant: req.user!.tenant_id, count: rows.length, versions: rows });
-    }
-  );
+  try {
+    const db = new DatabaseSync(DB_PATH);
+    const stmt = db.prepare(`
+      SELECT v.id, v.version_tag, v.commit_hash, v.records_count, v.size_bytes, v.storage_location, v.created_at,
+             i.display_name AS connector_name
+      FROM data_versions v
+      JOIN connector_installations i ON v.installation_id = i.id
+      WHERE v.tenant_id = ?
+      ORDER BY v.created_at DESC LIMIT 100
+    `);
+    const rows = stmt.all(req.user!.tenant_id);
+    db.close();
+    res.json({ tenant: req.user!.tenant_id, count: rows.length, versions: rows });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // 4. Test Any Connector via Dynamic Router
@@ -98,14 +102,55 @@ router.post('/uploads/:sessionId/part-complete', requireRole(['owner', 'admin', 
   res.json({ status: 'recorded', partNumber });
 });
 
-// 8. Complete Upload
+// 8. Complete Upload & Enqueue Processing Job
 router.post('/uploads/:sessionId/complete', requireRole(['owner', 'admin', 'editor']), async (req, res) => {
   const session = uploadSessions.get(req.params.sessionId);
   if (!session) return res.status(404).json({ error: 'Upload session not found' });
 
   await UploadService.completeUpload(session.objectKey, session.uploadId, req.body.parts);
   uploadSessions.delete(req.params.sessionId);
+
+  await jobQueue.add({
+    tenantId: req.user!.tenant_id,
+    connectorKey: 's3_storage',
+    jobType: 'upload_process',
+    inputMetadata: { objectKey: session.objectKey, sizeBytes: req.body.sizeBytes }
+  });
+
   res.json({ status: 'completed', objectKey: session.objectKey });
+});
+
+// 9. Dispatch Background Job (sync, connection_test, export)
+router.post('/jobs/dispatch', requireRole(['owner', 'admin', 'editor']), async (req, res) => {
+  const { connectorKey, jobType, inputMetadata, idempotencyKey } = req.body;
+  if (!connectorKey || !jobType) {
+    return res.status(400).json({ error: 'Missing connectorKey or jobType' });
+  }
+
+  const job = await jobQueue.add({
+    tenantId: req.user!.tenant_id,
+    connectorKey,
+    jobType,
+    inputMetadata: inputMetadata || {},
+    idempotencyKey
+  });
+
+  res.json({ status: 'queued', job });
+});
+
+// 10. List Jobs for Tenant
+router.get('/jobs', async (req, res) => {
+  const jobs = jobQueue.list(req.user!.tenant_id);
+  res.json({ tenant: req.user!.tenant_id, count: jobs.length, jobs });
+});
+
+// 11. Get Job by ID
+router.get('/jobs/:id', async (req, res) => {
+  const job = jobQueue.get(req.params.id);
+  if (!job || job.tenantId !== req.user!.tenant_id) {
+    return res.status(404).json({ error: 'Job not found' });
+  }
+  res.json(job);
 });
 
 export default router;

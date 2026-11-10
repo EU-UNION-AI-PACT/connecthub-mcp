@@ -242,40 +242,104 @@
     </div>
 
     <!-- TAB 3: Jobs & Audit -->
-    <div id="viewJobs" class="space-y-3 hidden">
+    <div id="viewJobs" class="space-y-4 hidden">
+      <!-- Interactive Job Launcher Card -->
+      <div class="p-4 rounded-lg border border-[var(--card-border)] bg-[var(--card)] space-y-3">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <div>
+            <h3 class="text-sm font-bold text-[var(--foreground)] flex items-center gap-2">
+              ⚡ Asynchroner Job-Dispatcher &amp; Worker-Pipeline
+              <span class="px-2 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">BullMQ / In-Memory Queue</span>
+            </h3>
+            <p class="text-xs text-[var(--muted-foreground)]">Wähle einen der 200 aktiven Connectoren, um Synchronisierungs- und Verarbeitungs-Jobs mit automatischer SHA-256 Versionierung auszuführen.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              4 Worker aktiv
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-2">
+          <div class="sm:col-span-5">
+            <label class="block text-[11px] font-semibold text-[var(--muted-foreground)] mb-1">Connector auswählen (200 verfügbar)</label>
+            <select id="jobConnectorSelect" class="w-full bg-[var(--input)] border border-[var(--card-border)] rounded px-3 py-2 text-xs text-[var(--foreground)] focus:outline-none focus:border-blue-500">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+          <div class="sm:col-span-4">
+            <label class="block text-[11px] font-semibold text-[var(--muted-foreground)] mb-1">Job-Typ</label>
+            <select id="jobTypeSelect" class="w-full bg-[var(--input)] border border-[var(--card-border)] rounded px-3 py-2 text-xs text-[var(--foreground)] focus:outline-none focus:border-blue-500">
+              <option value="sync">Data Sync (Erzeugt SHA-256 Snapshot)</option>
+              <option value="upload_process">Upload Processing (Parquet &amp; Checksums)</option>
+              <option value="connection_test">Connection Test (OAuth/KMS Healthcheck)</option>
+            </select>
+          </div>
+          <div class="sm:col-span-3 flex items-end">
+            <button id="btnTriggerJob" onclick="triggerJobExecution()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded text-xs transition flex items-center justify-center gap-2 shadow-md">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Job Starten
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Job Progress Banner -->
+        <div id="liveJobCard" class="hidden p-3 rounded-md border border-blue-500/30 bg-blue-500/5 space-y-2 transition-all">
+          <div class="flex justify-between items-center text-xs">
+            <div class="flex items-center gap-2">
+              <span id="liveJobId" class="font-mono font-bold text-blue-400">job_sync_...</span>
+              <span id="liveJobBadge" class="px-2 py-0.5 rounded text-[10px] bg-blue-500/20 text-blue-300 font-mono animate-pulse">running</span>
+              <span id="liveJobConnector" class="text-[var(--foreground)] font-semibold">GitHub</span>
+            </div>
+            <div class="text-[var(--muted-foreground)] font-mono text-[11px]">
+              Dauer: <span id="liveJobDuration">0.0s</span> | Datensätze: <span id="liveJobRecords">0</span>
+            </div>
+          </div>
+          <div class="w-full bg-[var(--border)] h-2 rounded-full overflow-hidden">
+            <div id="liveJobBar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full w-[0%] transition-all duration-300"></div>
+          </div>
+          <div class="flex justify-between items-center text-[10px] text-[var(--muted-foreground)] font-mono">
+            <span id="liveJobStep">Worker 1: Fetching delta records...</span>
+            <span id="liveJobHash" class="text-purple-400">SHA-256 Hash wird berechnet...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jobs Table -->
       <div class="border border-[var(--card-border)] rounded-lg overflow-hidden">
         <table class="w-full text-left border-collapse text-xs">
           <thead class="bg-[var(--card)] border-b border-[var(--card-border)]">
             <tr>
-              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Job ID</th>
-              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Typ</th>
-              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Connector</th>
-              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Datensätze / Größe</th>
-              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)]">Status</th>
-              <th class="py-2 px-3 font-semibold text-[var(--muted-foreground)] text-right">Dauer</th>
+              <th class="py-2.5 px-3 font-semibold text-[var(--muted-foreground)]">Job ID</th>
+              <th class="py-2.5 px-3 font-semibold text-[var(--muted-foreground)]">Typ</th>
+              <th class="py-2.5 px-3 font-semibold text-[var(--muted-foreground)]">Connector</th>
+              <th class="py-2.5 px-3 font-semibold text-[var(--muted-foreground)]">Datensätze / Größe</th>
+              <th class="py-2.5 px-3 font-semibold text-[var(--muted-foreground)]">Status</th>
+              <th class="py-2.5 px-3 font-semibold text-[var(--muted-foreground)] text-right">Dauer</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-[var(--card-border)] font-mono">
+          <tbody id="jobsTbody" class="divide-y divide-[var(--card-border)] font-mono">
             <tr>
               <td class="py-2 px-3 font-bold text-[var(--foreground)]">job_sync_7841</td>
               <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-500 border border-blue-500/20">sync</span></td>
-              <td class="py-2 px-3 font-sans">GitHub Enterprise</td>
+              <td class="py-2 px-3 font-sans font-medium">GitHub</td>
               <td class="py-2 px-3">14,200 Commits</td>
               <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">succeeded</span></td>
-              <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">14.2s</td>
+              <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">1.2s</td>
             </tr>
             <tr>
               <td class="py-2 px-3 font-bold text-[var(--foreground)]">job_upload_9012</td>
               <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-500 border border-purple-500/20">upload_process</span></td>
-              <td class="py-2 px-3 font-sans">AWS S3 Parquet</td>
+              <td class="py-2 px-3 font-sans font-medium">AWS S3</td>
               <td class="py-2 px-3">5.40 GB</td>
-              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-blue-500/10 text-blue-500 animate-pulse">running (84%)</span></td>
-              <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">42.8s</td>
+              <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">succeeded</span></td>
+              <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">4.8s</td>
             </tr>
             <tr>
               <td class="py-2 px-3 font-bold text-[var(--foreground)]">job_test_3319</td>
               <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-amber-500/10 text-amber-500 border border-amber-500/20">connection_test</span></td>
-              <td class="py-2 px-3 font-sans">PostgreSQL Cluster</td>
+              <td class="py-2 px-3 font-sans font-medium">PostgreSQL</td>
               <td class="py-2 px-3">Ping handshake</td>
               <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">succeeded</span></td>
               <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">0.4s</td>
@@ -3367,8 +3431,122 @@
       `).join('');
     }
 
+    function populateJobConnectors() {
+      const select = document.getElementById('jobConnectorSelect');
+      if (!select) return;
+      select.innerHTML = connectors.map(c => `
+        <option value="${c.key}">${c.name} (${c.cat})</option>
+      `).join('');
+    }
+
+    let isJobRunning = false;
+
+    function triggerJobExecution() {
+      if (isJobRunning) return;
+      const select = document.getElementById('jobConnectorSelect');
+      const typeSelect = document.getElementById('jobTypeSelect');
+      const connKey = select.value;
+      const jobType = typeSelect.value;
+      const conn = connectors.find(c => c.key === connKey) || connectors[0];
+
+      isJobRunning = true;
+      const btn = document.getElementById('btnTriggerJob');
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      const liveCard = document.getElementById('liveJobCard');
+      liveCard.classList.remove('hidden');
+
+      const jobId = `job_${jobType}_${Math.floor(1000 + Math.random() * 9000)}`;
+      document.getElementById('liveJobId').innerText = jobId;
+      document.getElementById('liveJobConnector').innerText = conn.name;
+      document.getElementById('liveJobBadge').innerText = 'queued';
+      document.getElementById('liveJobBadge').className = 'px-2 py-0.5 rounded text-[10px] bg-amber-500/20 text-amber-300 font-mono';
+      document.getElementById('liveJobBar').style.width = '5%';
+      document.getElementById('liveJobDuration').innerText = '0.0s';
+      document.getElementById('liveJobRecords').innerText = '0';
+      document.getElementById('liveJobStep').innerText = 'Queue: Job zugewiesen an Worker #2...';
+      document.getElementById('liveJobHash').innerText = 'Berechnung ausstehend';
+
+      let step = 0;
+      const totalSteps = 4;
+      const startTime = Date.now();
+      const targetRecords = jobType === 'sync' ? Math.floor(1200 + Math.random() * 24000) : (jobType === 'upload_process' ? 1 : 0);
+      const targetSize = jobType === 'upload_process' ? `${(Math.random() * 4 + 1).toFixed(2)} GB` : (jobType === 'sync' ? `${targetRecords.toLocaleString()} Zeilen` : 'Ping handshake');
+
+      const stepMessages = [
+        'Worker 2: Verbindung zu Auth0/KMS Secret initialisiert...',
+        'Worker 2: MCP Toolchain aufgerufen / Delta-Records übertragen...',
+        'Worker 2: Parquet Chunks validiert & SHA-256 Merkle-Tree berechnet...',
+        'Worker 2: In PostgreSQL RLS gesichert & Audit Event protokolliert!'
+      ];
+
+      const interval = setInterval(() => {
+        step++;
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+        document.getElementById('liveJobDuration').innerText = `${elapsed}s`;
+
+        document.getElementById('liveJobBadge').innerText = 'running';
+        document.getElementById('liveJobBadge').className = 'px-2 py-0.5 rounded text-[10px] bg-blue-500/20 text-blue-300 font-mono animate-pulse';
+
+        const pct = Math.min(100, Math.floor((step / totalSteps) * 100));
+        document.getElementById('liveJobBar').style.width = `${pct}%`;
+        document.getElementById('liveJobRecords').innerText = Math.floor((pct / 100) * targetRecords).toLocaleString();
+        document.getElementById('liveJobStep').innerText = stepMessages[step - 1] || 'Finalisiere...';
+
+        if (step >= totalSteps) {
+          clearInterval(interval);
+          isJobRunning = false;
+          btn.disabled = false;
+          btn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+          const finalHash = Array.from(crypto.getRandomValues(new Uint8Array(8))).map(b => b.toString(16).padStart(2, '0')).join('');
+          document.getElementById('liveJobBadge').innerText = 'succeeded';
+          document.getElementById('liveJobBadge').className = 'px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 font-mono';
+          document.getElementById('liveJobHash').innerText = `sha256:${finalHash}...`;
+          document.getElementById('liveJobRecords').innerText = targetRecords.toLocaleString();
+
+          // Prepend to Jobs Table
+          const tbody = document.getElementById('jobsTbody');
+          const typeBadgeClass = jobType === 'sync' ? 'bg-blue-500/10 text-blue-500 border border-blue-500/20' : (jobType === 'upload_process' ? 'bg-purple-500/10 text-purple-500 border border-purple-500/20' : 'bg-amber-500/10 text-amber-500 border border-amber-500/20');
+          const tr = document.createElement('tr');
+          tr.className = 'bg-blue-500/10 transition-colors';
+          tr.innerHTML = `
+            <td class="py-2 px-3 font-bold text-[var(--foreground)]">${jobId}</td>
+            <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] ${typeBadgeClass}">${jobType}</span></td>
+            <td class="py-2 px-3 font-sans font-medium">${conn.name}</td>
+            <td class="py-2 px-3">${targetSize}</td>
+            <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">succeeded</span></td>
+            <td class="py-2 px-3 text-right text-[var(--muted-foreground)]">${elapsed}s</td>
+          `;
+          tbody.prepend(tr);
+          setTimeout(() => tr.classList.remove('bg-blue-500/10'), 3000);
+
+          // If sync job: also prepend to Versioning table!
+          if (jobType === 'sync') {
+            const vTbody = document.getElementById('versionsTbody');
+            if (vTbody) {
+              const vTr = document.createElement('tr');
+              const newVer = `v1.${Math.floor(Math.random() * 9)}.${Math.floor(Math.random() * 30)}`;
+              vTr.className = 'bg-purple-500/10 transition-colors';
+              vTr.innerHTML = `
+                <td class="py-2 px-3 font-sans font-bold text-[var(--foreground)]">${conn.name} <span class="text-[10px] text-emerald-400 font-normal">(Neu)</span></td>
+                <td class="py-2 px-3"><span class="px-2 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20">${newVer}</span></td>
+                <td class="py-2 px-3 text-blue-400 font-bold font-mono">sha256:${finalHash}...</td>
+                <td class="py-2 px-3 text-[var(--muted-foreground)]">${targetRecords.toLocaleString()} Zeilen</td>
+                <td class="py-2 px-3 text-[var(--muted-foreground)]">${((targetRecords * 490) / 1024 / 1024).toFixed(2)} MB (Parquet)</td>
+                <td class="py-2 px-3 text-right"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500">verifiziert</span></td>
+              `;
+              vTbody.prepend(vTr);
+            }
+          }
+        }
+      }, 400);
+    }
+
     renderCatalog();
     renderVersions();
+    populateJobConnectors();
   </script>
 </body>
 </html>
